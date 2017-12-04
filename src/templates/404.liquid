@@ -1,0 +1,48 @@
+<link rel="stylesheet" type="text/css" href='{{ "pre-cart-2.css" | asset_url }}'>
+
+<div class="sixteen columns clearfix collection_nav">
+  <h1 class="collection_title">{{ 'general.404.title' | t }}</h1>
+</div>
+
+<div class="sixteen columns">
+  <div class="section clearfix">
+    <p class="quote">
+        {{ 'general.404.subtext' | t }}
+    </p>
+  </div>
+</div>
+
+<div class="section clearfix">
+  <div class="sixteen columns center">
+    <p class="extra_padding">
+      {{ 'general.404.continue_shopping_html' | t }}
+    </p>
+  </div>
+  <div class="eight columns offset-by-four">
+    <form class="search" action="/pages/search-results">
+      <input type="text" name="q" class="search_box" placeholder="{{ 'general.search.placeholder' | t }}" value="{{ search.terms }}" style="width: 100%" />
+    </form>
+  </div>
+  <br class="clear" />
+  <br class="clear" />
+
+
+  <br class="clear" />
+</div>
+
+
+  {% include 'handle_product_form' %}
+
+
+<!-- DO NOT EDIT: START -->
+<!-- BULK REDIRECT CODE: START -->
+<script type="text/javascript">
+function makeDoubleDelegate(a,b){return function(){if(a)a();if(b)b()}}window.onload=makeDoubleDelegate(window.onload,function(){window.onload=function(){var a=document.createElement("img");var b="https:"==document.location.protocol?"https://":"http://";a.src=b+"www.redirectsapp.com/tracker?r="+encodeURIComponent(document.referrer)+"&c=N88s";((document.getElementsByTagName("head")||[null])[0]||document.getElementsByTagName("script")[0].parentNode).appendChild(a)}()})
+</script>
+<!-- BULK REDIRECT CODE: END -->
+<!-- DO NOT EDIT: END -->
+
+
+{% include 'limespot-you-may-like' %}
+{% include 'limespot-most-popular' %}
+{% include 'limespot-recently-viewed' %}

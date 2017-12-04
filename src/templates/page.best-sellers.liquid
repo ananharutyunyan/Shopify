@@ -1,0 +1,38 @@
+<meta name="robots" content="noindex, follow" />
+
+<div class="sixteen columns clearfix collection_nav">
+  <h1 class="collection_title">
+    {{ page.title }}
+  </h1>
+</div>
+
+{% include 'sidebar-general', hide_sections: 'vibrators' %}
+<div class="twelve columns page">
+  <div class="section clearfix">
+    <h1>Best Selling Sex Toys</h1>
+    <table>
+  {% tablerow product in collections.top-10-sex-toys-for-men.products cols:2 %}
+      <ul class="best-selling">
+        <li>	<p class="productnumber">#{{ tablerow.index }}</p>  </li>
+        <li> <img src="{{ product.featured_image.src | product_img_url: "medium", format: 'pjpg' }}" alt="{{ product.featured_image.alt }}" /> </li>
+<li><a href="{{ product.url | within: collection }}">
+  {{ product.title }}    </a></li>
+    {% endtablerow %}
+      </ul>
+    </table>
+  </div></div>
+
+ <style>
+   #check-img{display:none;background:#eef;padding:10px;text-align:center;}
+
+   .box-bundle td.plus {
+    text-align: center;
+    padding: 0 5px 0 5px;
+    font-size: 105%;
+    font-weight: bold;
+    color: #999;
+     vertical-align: middle;
+}
+
+
+    </style>

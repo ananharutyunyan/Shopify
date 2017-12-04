@@ -1,0 +1,9 @@
+{% assign breadcrumb_index = 0 %}
+{% assign rootUrl = 'https://www.simplipleasure.com/' %}
+
+<div id="breadcrumbs" class="sixteen columns clearfix collection_nav">
+  <ol class="breadcrumbsol" itemscope itemtype="http://schema.org/BreadcrumbList">
+    {% include 'breadcrumbs__item', name: "Home", url: '/', title: "Back to the home page" %}
+    {% include 'breadcrumbs__item', name: 'Cart' %}
+  </ol>
+</div>

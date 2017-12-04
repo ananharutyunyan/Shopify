@@ -1,0 +1,16 @@
+{% assign my_description = product.description | split: '<!-- split -->'  %}
+<meta name="robots" content="noindex, follow" />
+
+<!--- Bold Apps: Premium Options -->
+<div class="sixteen columns">
+  <h1>Product is only available in our Top 10 list!</h1>
+  <hr>
+</div>
+
+<div class="twelve columns">
+  {% include 'best-sellers__women-men-couples-grid' %}
+</div>
+
+<div class="sixteen columns">
+  {% include 'limespot-related-product' %}
+</div>

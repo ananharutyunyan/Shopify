@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <!-- layout/theme.liquid  for {{template}}. -->
+  <head>
+  
+    {% include 'limespot' %}
+    <!-- leave at top, to ensure our jquery is the one first loaded -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    {% include 'translations' %}
+
+    {% include 'head__meta' %}
+
+    <title> {% include 'collection-meta-titles' %}</title>
+    {% include 'ab__loader-script' %}
+    {% include 'head__convert-experiments' %}
+
+    {% include 'head__next-prev' %}
+
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,600" rel="stylesheet">
+
+    <!--[if lte IE 8]>
+      <link rel="stylesheet" type="text/css" href='{{ "ie.css" | asset_url }}'>
+    <![endif]-->
+
+
+    <!-- Icons -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ 'favicon.png' | asset_url }}">
+
+    {% include 'head__customers-templates' %}
+    {% include 'head__collections-templates' %}
+    {% include 'head__cart-templates' %}
+
+
+    {% include 'head__3rd-party-apps' %}
+
+    <!-- *********** START Content For Header ************* -->
+    {{ content_for_header }}
+    <!-- *********** END Content For Header ************* -->
+
+  </head>
+
+  <body class="{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} ab__smaller-breadcrumb">
+    <!--icon loader -->
+    <div data-svg-loader='{{ "icons.svg" | asset_url }}'></div>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W2GQNVS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    {% include 'facebook-sdk' %}
+
+    {% include 'header-two-tighter' %}
+
+    <div class="toggle_menu nav">
+      <ul class="mobile_menu">
+        {% for link in linklists.all-toys.links %}
+          {% if linklists[link.handle] == empty %}
+            <li {% if link.active %}class="active"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+          {% else %}
+            <li {% if link.active %}class="active"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}" class="toggle"><span>+</span>{{ link.title }}</a>
+              <ul class="toggle_list">
+                {% for link in linklists[link.handle].links %}
+                  {% if linklists[link.handle] == empty %}
+                    <li {% if link.active %}class="active"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+                  {% else %}
+                  <li {% if link.active %}class="active"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}" class="toggle"><span>+</span>{{ link.title }}</a>
+                    <ul>
+                      {% for link in linklists[link.handle].links %}
+                        <li {% if link.active %}class="active"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </li>
+          {% endif %}
+        {% endfor %}
+        {% for link in linklists['footer'].links %}
+          <li>
+            <a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+        {% if shop.customer_accounts_enabled %}
+          {% if customer %}
+            <li>
+              <a href="/account">{{ customer.name }}</a>
+            </li>
+            <li>
+              {{ 'layout.customer.log_out' | t | customer_logout_link }}
+            </li>
+          {% else %}
+            <li>
+              {{ 'layout.customer.log_in' | t | customer_login_link }}
+            </li>
+          {% endif %}
+        {% endif %}
+      </ul>
+    </div>
+
+
+      <div class="fixed_header"></div>
+
+        <div class="container main content desktop-extend">
+
+      {% if template contains 'list-collections' %}
+        {% include 'collection-listing' %}
+      {% else %}
+        {% include 'breadcrumbs-index' %}
+
+
+        {{ content_for_layout }}
+        <limespot></limespot>
+      {% endif %}
+
+
+      <div class="clear"></div>
+
+      {% unless template == "cart.new" %}
+        <div class="footer-search-sec">
+          <form class="search_form" action="/pages/search-results">
+            <input type="hidden" name="type" value="product" />
+            <input type="text" name="q" class="search_box footer_search" placeholder="Search: e.g. lelo, dildo, thrusting…" value="" autocapitalize="off" autocomplete="off" autocorrect="off" />
+          </form>
+          <a href="{{ shop.url }}/pages/brands" class="brand_link">View All Of Our Brands</a>
+        </div>
+
+        {% include 'klaviyo-newsletter' %}
+      {% endunless %}
+    </div> <!-- end container -->
+
+    {% include 'footer-theme', include_authorize_net_seal: false, favourite_toys_linklist: "new-footer-links" %}
+
+      <script type="text/javascript">
+        (function() {
+          var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+          po.src = 'https://apis.google.com/js/plusone.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+      </script>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.async=true;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+<input type="hidden" name="_pc_params" value="{{ shop.permanent_domain }}:{{ customer.id }}" />
+
+
+      <script type="text/javascript">
+  var _learnq = _learnq || [];
+
+  _learnq.push(['account', 'batDZz']);
+
+  (function () {
+  var b = document.createElement('script'); b.type = 'text/javascript'; b.async = true;
+  b.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'a.klaviyo.com/media/js/analytics/analytics.js';
+  var a = document.getElementsByTagName('script')[0]; a.parentNode.insertBefore(b, a);
+  })();
+</script>
+
+
+    <!-- begin olark code -->
+<script type="text/javascript" async>
+;(function(o,l,a,r,k,y){if(o.olark)return;
+r="script";y=l.createElement(r);r=l.getElementsByTagName(r)[0];
+y.async=1;y.src="//"+a;r.parentNode.insertBefore(y,r);
+y=o.olark=function(){k.s.push(arguments);k.t.push(+new Date)};
+y.extend=function(i,j){y("extend",i,j)};
+y.identify=function(i){y("identify",k.i=i)};
+y.configure=function(i,j){y("configure",i,j);k.c[i]=j};
+k=y._={s:[],t:[+new Date],c:{},l:a};
+})(window,document,"static.olark.com/jsclient/loader.js");
+/* Add configuration calls bellow this comment */
+olark.identify('9980-493-10-8258');</script>
+<!-- end olark code -->
+
+
+
+
+<link href="https://limespot.azureedge.net/storefront/2.0.0/css/recommendations.min.css" rel="stylesheet" />
+
+
+  <!-- Google Code for Remarketing Tag -->
+<!--------------------------------------------------
+Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+--------------------------------------------------->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 965807838;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/965807838/?guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+
+{% include 'product-page-badges-modals' %}
+
+
+</body>
+</html>
+
+<style>
+
+
+  div#breadcrumb {
+margin-left: 10px;
+}
+
+  div#breadcrumb a:hover {
+text-decoration: underline;
+}
+
+
+  div#breadcrumb a:visited {
+color: #cc3366;
+}
+
+
+
+  @media only screen and (max-width: 479px) {
+input.search_box {
+width: 90% !important;
+
+}
+  }
+
+</style>

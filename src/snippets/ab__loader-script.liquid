@@ -1,0 +1,37 @@
+<!-- src/snippets/ab__loader-script.liquid -->
+<script>
+window.SP = window.SP || {}
+
+function registerABLoader(testName, convertId) {
+  var SP = window.SP
+  SP.abTests = SP.abTests || {}
+  var AB = SP.abTests
+  AB[testName] = AB[testName] || {}
+  var test = AB[testName]
+  if (!test.loader) {
+    test.loader = function abLoader() {
+      var convert = window.convert
+      var currentData = convert.currentData
+      console.log('currentData: ', currentData)
+      if ((currentData.experiments[convertId] === undefined) || currentData.experiments_goals[convertId] === undefined) {
+        console.log("experiment "+testName+" (id: "+convertId+") not found. Registering jquery ready to hide loader & show original")
+        $(function() {
+          var $loading = $(".ab__loader[data-ab-test="+testName+"]")
+          var $original = $(".ab__variation[data-ab-test="+testName+"][data-ab-variation=0]")
+          var $notOriginal = $(".ab__variation[data-ab-test="+testName+"]").not("[data-ab-variation=0]")
+          console.log('hiding loading:', $loading)
+          console.log('showing: ', $original)
+          $loading.hide()
+          $notOriginal.hide()
+          $original.show()
+        })
+      } else {
+        console.log("found experiment "+testName+" (id: "+convertId+")")
+      }
+    }
+
+    var convertQueue = window._conv_q || [] // eslint-disable-line
+    convertQueue.push([test.loader])
+  }
+}
+</script>

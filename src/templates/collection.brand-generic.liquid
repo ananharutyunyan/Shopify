@@ -1,0 +1,129 @@
+{% paginate collection.products by 48 %}
+  {% assign tag_count = collection.all_tags | size %}
+  {% assign tag_threshold = 5 | minus: 0 %}
+
+  <div class="sixteen columns clearfix collection_nav">
+    {% include 'breadcrumbs' %}
+    <div class="ten columns alpha">
+    </div>
+  </div>
+
+
+
+  {% include 'sidebar-general', mobile: false %}
+  <div class="twelve columns">
+
+  <div align="center">
+
+   {% if collection.handle == '50-shades-of-grey' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/50_Shades_Of_Grey.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'allure-lingerie' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Allure_Lingerie.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'aneros' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Aneros.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'blush' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Blush_Novelties.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'bodi-spa' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Bodi_Spa.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'california-exotics' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/California_Exotics.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'classic-erotica' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Classic_Erotica.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'cloud-9' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Cloud_9.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'coquette-lingerie' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Coquette_Lingerie.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'd-a-v-e-synergy' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/DAVE_Synergy.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'doctor-love' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Doctor_Love.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'earthly-body' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Earthly_Body.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'empire-labs' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Empire_Labs.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'evolved-novelties' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Evolved_Novelties.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'fantasy-lingerie' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Fantasy_Lingerie.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'icon-brands' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Icon_Brands.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'intimate-organics' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Intimate_Organics.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'jopen' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Jopen.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'kheper-games' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Kheper_Games.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'kink-factory' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Kink_Factory.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'lelo' %}
+    <img alt="LELO Vibrators" src="https://cdn.shopify.com/s/files/1/0762/4901/files/LELO.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+
+    {% elsif collection.handle == 'jimmyjane' %}
+    <img alt="Jimmyjane Vibrators" src="https://cdn.shopify.com/s/files/1/0386/0093/files/940x250-jimmy.jpg?11904214938144100273" max-width="100%" class="ri"><hr>
+
+ {% elsif collection.handle == 'nasstoys' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Nasstoys.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'ns-novelties' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/NS_Novelties.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'ohmibod' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/OhMiBod.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'pipedream' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Pipedream.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'pjur-lubricants' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/PJUR_Lubricants.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'rascal-toys' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Rascal_Toys.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'rocks-off' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Rocks_Off.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'screaming-o' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Screaming_O.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'sliquid-lubricants' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Sliquid_Lubricants.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'jo' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/System_Jo.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'tantus' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Tantus.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'topco' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Topco.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+ {% elsif collection.handle == 'vibratex' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Vibratex.jpg?14859246053458274623" max-width="100%" class="ri"><hr>
+      {% elsif collection.handle == 'we-vibe' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/We_Vibe.jpg?7245691211501456591" max-width="100%" class="ri"><hr>
+       {% elsif collection.handle == 'je-joue' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Je_Joue.jpg?7245691211501456591" max-width="100%" class="ri"><hr>
+       {% elsif collection.handle == 'vixen-creations' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Vixen_Creations.jpg?7245691211501456591" max-width="100%" class="ri"><hr>
+       {% elsif collection.handle == 'sport-sheets' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Sport_Sheets.jpg?7245691211501456591" max-width="100%" class="ri"><hr>
+       {% elsif collection.handle == 'smiffys' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Smiffys.jpg?7245691211501456591" max-width="100%" class="ri"><hr>
+       {% elsif collection.handle == 'md-science' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/MD_Science.jpg?7245691211501456591" max-width="100%" class="ri"><hr>
+       {% elsif collection.handle == 'kimono-condoms' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Kimono_Condoms.jpg?7245691211501456591" max-width="100%" class="ri"><hr>
+       {% elsif collection.handle == 'hott-products' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/HOTT_Products.jpg?7245691211501456591" max-width="100%" class="ri"><hr>
+       {% elsif collection.handle == 'golden-triangle' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Golden_Triangle.jpg?7245691211501456591" max-width="100%" class="ri"><hr>
+       {% elsif collection.handle == 'fukuoku-therapeutic-vibes' %}<img src="https://cdn.shopify.com/s/files/1/0762/4901/files/Fukuoko_Vibes.jpg?7245691211501456591" max-width="100%" class="ri"><hr>
+
+
+ {% else %}
+{% endif %}
+        {% include 'collection-title', toggle: false %}
+     {% if collection.description != blank %}
+        {{ collection.description }}
+    {% else %}
+  {% endif %}
+      </div>
+{% if current_tags %}
+<div class="filter-group">
+<strong>Current Tags:</strong>
+
+<span class="clear2">
+{% for tag in collection.all_tags %}
+    {% if current_tags contains tag %}
+
+  		{% if tag == 'sale' %}
+  		<span class="filter-clear2">{{ tag | link_to_remove_tag: tag }}</span>
+  		{% else %}
+    	{% assign tag_collection = collections[tag] %}
+ 		<span class="filter-clear2">{{ tag_collection.title | link_to_remove_tag: tag }}</span>
+    	{% endif %}
+    {% endif %}
+{% endfor %}
+  <span class="filter-clear3"><a href="{{ collection.url }}">Clear All</a></span></span>
+  </div>
+
+
+{% endif %}
+<h4 style="margin-bottom:10px;"> </h4>
+
+  {% include 'sort-and-paginate' %}
+
+  {% if collection.products.size == 0 %}
+    <div class="center">
+      <div class="section clearfix">
+        <p class="quote">{{ 'collections.general.no_matches' | t }}</p>
+      </div>
+    </div>
+  {% else %}
+    <div class="main_product_list_sec">
+    {% assign products = collection.products %}
+
+    {% assign products_per_row = 4 %}
+
+    {% include 'product-loop'  %}
+    </div>
+  {% endif %}
+  </div>
+
+  {% include 'pagination' with 'below' %}
+{% endpaginate %}
+
+      <hr>  {% include 'sidebar-general', mobile: true %}
+
+
+            <style>
+
+
+
+      </style>

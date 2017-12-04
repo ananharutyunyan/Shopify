@@ -1,0 +1,44 @@
+//
+// SCSS Variables used throughout the site
+//
+
+$colors: (
+  'pink': #cc3366,
+  'green': #02b004,
+  'cart-green': #33af02,
+  'light-pink': #ffe1e6,
+  'red': #c33,
+  'white': white,
+  'black': black,
+  'text-white': white,
+  'text-black': #333333,
+  'text-gray': #9da6ae,
+  'footer-gray': #2e2d2c,
+  'border-gray': #dbe3e5
+);
+
+
+
+@function color($key: 'brand') {
+  @return map-get($colors, $key);
+}
+
+@function ui-tint($amt: 20%) {
+  @return lighten(color('footer-gray'), 100% - $amt);
+}
+
+// Responsive Design breakpoints
+$mobile-breakpoint: 480px;
+$tablet-small-breakpoint: 600px;
+$tablet-large-breakpoint: 768px;
+$desktop-small-breakpoint:  960px;
+$desktop-breakpoint: 1152px;
+
+// Block Grid
+$block-grid-default-spacing: 8px;
+$block-grid-tight-spacing: 4px;
+
+
+// Font
+$display-font: "Oswald", Arial, sans-serif;
+$text-font: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;

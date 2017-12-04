@@ -1,0 +1,121 @@
+<div class="sticky-search_pinned_menu sticky-search_element_hidden sixteen columns header_border nav">
+  <ul class="nav_buttons menu">
+    <li class="sticky-search_navicon_button hide-on-search-focus" onclick="$('.toggle_menu').toggle();">
+      <a href="javascript:void(0)" class="navicon" title="Menu" data-activator="#">Menu</a>
+    </li>
+    <li class="sticky-search_search">
+      <form class="search" action="/pages/search-results" method="get" role="search">
+        <div class="input-group">
+          <input type="search" name="q" class="ui-autocomplete-input form-control search-field" placeholder="Search: e.g. lelo, dildo, thrusting…" value="" autocapitalize="off" autocomplete="OfF" autocorrect="off" id="_ispbxi_" isp_ac="OfF" required>
+          <span class="input-group-btn">
+            <button data-role='button' class="btn sticky-search_search_button" type="submit"></button>
+          </span>
+        </div>
+      <a class="cancel-search" title="cancel" href="#">cancel</a>
+      </form>
+    </li>
+    <li class="hide-on-search-focus cartcounter">
+      {% include 'cart-counter' %}
+    </li>
+  </ul>
+</div>
+<script>
+  if($) {
+
+    var StickySearch = {
+      last_scroll_position: 0,
+      focus_scroll_position: 0,
+      focused: false
+    };
+
+    var showStickySearch = function () {
+      var stickySearch_current_scrollPosition = document.body.scrollTop;
+      var stickySearch_header_height = document.querySelector('.header').offsetHeight;
+      var stickySearch_fixed_menu = document.querySelector('.sticky-search_pinned_menu');
+
+      if(StickySearch.focused || (stickySearch_current_scrollPosition > stickySearch_header_height)){
+        stickySearch_fixed_menu.classList.remove('sticky-search_element_hidden');
+        document.querySelector('.toggle_menu.nav').classList.add('sticky-search_pinned_submenu');
+      }
+      else{
+        document.querySelector('.toggle_menu.nav').classList.remove('sticky-search_pinned_submenu');
+        stickySearch_fixed_menu.classList.add('sticky-search_element_hidden');
+      }
+
+      try{
+        //Scrolling Up
+        if(document.body.scrollTop < StickySearch.last_scroll_position){
+          if(document.querySelectorAll(".sticky-search_pinned_submenu").length > 0){
+
+            if(document.querySelector(".sticky-search_pinned_submenu").offsetTop >= document.body.scrollTop + document.querySelector(".sticky-search_pinned_menu").offsetHeight){
+
+              document.querySelector(".sticky-search_pinned_submenu").style.top = document.body.scrollTop + document.querySelector(".sticky-search_pinned_menu").offsetHeight + "px";
+            }
+          }
+
+          else{
+            document.querySelector(".toggle_menu").style.top = "0px";
+          }
+        }
+      }
+
+      catch(stickySearch_error){
+        console.log(stickySearch_error);
+      }
+
+      StickySearch.last_scroll_position = document.body.scrollTop;
+    }
+
+    window.addEventListener('scroll',function(){
+      showStickySearch();
+    });
+
+    document.querySelector(".sticky-search_navicon_button").addEventListener("click",function(){
+      document.querySelector(".sticky-search_pinned_submenu").style.top = document.body.scrollTop +  document.querySelector(".sticky-search_pinned_menu").offsetHeight + "px";
+    });
+
+
+    $(".sticky-search_search input").on('focus', function() {
+      console.log("search input focus");
+      console.log("set focus_scroll_position to", document.body.scrollTop);
+      StickySearch.focus_scroll_position = document.body.scrollTop;
+      $('.hide-on-search-focus').hide();
+      $('.cancel-search').show();
+      $(".container.main.content").addClass('hidden');
+      $(".sticky-search_search").addClass('focussed');
+      $(".hello-bar").addClass('hidden');
+      $("#sticky-search_menu_container").addClass('hidden');
+      $(".footer").addClass('empty');
+      StickySearch.focused = true;
+
+      showStickySearch();
+
+    });
+
+    var blurSearch = function() {
+      // return;
+      console.log("search input blur");
+      $('.hide-on-search-focus').show();
+      $('.cancel-search').hide();
+      $(".container.main.content").removeClass('hidden');
+      $(".sticky-search_search").removeClass('focussed');
+      $(".hello-bar").removeClass('hidden');
+      $("#sticky-search_menu_container").removeClass('hidden');
+      $(".footer").removeClass('empty');
+      StickySearch.focused = false;
+      showStickySearch();
+      setTimeout(function(){
+        window.scrollTo(0, StickySearch.focus_scroll_position);
+      }, 5);
+      return true;
+    };
+
+    $(".sticky-search_search input").on('blur', blurSearch);
+    $(".cancel-search").on('click', blurSearch);
+
+    $(".clear-search-icon").on('click', function() {
+      console.log("clear-search-icon click");
+      return true;
+    });
+  }
+</script>

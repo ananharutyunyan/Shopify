@@ -1,0 +1,105 @@
+#!/usr/bin/env ruby
+
+require 'awesome_print'
+require 'slop'
+require 'set'
+
+class App
+
+  attr_accessor :path
+
+  def initialize(path)
+    @path = path
+  end
+
+  def dirs
+    %w(snippets)
+  end
+
+  def root
+    @root ||= Dir.pwd
+  end
+
+  def dependencies
+    {
+      path => find_dependencies
+    }
+  end
+
+  def find_dependencies(filepath=nil)
+    filepath ||= path
+    file = File.read(filepath)
+
+    dependencies = {}
+
+    file.scan(include_regex).each do |match|
+      inc = match.first
+      unless dependencies[inc]
+        dependencies[inc] = find_dependencies(File.join('snippets', "#{inc}.liquid"))
+      end
+    end
+    dependencies
+  end
+
+  def include_regex
+    %r{\{%\s*include\s*['"]([^'"]+)['"][^%]*%\}}
+  end
+
+  def print_dependencies(deps=nil, indent:0)
+    unless deps
+      puts
+      puts "Dependencies:"
+      puts "------------"
+      deps = dependencies
+    end
+    deps.each do |dep, nested|
+      puts (" " * indent * 2) + dep
+      print_dependencies(nested, indent: indent+1)
+    end
+  end
+
+  def dependencies_as_paths(deps=nil, deps_paths=nil)
+    return [] if deps.nil? && path.nil?
+    deps_paths ||= Set.new
+    deps ||= dependencies
+    deps.each do |dep, nested|
+      deps_paths << (dep.include?('/') ? dep : "snippets/#{dep}.liquid")
+      dependencies_as_paths(nested, deps_paths)
+    end
+    deps_paths
+  end
+
+  def usage(term, deps=nil, liquid:false)
+    puts
+    puts "Usage of '#{term}':"
+    puts "----------#{'-'*term.length}"
+    # ap dependencies_as_paths(deps)
+    term = "\\{ *[%{][^}]*#{term}" if liquid
+
+    cmd = %Q{ag "#{term}" #{dependencies_as_paths(deps).to_a.join(' ')}}
+    # puts "-"
+    # puts "cmd: #{cmd.inspect}"
+    # puts "-"
+    system cmd
+    puts
+  end
+end
+
+
+if __FILE__==$0
+  opts = Slop.parse do |o|
+    o.banner = 'usage: liquid_dependencies PATH [-u SEARCHTERM]'
+    o.separator ''
+    o.separator 'recursively finds all the snippets used in a layout/template/snippet'
+    o.string '-u', '--usage', 'output usages of TERM in the dependencies'
+    o.bool '-l', '--liquid', 'only find terms used in liquid tags'
+    o.on '-h', '--help' do
+      puts o
+      exit
+    end
+  end
+  app = App.new(opts.arguments.first)
+  app.print_dependencies if opts.arguments.first
+  app.usage(opts[:usage], liquid: opts[:liquid]) if opts[:usage]
+end
+

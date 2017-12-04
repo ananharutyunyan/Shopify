@@ -1,0 +1,101 @@
+$mobile-breakpoint:         480px;
+$tablet-small-breakpoint:   600px;
+$tablet-large-breakpoint:   768px;
+$desktop-small-breakpoint:  960px;
+$desktop-breakpoint:        1152px;
+
+$overhang-width: 10px;
+
+$mobile-range: (0, $mobile-breakpoint - 1px);                                     // 0 - 479
+$tablet-small-range: ($mobile-breakpoint, $tablet-small-breakpoint - 1);          // 480 - 599
+$tablet-large-range: ($tablet-small-breakpoint, $tablet-large-breakpoint - 1);    // 480 - 599
+$desktop-small-range: ($tablet-large-breakpoint, $desktop-small-breakpoint - 1);  // 768 - 959
+$desktop-range: ($desktop-small-breakpoint, $desktop-breakpoint - 1);             // 960 - 1151
+$desktop-wide-range: ($desktop-breakpoint, 99999999px);                           // 1152+
+
+@function lower-bound($range){
+    @if length($range) <= 0 {
+        @return 0;
+    }
+    @return nth($range,1);
+}
+
+@function upper-bound($range) {
+    @if length($range) < 2 {
+        @return 999999999999;
+    }
+    @return nth($range, 2);
+}
+
+$screen: "only screen";
+$mobile-up: $screen;
+$mobile-only: "#{$screen} and (max-width: #{upper-bound($mobile-range)})";
+
+$tablet-small-up: "#{$screen} and (min-width:#{lower-bound($tablet-small-range)})";
+$tablet-small-only: "#{$screen} and (min-width:#{lower-bound($tablet-small-range)}) and (max-width:#{upper-bound($tablet-small-range)})";
+
+$tablet-large-up: "#{$screen} and (min-width:#{lower-bound($tablet-large-range)})";
+$tablet-large-only: "#{$screen} and (min-width:#{lower-bound($tablet-large-range)}) and (max-width:#{upper-bound($tablet-large-range)})";
+
+$tablet-only: "#{$screen} and (min-width:#{lower-bound($tablet-small-range)}) and (max-width:#{upper-bound($tablet-large-range)})";
+$desktop-small-up: "#{$screen} and (min-width:#{lower-bound($desktop-small-range)})";
+$desktop-small-only: "#{$screen} and (min-width:#{lower-bound($desktop-small-range)}) and (max-width:#{upper-bound($desktop-small-range)})";
+
+$desktop-up: "#{$screen} and (min-width:#{lower-bound($desktop-range)})";
+$desktop-only: "#{$screen} and (min-width:#{lower-bound($desktop-range)}) and (max-width:#{upper-bound($desktop-range)})";
+$desktop-overhang-only: "#{$screen} and (min-width:#{lower-bound($desktop-range) + ($overhang-width * 2)}) and (max-width:#{upper-bound($desktop-range)})";
+
+$desktop-wide-up: "#{$screen} and (min-width:#{lower-bound($desktop-wide-range)})";
+$desktop-wide-only: "#{$screen} and (min-width:#{lower-bound($desktop-wide-range)}) and (max-width:#{upper-bound($desktop-wide-range)})";
+
+/*
+
+Media Query examples for the Sass Grid
+
+screen: @media \#{$screen}
+@media #{$screen}
+
+
+Mobile and up: @media \#{$mobile-up}
+@media #{$mobile-up}
+
+Mobile Only: @media \#{$mobile-only}
+@media #{$mobile-only}
+
+Tablet-small and Up: @media \#{$tablet-small-up}
+@media #{$tablet-small-up}
+
+Tablet-small Only: @media \#{$tablet-small-only}
+@media #{$tablet-small-only}
+
+Tablet-large and Up: @media \#{$tablet-large-up}
+@media #{$tablet-large-up}
+
+Tablet-large Only: @media \#{$tablet-large-only}
+@media #{$tablet-large-only}
+
+Tablet Only: @media \#{$tablet-only}
+@media #{$tablet-only}
+
+Desktop-small and Up: @media \#{$desktop-small-up}
+@media #{$desktop-small-up}
+
+Desktop-small Only: @media \#{$desktop-small-only}
+@media #{$desktop-small-only}
+
+Desktop and Up: @media \#{$desktop-up}
+@media #{$desktop-up}
+
+Desktop Only: @media \#{$desktop-only}
+@media #{$desktop-only}
+
+Desktop Overhang Only: @media \#{$desktop-overhang-only}
+@media #{$desktop-overhang-only}
+
+Desktop-wide and Up: @media \#{$desktop-wide-up}
+@media #{$desktop-wide-up}
+
+Desktop-wide Only: @media \#{$desktop-wide-only}
+@media #{$desktop-wide-only}
+
+*/

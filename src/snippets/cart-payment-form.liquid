@@ -1,0 +1,42 @@
+<!-- snippets/cart-form.liquid -->
+<div class="clearfix">
+  <a href="/" class="c-cart__continue-shopping-btn"><i class="fa fa-arrow-circle-left fa-lg"></i>&nbsp;Continue Shopping</a>
+  <div class="c-cart__bottom-payment-section">
+    <button type="submit" class="cart_button2 c-cart__checkout-btn" id="checkout" name="checkout">
+      Proceed to Checkout&nbsp;<i class="fa fa-arrow-circle-right fa-lg"></i>
+    </button>
+
+    {% unless includePaypal == false %}
+      <div class="cart__paypal-btn">
+        <input type="image" name="goto_pp" value="paypal_express" src="//www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-150px.png">
+      </div>
+    {% endunless %}
+
+
+    {% if cart.total_price >= 6000 %}
+      <div class="cart__cont_free_ship">
+        <div class="cart__cont_free_ship_cart">
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" 	 width="25px" height="25px" viewBox="0 0 612 612" enable-background="new 0 0 612 612" xml:space="preserve"> <g> 	<path d="M612,327.56V129.567c0-16.337-13.243-29.58-29.58-29.58H243.834c-16.337,0-29.58,13.244-29.58,29.58v21.988h-58.622 		c-10.387,0-20.355,4.097-27.739,11.403L11.701,277.917C4.213,285.326,0,295.421,0,305.954l0,21.606H612z M179.448,190.303v86.866 		c0,2.564-2.072,4.634-4.635,4.634h-112.5c-4.14,0-6.211-5.127-3.154-7.987l91.006-86.865c0.887-0.788,2.069-1.282,3.253-1.282 		h21.396c2.564,0,4.635,2.071,4.635,4.634H179.448z M0,343.904h612v65.486c0,16.336-13.243,29.578-29.58,29.577h-39.637 		c-5.718-39.242-39.538-69.412-80.259-69.412s-74.541,30.17-80.259,69.412h-160.42c-5.719-39.242-39.538-69.412-80.259-69.412 		c-40.818,0-74.638,30.17-80.357,69.412h-31.65C13.243,438.967,0,425.725,0,409.389l0-65.486V343.904z M80.194,450.663 		c0,33.883,27.468,61.35,61.35,61.35s61.351-27.467,61.351-61.35s-27.468-61.35-61.351-61.35S80.194,416.78,80.194,450.663z 		 M110.868,450.663c0-16.942,13.735-30.674,30.676-30.674c16.943,0,30.675,13.732,30.675,30.674s-13.734,30.676-30.675,30.676 		S110.868,467.605,110.868,450.663z M401.186,450.663c0,33.883,27.468,61.35,61.35,61.35s61.35-27.467,61.35-61.35 		s-27.467-61.35-61.35-61.35C428.654,389.313,401.186,416.78,401.186,450.663z M431.861,450.663 		c0-16.942,13.734-30.674,30.675-30.674c16.942,0,30.676,13.732,30.676,30.674s-13.735,30.676-30.676,30.676 		C445.595,481.339,431.861,467.605,431.861,450.663z"/> </g>
+          </svg>
+        </div>
+        <span>FREE Shipping, FREE Returns</span>
+      </div>
+    {% endif %}
+
+    {% unless includeBadges == false %}
+      <div class="addedcontent sealswrapper">
+        <div class="sealholder">
+          <img src="//cdn.shopify.com/s/files/1/1790/4935/t/3/assets/protalus_checkout_seal_1.png?16347456113792353971" title="SECURE" class="checkoutseal">
+        </div>
+        <div class="sealholder">
+          <img src="//cdn.shopify.com/s/files/1/1790/4935/t/3/assets/protalus_checkout_seal_2.png?16347456113792353971" title="SECURE" class="checkoutseal">
+        </div>
+        <div class="sealholder">
+          <img src="//cdn.shopify.com/s/files/1/1790/4935/t/3/assets/protalus_checkout_seal_3.png?16347456113792353971" title="SECURE" class="checkoutseal">
+        </div>
+      </div>
+    {% endunless %}
+
+  </div>
+</div>
+<!-- END: snippets/cart-form.liquid -->

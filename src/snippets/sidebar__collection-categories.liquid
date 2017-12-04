@@ -1,0 +1,250 @@
+<!-- snippets/sidebar__collection-categories.liquid -->
+
+{% assign sidebar_parent = collection.metafields.LOC.collection_parent %}
+
+{% case  sidebar_parent %}
+
+{% when 'anal-sex-toys' %}
+  {% include 'sidebar__collection-menu' with "Anal Toys" %}
+    {% include 'sidebar__item' with collections.anal-sex-toys-beads,                 title: "Anal Beads" %}
+    {% include 'sidebar__item' with collections.anal-sex-toys-dildos,                title: "Anal Dildos" %}
+    {% include 'sidebar__item' with collections.anal-sex-toys-probes,                title: "Anal Probes" %}
+    {% include 'sidebar__item' with collections.anal-sex-toys-hygiene,               title: "Anal Hygiene" %}
+    {% include 'sidebar__item' with collections.anal-sex-toys-animal-tail,           title: "Animal Tail Toys" %}
+    {% include 'sidebar__item' with collections.anal-sex-toys-jeweled,               title: "Jeweled Anal Toys" %}
+    {% include 'sidebar__item' with collections.anal-sex-toys-beginner,              title: "Beginner Anal Toys" %}
+    {% include 'sidebar__item' with collections.anal-sex-toys-kit,                   title: "Anal Toy Kits" %}
+    {% include 'sidebar__item' with collections.anal-sex-toys-butt-plugs,            title: "Butt Plug Toys" %}
+    {% include 'sidebar__item' with collections.anal-sex-toys-glass,                 title: "Glass Anal Toys" %}
+    {% include 'sidebar__item' with collections.anal-sex-toys-inflatable,            title: "Inflatable Anal Toys" %}
+    {% include 'sidebar__item' with collections.anal-sex-toys-large,                 title: "Large Anal Toys" %}
+    {% include 'sidebar__item' with collections.anal-sex-toys-prostate,              title: "Male Prostate Massagers" %}
+    {% include 'sidebar__item' with collections.anal-sex-toys-metal,                 title: "Metal Anal Toys" %}
+    {% include 'sidebar__item' with collections.anal-sex-toys-small,                 title: "Small Anal Toys" %}
+  {% include 'sidebar__collection-menu', endblock: true %}
+
+
+{% when 'butt-plugs' %}
+  {% include 'sidebar__collection-menu' with "Butt Plugs" %}
+    {% include 'sidebar__item' with collections.butt-plugs-animal-tail,              title: "Animal Tail Butt Plugs" %}
+    {% include 'sidebar__item' with collections.butt-plugs-beginner,                 title: "Beginner Butt Plugs" %}
+    {% include 'sidebar__item' with collections.butt-plugs-kit,                      title: "Butt Plug Sets" %}
+    {% include 'sidebar__item' with collections.butt-plugs-glass,                    title: "Glass Butt Plugs" %}
+    {% include 'sidebar__item' with collections.butt-plugs-inflatable,               title: "Inflatable Butt Plugs" %}
+    {% include 'sidebar__item' with collections.butt-plugs-jeweled,                  title: "Jeweled Butt Plugs" %}
+    {% include 'sidebar__item' with collections.butt-plugs-large,                    title: "Large Butt Plugs" %}
+    {% include 'sidebar__item' with collections.butt-plugs-metal,                    title: "Metal Butt Plugs" %}
+    {% include 'sidebar__item' with collections.butt-plugs-non-vibe,                 title: "Non-Vibrating Butt Plugs" %}
+    {% include 'sidebar__item' with collections.butt-plugs-vibrates,                 title: "Vibrating Butt Plugs" %}
+  {% include 'sidebar__collection-menu', endblock: true %}
+
+{% when 'male-toys' %}
+  {% include 'sidebar__collection-menu' with "Mens Toys" %}
+    {% include 'sidebar__item' with collections.male-toys-fleshlights,               title: "Fleshlights" %}
+    {% include 'sidebar__item' with collections.male-toys-cock-rings,                title: "Cock Rings" %}
+    {% include 'sidebar__item' with collections.male-toys-masturbators,              title: "Male Masturbators" %}
+    {% include 'sidebar__item' with collections.male-toys-vibrators,                 title: "Male Vibrators" %}
+    {% include 'sidebar__item' with collections.male-toys-pumps,                     title: "Penis Pumps & Enlargers" %}
+    {% include 'sidebar__item' with collections.male-toys-sleeves,                   title: "Penis Sleeves & Extensions" %}
+    {% include 'sidebar__item' with collections.male-toys-prostate,                  title: "Prostate Massagers" %}
+    {% include 'sidebar__item' with collections.male-toys-real-butts,                title: "Realistic Butts" %}
+    {% include 'sidebar__item' with collections.male-toys-real-vaginas,              title: "Realistic Vaginas" %}
+    {% include 'sidebar__item' with collections.male-toys-dolls,                     title: "Sex Dolls" %}
+    {% include 'sidebar__item' with collections.male-toys-tenga,                     title: "TENGA & Flip Hole" %}
+    {% include 'sidebar__item' with collections.male-toys-hollow,                    title: "Hollow Strap On" %}
+  {% include 'sidebar__collection-menu', endblock: true %}
+
+{% when 'female-toys' %}
+  {% include 'sidebar__collection-menu' with "Womens Toys" %}
+    {% include 'sidebar__item' with collections.female-vibrators,                    title: "Vibrators" %}
+    {% include 'sidebar__item' with collections.female-rabbits,                      title: "Rabbit Vibrators" %}
+    {% include 'sidebar__item' with collections.female-clitoral,                     title: "Clitoral Vibrators" %}
+    {% include 'sidebar__item' with collections.female-recharge,                     title: "Rechargeable Vibrators" %}
+    {% include 'sidebar__item' with collections.female-luxury,                       title: "Luxury Vibrators" %}
+    {% include 'sidebar__item' with collections.female-g-spot,                       title: "G-Spot Vibrators" %}
+    {% include 'sidebar__item' with collections.female-dildos,                       title: "Dildos" %}
+    {% include 'sidebar__item' with collections.female-anal-toys,                    title: "Anal Toys" %}
+    {% include 'sidebar__item' with collections.female-ben-wa-balls,                 title: "Ben Wa Balls" %}
+    {% include 'sidebar__item' with collections.female-nipple-toys,                  title: "Nipple Toys" %}
+    {% include 'sidebar__item' with collections.female-essentials,                   title: "Essentials For Her" %}
+  {% include 'sidebar__collection-menu', endblock: true %}
+
+{% when 'couples-toys' %}
+  {% include 'sidebar__collection-menu' with "Couples Toys" %}
+    {% include 'sidebar__item' with collections.couples-cock-rings,                  title: "Couples Cock Rings" %}
+    {% include 'sidebar__item' with collections.couples-bondage,                     title: "Bondage Toys" %}
+    {% include 'sidebar__item' with collections.couples-swings,                      title: "Sex Swings" %}
+    {% include 'sidebar__item' with collections.couples-furniture,                   title: "Sex Furniture" %}
+    {% include 'sidebar__item' with collections.couples-strap-ons,                   title: "Strap Ons & Harnesses" %}
+    {% include 'sidebar__item' with collections.couples-sex-toys,                    title: "Couples Sex Toys" %}
+    {% include 'sidebar__item' with collections.couples-games,                       title: "Sex Games" %}
+    {% include 'sidebar__item' with collections.couples-enhancers,                   title: "Sex Enhancers" %}
+  {% include 'sidebar__collection-menu', endblock: true %}
+
+{% when 'dildos' %}
+  {% include 'sidebar__collection-menu' with "Dildos" %}
+    {% include 'sidebar__item' with collections.dildos-black,                        title: "Black Dildos" %}
+    {% include 'sidebar__item' with collections.dildos-double,                       title: "Double Ended Dildos" %}
+    {% include 'sidebar__item' with collections.dildos-ejaculating,                  title: "Ejaculating Dildos" %}
+    {% include 'sidebar__item' with collections.dildos-glass,                        title: "Glass Dildos" %}
+    {% include 'sidebar__item' with collections.dildos-harness,                      title: "Harness Dildos" %}
+    {% include 'sidebar__item' with collections.dildos-homemade,                     title: "Homemade Dildos" %}
+    {% include 'sidebar__item' with collections.dildos-large,                        title: "Large Dildos" %}
+    {% include 'sidebar__item' with collections.dildos-metal,                        title: "Metal Dildos" %}
+    {% include 'sidebar__item' with collections.dildos-realistic,                    title: "Realistic Dildos" %}
+    {% include 'sidebar__item' with collections.dildos-silicone,                     title: "Silicone Dildos" %}
+    {% include 'sidebar__item' with collections.dildos-small,                        title: "Small Dildos" %}
+    {% include 'sidebar__item' with collections.dildos-strapless,                    title: "Strapless Dildos" %}
+    {% include 'sidebar__item' with collections.dildos-vibrates,                     title: "Vibrating Dildos" %}
+    {% include 'sidebar__item' with collections.dildos-suction-cup,                  title: "Suction Cup Dildos" %}
+    {% include 'sidebar__item' with collections.dildos-porn-star,                    title: "Porn Star Molded Dildos" %}
+    {% include 'sidebar__item' with collections.dildos-g-spot,                       title: "G-Spot Dildos" %}
+  {% include 'sidebar__collection-menu', endblock: true %}
+
+{% when 'vibrators' %}
+  {% include 'sidebar__collection-menu' with "Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-anal,                      title: "Anal Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-bullet,                    title: "Bullet Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-butterfly,                 title: "Butterfly Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-classic,                   title: "Classic Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-clitoral,                  title: "Clitoral Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-couples,                   title: "Couples Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-discreet,                  title: "Discreet Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-dual,                      title: "Dual Action Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-quiet,                     title: "Extra Quiet Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-g-spot,                    title: "G-Spot Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-large,                     title: "Large Sized Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-luxury,                    title: "Luxury Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-wand,                      title: "Magic Wand Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-massager,                  title: "Massager Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-rabbit,                    title: "Rabbit Vibrators" %}
+    {% include 'sidebar__item' with collections.thrusting-vibrators,                 title: "Thrusting Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-realistic,                 title: "Realistic Dildo Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-kit,                       title: "Vibrator Sets" %}
+    {% include 'sidebar__item' with collections.vibrators-remote,                    title: "Remote Control Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-finger,                    title: "Finger & Tongue Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-egg,                       title: "Egg Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-recharge,                  title: "Rechargeable Vibrators" %}
+    {% include 'sidebar__item' with collections.vibrators-attachments,               title: "Vibrator Attachments" %}
+  {% include 'sidebar__collection-menu', endblock: true %}
+
+{% when 'strap-ons-harnesses' %}
+  {% include 'sidebar__collection-menu' with "Strap Ons" %}
+    {% include 'sidebar__item' with collections.strap-ons-harnesses-beginner,        title: "Beginner Strap Ons" %}
+    {% include 'sidebar__item' with collections.strap-ons-harnesses-hollow,          title: "Hollow Strap Ons" %}
+    {% include 'sidebar__item' with collections.pegging-strap-ons,                   title: "Pegging Strap Ons" %}
+    {% include 'sidebar__item' with collections.strap-ons-harnesses-lesbian,         title: "Lesbian Strap Ons" %}
+    {% include 'sidebar__item' with collections.strap-ons-harnesses-kit,             title: "Strap On Harnesses & Kits" %}
+    {% include 'sidebar__item' with collections.strap-ons-harnesses-strapless,       title: "Strapless Strap Ons" %}
+    {% include 'sidebar__item' with collections.strap-ons-harnesses-dildos,          title: "Strap On Dildos" %}
+    {% include 'sidebar__item' with collections.strap-ons-harnesses-vac-u-loc,       title: "Vac U Lock Strap Ons" %}
+    {% include 'sidebar__item' with collections.strap-ons-harnesses-vibrates,        title: "Vibrating Strap Ons" %}
+  {% include 'sidebar__collection-menu', endblock: true %}
+
+{% when 'bondage-gear' %}
+  {% include 'sidebar__collection-menu' with "Bondage Gear" %}
+    {% include 'sidebar__item' with collections.bondage-gear-beginner,               title: "Beginner Bondage" %}
+    {% include 'sidebar__item' with collections.bondage-gear-kit,                    title: "Bondage Kits" %}
+    {% include 'sidebar__item' with collections.bondage-gear-blindfolds-masks-gags,  title: "Blindfolds, Masks & Gags" %}
+    {% include 'sidebar__item' with collections.bondage-gear-chastity,               title: "Chastity Devices" %}
+    {% include 'sidebar__item' with collections.bondage-gear-electro,                title: "Electro Sex Toys" %}
+    {% include 'sidebar__item' with collections.bondage-gear-handcuffs-restraints,   title: "Handcuffs & Restraints" %}
+    {% include 'sidebar__item' with collections.bondage-gear-nipple-clitoral,        title: "Nipple & Clitoral Toys" %}
+    {% include 'sidebar__item' with collections.bondage-gear-furniture,              title: "Sex Furniture" %}
+    {% include 'sidebar__item' with collections.bondage-gear-sex-swings-machines,    title: "Sex Swings & Machines" %}
+    {% include 'sidebar__item' with collections.bondage-gear-spankers-ticklers,      title: "Spankers,Ticklers & Whips" %}
+  {% include 'sidebar__collection-menu', endblock: true %}
+
+{% when 'kegel-health-toys' %}
+  {% include 'sidebar__collection-menu' with "Kegel Health Toys" %}
+    {% include 'sidebar__item' with collections.kegel-health-toys-kegel,             title: "Kegel Exercisers & Sets" %}
+    {% include 'sidebar__item' with collections.kegel-health-toys-ben-wa,            title: "Ben Wa Balls" %}
+    {% include 'sidebar__item' with collections.kegel-health-toys-vibrating-eggs,    title: "Vibrating Love Eggs" %}
+    {% include 'sidebar__item' with collections.kegel-health-toys-remote-eggs,       title: "Remote Control Love Eggs" %}
+  {% include 'sidebar__collection-menu', endblock: true %}
+
+{% when 'sex-essentials' %}
+  {% include 'sidebar__collection-menu' with "Sex Essentials" %}
+    {% include 'sidebar__item' with collections.sex-essentials-lube-anal,            title: "Anal Lubricants" %}
+    {% include 'sidebar__item' with collections.sex-essentials-lube-cooling,         title: "Cooling Lubricants" %}
+    {% include 'sidebar__item' with collections.sex-essentials-lube-flavored,        title: "Flavored Lubricants" %}
+    {% include 'sidebar__item' with collections.sex-essentials-lube-masturbation,    title: "Masturbation Creams" %}
+    {% include 'sidebar__item' with collections.sex-essentials-lube-organic,         title: "Organic Lube" %}
+    {% include 'sidebar__item' with collections.sex-essentials-oils-creams-massage,  title: "Erotic Massage Oils & Creams" %}
+    {% include 'sidebar__item' with collections.sex-essentials-lube-silicone,        title: "Silicone Lubricants" %}
+    {% include 'sidebar__item' with collections.sex-essentials-lube-stim,            title: "Stimulating Lubricants" %}
+    {% include 'sidebar__item' with collections.sex-essentials-lube-vegan,           title: "Vegan Lubricants" %}
+    {% include 'sidebar__item' with collections.sex-essentials-lube-warming,         title: "Warming Lubricants" %}
+    {% include 'sidebar__item' with collections.sex-essentials-lube-water,           title: "Water Based Lubricants" %}
+    {% include 'sidebar__item' with collections.sex-essentials-lube-women,           title: "Female Lubricants" %}
+        <li class="filter-group__section">Sex Enhancers</li>
+    {% include 'sidebar__item' with collections.sex-essentials-better-anal,          title: "Better Anal Sex" %}
+    {% include 'sidebar__item' with collections.sex-essentials-better-her,           title: "Better Sex for Her" %}
+    {% include 'sidebar__item' with collections.sex-essentials-better-him,           title: "Better Sex for Him" %}
+    {% include 'sidebar__item' with collections.sex-essentials-condoms,              title: "Safe Sex & Condoms" %}
+        <li class="filter-group__section">Sex Accessories</li>
+    {% include 'sidebar__item' with collections.sex-essentials-battery,              title: "Batteries" %}
+    {% include 'sidebar__item' with collections.sex-essentials-cleaners,             title: "Cleaners" %}
+    {% include 'sidebar__item' with collections.sex-essentials-storage,              title: "Toy Storage" %}
+    {% include 'sidebar__item' with collections.sex-essentials-toy-accessories,      title: "Toy Accessories" %}
+  {% include 'sidebar__collection-menu', endblock: true %}
+
+{% when 'cock-rings' %}
+  {% include 'sidebar__collection-menu' with "Cock Rings" %}
+    {% include 'sidebar__item' with collections.cock-rings-adjustable,               title: "Adjustable Cock Rings" %}
+    {% include 'sidebar__item' with collections.cock-rings-set,                      title: "Cock Ring Sets" %}
+    {% include 'sidebar__item' with collections.cock-rings-double,                   title: "Double Cock Rings" %}
+    {% include 'sidebar__item' with collections.cock-rings-metal,                    title: "Metal Cock Rings" %}
+    {% include 'sidebar__item' with collections.cock-rings-non-vibe,                 title: "Non Vibrating Cock Rings" %}
+    {% include 'sidebar__item' with collections.cock-rings-rabbit,                   title: "Rabbit Cock Rings" %}
+    {% include 'sidebar__item' with collections.cock-rings-stretchy,                 title: "Stretchy Cock Rings" %}
+    {% include 'sidebar__item' with collections.cock-rings-vibrates,                 title: "Vibrating Cock Rings" %}
+    {% include 'sidebar__item' with collections.cock-rings-couples,                  title: "Couples Cock Rings" %}
+  {% include 'sidebar__collection-menu', endblock: true %}
+
+{% when 'lingerie' %}
+  {% include 'sidebar__collection-menu' with "Lingerie" %}
+    {% comment %}
+      {% include 'sidebar__item' with collections.lingerie-babydolls-chemise,        title: "Babydolls & Chemises" %}
+      {% include 'sidebar__item' with collections.lingerie-bikini-set,               title: "Bikini Sets" %}
+      {% include 'sidebar__item' with collections.lingerie-bodystockings,            title: "Bodystockings" %}
+      {% include 'sidebar__item' with collections.lingerie-boxer-briefs,             title: "Boxers & Briefs" %}
+      {% include 'sidebar__item' with collections.lingerie-bras,                     title: "Bras & Bra Sets" %}
+      {% include 'sidebar__item' with collections.lingerie-corsets,                  title: "Corsets" %}
+      {% include 'sidebar__item' with collections.lingerie-costumes,                 title: "Costumes" %}
+      {% include 'sidebar__item' with collections.lingerie-crotchless,               title: "Crotchless Lingerie" %}
+      {% include 'sidebar__item' with collections.lingerie-set,                      title: "Lingerie Sets" %}
+      {% include 'sidebar__item' with collections.lingerie-male,                     title: "Male Lingerie" %}
+      {% include 'sidebar__item' with collections.lingerie-fetish-men,               title: "Men's Fetishwear" %}
+      {% include 'sidebar__item' with collections.lingerie-peek-a-boo,               title: "Peek-A-Boo Lingerie" %}
+      {% include 'sidebar__item' with collections.lingerie-plus-babydoll,            title: "Plus Size Babydoll" %}
+      {% include 'sidebar__item' with collections.lingerie-plus-corsets,             title: "Plus Size Corsets" %}
+      {% include 'sidebar__item' with collections.lingerie-plus-size,                title: "Plus Size Lingerie" %}
+      {% include 'sidebar__item' with collections.lingerie-underwear,                title: "Sexy Underwear" %}
+      {% include 'sidebar__item' with collections.lingerie-strocking-set,            title: "Stocking Sets" %}
+      {% include 'sidebar__item' with collections.lingerie-stockings,                title: "Stockings" %}
+      {% include 'sidebar__item' with collections.lingerie-thongs-g-strings,         title: "Thongs & G-Strings" %}
+      {% include 'sidebar__item' with collections.lingerie-fetish-women,             title: "Women's Fetishwear" %}
+          <li class="filter-group__section">More Lingerie</li>
+    {% endcomment %}
+    {% include 'sidebar__item' with collections.sexy-lingerie-costumes,              title: "Sexy Lingerie & Costumes" %}
+    {% include 'sidebar__item' with collections.sexy-lingerie-stockings,             title: "Stockings & Hosiery" %}
+    {% include 'sidebar__item' with collections.sexy-lingerie-plus,                  title: "Plus Sized Lingerie" %}
+    {% include 'sidebar__item' with collections.sexy-lingerie-sets,                  title: "Lingerie Sets" %}
+    {% include 'sidebar__item' with collections.sexy-lingerie-bras,                  title: "Bras & Bra Sets" %}
+    {% include 'sidebar__item' with collections.sexy-lingerie-panties,               title: "Sexy Panties" %}
+  {% include 'sidebar__collection-menu', endblock: true %}
+
+{% when 'games-gifts' %}
+  {% include 'sidebar__collection-menu' with "Games & Gifts" %}
+    {% include 'sidebar__item' with collections.games-gifts-drinking,                title: "Drinking Games" %}
+    {% include 'sidebar__item' with collections.games-gifts-massage,                 title: "Erotic Massage" %}
+    {% include 'sidebar__item' with collections.games-gifts-hen,                     title: "Hen Party Goodies" %}
+    {% include 'sidebar__item' with collections.games-gifts-candles,                 title: "Massage Candles" %}
+    {% include 'sidebar__item' with collections.games-gifts-edibles,                 title: "Naughty Edibles" %}
+    {% include 'sidebar__item' with collections.games-gifts-novelty,                 title: "Novelty Gifts" %}
+    {% include 'sidebar__item' with collections.games-gifts-moulding,                title: "Penis Moulding Kits" %}
+    {% include 'sidebar__item' with collections.games-gifts-dice,                    title: "Sex Dice" %}
+    {% include 'sidebar__item' with collections.games-gifts-sex,                     title: "Sex Games" %}
+  {% include 'sidebar__collection-menu', endblock: true %}
+{% endcase %}

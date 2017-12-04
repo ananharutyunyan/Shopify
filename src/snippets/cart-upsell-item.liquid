@@ -1,0 +1,22 @@
+<li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+  <label>
+    <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/>
+    <span class="upsell__item-desc">{{ product.title }}
+      <span class="upsellprice">
+        {% include 'shappify-qb-min-price' with product %}
+        <span class="was_price"> {% if product.price < product.compare_at_price_min %}
+{{ product.compare_at_price_min | money }}{% endif %}</span>
+      </span>
+    </span>
+  </label>
+  <script type="text/javascript">
+    $('#product-{{ product.variants.first.id }}').change(function() {
+      if(this.checked) {
+        jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+      } else {
+        jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+      }
+    });
+  </script>
+</li>

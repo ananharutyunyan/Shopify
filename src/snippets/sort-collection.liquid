@@ -1,0 +1,38 @@
+<div id="sort-by-coll">
+  <div class="collections-sort-option" data-value="best-selling">Best Selling</div>
+  <div class="collections-sort-option" data-value="manual">Top Rated</div>
+  <div class="collections-sort-option" data-value="price-ascending">$ Low </div>
+  <div class="collections-sort-option" data-value="price-descending">$ High</div>
+  <div style="clear:both;"></div>
+</div>
+
+<script type="text/javascript">
+  $('#sort-by-coll .collections-sort-option').each(function(e){
+    var sort_by = '{{ collection.sort_by | default: collection.default_sort_by | escape }}';
+    if($(this).data('value') == sort_by || '{{ current_tags }}' == $(this).data('value')) {
+      $(this).addClass('current');
+    }
+
+  	$(this).bind('click', function() {
+      var sort_option = $(this).data('value');
+      if(sort_option == "best-selling" || sort_option == "price-ascending" || sort_option == "price-descending" || sort_option == "manual") {
+        Shopify.queryParams.sort_by = $(this).data('value');
+          location.search = $.param(Shopify.queryParams).replace(/\+/g, '%20');
+      } else if(sort_option == "sale") {
+        var newTags = [];
+        {% for tag in current_tags %}
+          newTags.push('{{tag}}');
+        {% endfor %}
+
+        newTags.push(sort_option);
+
+        if (newTags.length) {
+          var query = newTags.join('+');
+          //alert(jQuery('{{ 'tag' | link_to_tag: 'tag' }}').attr('href'));
+         window.location.href = jQuery('{{ 'tag' | link_to_tag: 'tag' }}').attr('href').replace('tag', query);
+        }
+      }
+    });
+  });
+</script>
+

@@ -1,0 +1,14 @@
+<div class="mobile-filter-menu-container">
+  {% include 'filter-menu' %}
+</div>
+<script>
+  console.log('mobile-filter-menu included');
+  $( document ).ready(function() {
+    $('.filter-toggle').on('click', function() {
+      console.log("filter-toggle click")
+      let $toggle = $(this);
+      let $menu = $('.filter-menu')
+      $menu.slideToggle("slow");
+    });
+  });
+</script>

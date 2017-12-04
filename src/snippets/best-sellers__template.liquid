@@ -1,0 +1,46 @@
+<!-- snippets/best-sellers__template.liquid collection: {{collection.handle}}  collection_parent: {{collection.metafields.LOC.collection_parent}} -->
+{% if page_size %}
+  {% assign _page_size = page_size %}
+{% else %}
+  {% assign _page_size = 48 %}
+{% endif %}
+{% assign tag_count = collection.all_tags | size %}
+{% assign tag_threshold = 5 | minus: 0 %}
+
+{% paginate collection.products by _page_size %}
+
+{% include 'breadcrumbs-new' %}
+
+{% include 'sidebar-general', mobile: false %}
+
+<div class="twelve columns best-sellers__container">
+
+  {% include 'best-sellers__title-section' %}
+
+  {% include 'sidebar__current-tags' %}
+
+  <hr>
+  {% if anchor_name %}
+    <a id="{{anchor_name}}"></a>
+  {% endif %}
+
+  <div class="main_product_list_sec">
+    {% assign products = collection.products %}
+    {% include 'product-loop',
+         num_products: _page_size,
+         grid_classes: "mobile-fblock-grid-1",
+         list_class: "products__best-sellers",
+         thumbnail_snippet: "best-sellers__product-thumbnail",
+         skip_shappify_hidden: true,
+         skip_tags: ''
+    %}
+  </div>
+
+</div>
+
+{% endpaginate %}
+
+{% include 'sidebar-general', mobile: true %}
+
+
+

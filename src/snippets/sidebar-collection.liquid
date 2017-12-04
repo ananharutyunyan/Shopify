@@ -1,0 +1,53 @@
+<!-- snippets/sidebar-collection.liquid  {{collection.metafields.LOC.collection_parent}} show_filters: {{show_filters}}-->
+
+{% if show_filters == false %}
+  {% assign category_toggle_viz = 'hidden' %}
+  {% assign _show_filters = false %}
+  {% assign _menu_class = '' %}
+  {% assign _menu_viz = '' %}
+  {% assign _sidebar_viz = 'hide-for-desktop' %}
+{% else %}
+  {% assign category_toggle_viz = 'hide-for-desktop' %}
+  {% assign _show_filters = true %}
+  {% assign _menu_class = 'filter-menu closed' %}
+  {% assign _menu_viz = 'mobile_start_hidden' %}
+  {% assign _sidebar_viz = '' %}
+{% endif %}
+
+
+{% assign sidebar_checkboxes = true %}
+
+<div class="sidebar four columns {{_sidebar_viz}}">
+
+  {% if collection.handle == 'all' %}
+    <div class="show-for-desktop">
+      <a href="/collections/sex-toy-blowout" onclick="ga('send', 'event', 'Collections All', 'Sidebar Click Through', 'Sex Toy Blowout');">
+        <img src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/sex-toy-blow-thumb.png?10981429758712927942">
+      </a>
+    </div>
+  {% endif %}
+
+  {% if _show_filters %}
+    {% include 'collection-title', dbg: 'from snippets/sidebar.liquid' %}
+  {% endif %}
+
+
+  <div class="{{_menu_class}} {{_menu_viz}} filter-selected-{{ collection.handle }} {% for tag in current_tags %} filter-selected-{{ tag | handleize }}{% endfor %}">
+
+    {% include 'sidebar__collection-categories' %}
+
+    {% if _show_filters %}
+      {% include 'sidebar__current-tags' %}
+      {% include 'filter-menu' %}
+    {% endif %}
+
+  </div>
+</div>
+
+<!-- END: snippets/sidebar-collection.liquid  mobile: {{mobile}}-->
+
+
+
+
+
+

@@ -1,0 +1,515 @@
+<!-- src/snippets/collection-matrix.liquid  collection.handle: {{collection.handle}}-->
+
+{% assign blurb = collection.description | split: '<!-- split -->' %}
+{% assign collection_parent = collection.metafields.LOC.collection_parent %}
+
+
+<div id="collection-matrix">
+
+  {% if sidebar_parent == 'vibrators' %}
+    {% include 'collection__vibrators-best-guide' %}
+  {% endif %}
+
+
+  {% case collection.handle %}
+  {% when 'vibrators' %}
+  {% when 'male-toys' %}
+  {% when 'couples-toys' %}
+  {% else %}
+    {% if collection.description != blank and current_page == 1 %}
+      {% unless current_tags != tag %}
+        <div id="col-description">
+          {{ collection.description }}
+        </div>
+      {% endunless %}
+    {% endif %}
+  {% endcase %}
+
+  {% if current_tags != tag %}
+  {% else %}
+    {% if current_page == 1 %}
+      {% if collection.handle == "vibrators" %}
+        <div id="col-description">
+          {{ blurb[0] }}
+        </div>
+
+        <ul class="mobile-fblock-grid-2 tablet-small-fblock-grid-4 fblock-grid__expand">
+          <li><a href="https://simplipleasure.com/collections/vibrators-rabbit" >
+            <img src="{{ '../assets/images/rabbit-vibrators.jpg' | asset_url }}" alt="Shop Our Best Rabbit Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-clitoral" >
+            <img src="{{ '../assets/images/clitoral-vibrators.jpg' | asset_url }}" alt="Shop Our Best Clitoral Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-quiet" >
+            <img src="{{ '../assets/images/quiet-vibrators.jpg' | asset_url }}" alt="Shop Our Best Extra Quiet Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-wand" >
+            <img src="{{ '../assets/images/wand-vibrators.jpg' | asset_url }}" alt="Shop Our Best Magic Wand Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-g-spot" >
+            <img src="{{ '../assets/images/gspot-vibrators.jpg' | asset_url }}" alt="Shop Our Best G-Spot Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-couples" >
+            <img src="{{ '../assets/images/couples-vibrators.jpg' | asset_url }}" alt="Shop Our Best Couples Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-luxury" >
+            <img src="{{ '../assets/images/luxury-vibrators.jpg' | asset_url }}" alt="Shop Our Best Luxury Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-large" >
+            <img src="{{ '../assets/images/large-vibrators.jpg' | asset_url }}" alt="Shop Our Best Large Sized Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-bullet" >
+            <img src="{{ '../assets/images/bullet-vibrators.jpg' | asset_url }}" alt="Shop Our Best Bullet Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-recharge" >
+            <img src="{{ '../assets/images/rechargeable-vibrators.jpg' | asset_url }}" alt="Shop Our Best Rechargeable Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-discreet" >
+            <img src="{{ '../assets/images/discreet-vibrators.jpg' | asset_url }}" alt="Shop Our Best Discreet Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-classic" >
+            <img src="{{ '../assets/images/classic-vibrators.jpg' | asset_url }}" alt="Shop Our Best Classic Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-anal" >
+            <img src="{{ '../assets/images/anal-vibrators.jpg' | asset_url }}" alt="Shop Our Best Anal Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-remote" >
+            <img src="{{ '../assets/images/remote-control-vibrators.jpg' | asset_url }}" alt="Shop Our Best Remote Control Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-massager" >
+            <img src="{{ '../assets/images/massager-vibrators.jpg' | asset_url }}" alt="Shop Our Best Massager Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-egg" >
+            <img src="{{ '../assets/images/egg-vibrators.jpg' | asset_url }}" alt="Shop Our Best Egg Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-realistic" >
+            <img class="lazy" data-src="{{ '../assets/images/realistic-vibrators.jpg' | asset_url }}" alt="Shop Our Best Realistic Dildo Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-kit" >
+            <img class="lazy" data-src="{{ '../assets/images/vibrator-sets.jpg' | asset_url }}" alt="Shop Our Best Vibrator Sets">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-finger" >
+            <img class="lazy" data-src="{{ '../assets/images/finger-vibrators.jpg' | asset_url }}" alt="Shop Our Best Finger & Tongue Vibrators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/vibrators-butterfly" >
+            <img class="lazy" data-src="{{ '../assets/images/butterfly-vibrators.jpg' | asset_url }}" alt="Shop Our Best Butterfly Vibrators">
+            </a></li>
+        </ul>
+
+        <hr>
+        <div id="col-description">
+          {{ blurb[1] }}
+        </div>
+      {% elsif collection.handle == "anal-sex-toys" %}
+        <ul class="mobile-fblock-grid-2 tablet-small-fblock-grid-4 fblock-grid__expand">
+          <li><a href="/collections/anal-sex-toys-beads" >
+            <img src="{{ '../assets/images/anal-beads.jpg' | asset_url }}" alt="Shop Our Best Anal Beads">
+            </a></li>
+          <li><a href="/collections/anal-sex-toys-large" >
+            <img src="{{ '../assets/images/large-anal-toys.jpg' | asset_url }}" alt="Shop Our Best Large Anal Toys">
+            </a></li>
+          <li><a href="/collections/anal-sex-toys-butt-plugs" >
+            <img src="{{ '../assets/images/butt-plug-anal-toys.jpg' | asset_url }}" alt="Shop Our Best Butt Plug Toys">
+            </a></li>
+          <li><a href="/collections/anal-sex-toys-hygiene" >
+            <img src="{{ '../assets/images/anal-hygiene.jpg' | asset_url }}" alt="Shop Our Best Anal Hygiene">
+            </a></li>
+          <li><a href="/collections/anal-sex-toys-jeweled" >
+            <img src="{{ '../assets/images/jeweled-anal-toys.jpg' | asset_url }}" alt="Shop Our Best Jeweled Anal Toys">
+            </a></li>
+          <li><a href="/collections/anal-sex-toys-beginner" >
+            <img src="{{ '../assets/images/beginner-toys.jpg' | asset_url }}" alt="Shop Our Best Beginner Anal Toys">
+            </a></li>
+          <li><a href="/collections/anal-sex-toys-kit" >
+            <img src="{{ '../assets/images/anal-toy-kits.jpg' | asset_url }}" alt="Shop Our Best Anal Toy Kits">
+            </a></li>
+          <li><a href="/collections/anal-sex-toys-glass" >
+            <img src="{{ '../assets/images/glass-anal-toys.jpg' | asset_url }}" alt="Shop Our Best Glass Anal Toys">
+            </a></li>
+          <li><a href="/collections/anal-sex-toys-metal" >
+            <img src="{{ '../assets/images/metal-analy-toys.jpg' | asset_url }}" alt="Shop Our Best Metal Anal Toys">
+            </a></li>
+          <li><a href="/collections/anal-sex-toys-prostate" >
+            <img src="{{ '../assets/images/prostate-massagers.jpg' | asset_url }}" alt="Shop Our Best Male Prostate Massagers">
+            </a></li>
+          <li><a href="/collections/anal-sex-toys-inflatable" >
+            <img src="{{ '../assets/images/inflatable-anal-toys.jpg' | asset_url }}" alt="Shop Our Best Inflatable Anal Toys">
+            </a></li>
+          <li><a href="/collections/anal-sex-toys-dildos" >
+            <img src="{{ '../assets/images/anal-dildos.jpg' | asset_url }}" alt="Shop Our Best Anal Dildos">
+            </a></li>
+        </ul>
+
+      {% elsif collection.handle == "bondage-gear" %}
+
+        <ul class="mobile-fblock-grid-2 tablet-small-fblock-grid-4 fblock-grid__expand">
+          <li><a href="https://simplipleasure.com/collections/bondage-gear-beginner">
+            <img src="{{ '../assets/images/beginners-bondage.jpg' | asset_url }}" alt="Shop Our Best Beginner Bondage" >
+            </a></li>
+
+          <li><a href="https://simplipleasure.com/collections/bondage-gear-kit" >
+            <img src="{{ '../assets/images/bondage-kits.jpg' | asset_url }}" alt="Shop Our Best Bondage Kits">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/bondage-gear-nipple-clitoral" >
+            <img src="{{ '../assets/images/nipple-and-clitoral-toys.jpg' | asset_url }}" alt="Shop Our Best Nipple & Clitoral Toys">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/bondage-gear-handcuffs-restraints" >
+            <img src="{{ '../assets/images/handcuffs-and-restraints.jpg' | asset_url }}" alt="Shop Our Best Handcuffs & Restraints">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/bondage-gear-blindfolds-masks-gags" >
+            <img src="{{ '../assets/images/blindfolds-masks-and-gags.jpg' | asset_url }}" alt="Shop Our Best Blindfolds, Masks & Gags">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/bondage-gear-furniture" >
+            <img src="{{ '../assets/images/sex-furniture.jpg' | asset_url }}" alt="Shop Our Best Sex Furniture">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/bondage-gear-sex-swings-machines" >
+            <img src="{{ '../assets/images/sex-swings-and-machines.jpg' | asset_url }}" alt="Shop Our Best Sex Swings & Machines">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/bondage-gear-spankers-ticklers" >
+            <img src="{{ '../assets/images/spankers-ticklers-and-whips.jpg' | asset_url }}" alt="Shop Our Best Spankers,Ticklers & Whips">
+            </a></li>
+        </ul>
+      {% elsif collection.handle == "butt-plugs" %}
+        <ul class="mobile-fblock-grid-2 tablet-small-fblock-grid-4 fblock-grid__expand">
+          <li><a href="https://simplipleasure.com/collections/butt-plugs-kit" >
+            <img src="{{ '../assets/images/butt-plug-sets.jpg' | asset_url }}" alt="Shop Our Best Butt Plug Sets">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/butt-plugs-vibrates" >
+            <img src="{{ '../assets/images/vibrating-butt-plugs.jpg' | asset_url }}" alt="Shop Our Best Vibrating Butt Plugs">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/butt-plugs-large" >
+            <img src="{{ '../assets/images/large-butt-plugs.jpg' | asset_url }}" alt="Shop Our Best Large Butt Plugs">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/butt-plugs-non-vibe" >
+            <img src="{{ '../assets/images/non-vibrating-butt-plugs.jpg' | asset_url }}" alt="Shop Our Best Non-Vibrating Butt Plugs">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/butt-plugs-jeweled" >
+            <img src="{{ '../assets/images/jeweled-butt-plugs.jpg' | asset_url }}" alt="Shop Our Best Jeweled Butt Plugs">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/butt-plugs-beginner" >
+            <img src="{{ '../assets/images/beginner-butt-plugs.jpg' | asset_url }}" alt="Shop Our Best Beginner Butt Plugs">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/butt-plugs-glass" >
+            <img src="{{ '../assets/images/glass-butt-plugs.jpg' | asset_url }}" alt="Shop Our Best Glass Butt Plugs">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/butt-plugs-animal-tail" >
+            <img src="{{ '../assets/images/animal-tail-butt-plugs.jpg' | asset_url }}" alt="Shop Our Best Animal Tail Butt Plugs">
+            </a></li>
+        </ul>
+      {% elsif collection.handle == "cock-rings" %}
+        <ul class="mobile-fblock-grid-2 tablet-small-fblock-grid-4 fblock-grid__expand">
+          <li><a href="https://simplipleasure.com/collections/cock-rings-double"  >
+            <img src="{{ '../assets/images/double-cock-rings.jpg' | asset_url }}" alt="Shop Our Best Double Cock Rings">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/cock-rings-set"  >
+            <img src="{{ '../assets/images/cockring-sets.jpg' | asset_url }}" alt="Shop Our Best Cock Ring Sets">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/cock-rings-non-vibe"  >
+            <img src="{{ '../assets/images/non-vibrating-cockrings.jpg' | asset_url }}" alt="Shop Our Best Non Vibrating Cock Rings">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/cock-rings-couples"  >
+            <img src="{{ '../assets/images/couples-cockrings.jpg' | asset_url }}" alt="Shop Our Best Couples Cock Rings">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/cock-rings-adjustable" >
+            <img src="{{ '../assets/images/adjustable-cockrings.jpg' | asset_url }}" alt="Shop Our Best Adjustable Cock Rings">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/cock-rings-metal"  >
+            <img src="{{ '../assets/images/metal_cockrings.jpg' | asset_url }}" alt="Shop Our Best Metal Cock Rings">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/cock-rings-rabbit"  >
+            <img src="{{ '../assets/images/rabbit-cockrings.jpg' | asset_url }}" alt="Shop Our Best Rabbit Cock Rings">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/cock-rings-stretchy"  >
+            <img src="{{ '../assets/images/stretchy-cockrings.jpg' | asset_url }}" alt="Shop Our Best Stretchy Cock Rings">
+            </a></li>
+        </ul>
+      {% elsif collection.handle == "dildos" %}
+        <ul class="mobile-fblock-grid-2 tablet-small-fblock-grid-4 fblock-grid__expand">
+          <li><a href="https://simplipleasure.com/collections/dildos-large" >
+            <img src="{{ '../assets/images/large-dildos.jpg' | asset_url }}" alt="Shop Our Best Large Dildos">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/dildos-suction-cup" >
+            <img src="{{ '../assets/images/suction-cup-dildos.jpg' | asset_url }}" alt="Shop Our Best Suction Cup Dildos">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/dildos-realistic" >
+            <img src="{{ '../assets/images/realistic-dildos.jpg' | asset_url }}" alt="Shop Our Best Realistic Dildos">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/dildos-ejaculating" >
+            <img src="{{ '../assets/images/ejaculating-dildos.jpg' | asset_url }}" alt="Shop Our Best Ejaculating Dildos">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/dildos-black" >
+            <img src="{{ '../assets/images/black-dildos.jpg' | asset_url }}" alt="Shop Our Best Black Dildos">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/dildos-silicone" >
+            <img src="{{ '../assets/images/silicone-dildos.jpg' | asset_url }}" alt="Shop Our Best Silicone Dildos">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/dildos-small" >
+            <img src="{{ '../assets/images/small-dildos.jpg' | asset_url }}" alt="Shop Our Best Small Dildos">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/dildos-strapless" >
+            <img src="{{ '../assets/images/strapless-dildos.jpg' | asset_url }}" alt="Shop Our Best Strapless Dildos">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/dildos-double" >
+            <img src="{{ '../assets/images/double-dildos.jpg' | asset_url }}" alt="Shop Our Best Double Ended Dildos">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/dildos-glass" >
+            <img src="{{ '../assets/images/glass-dildos.jpg' | asset_url }}" alt="Shop Our Best Glass Dildos">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/dildos-g-spot" >
+            <img src="{{ '../assets/images/g-spot-dildos.jpg' | asset_url }}" alt="Shop Our Best G-Spot Dildos">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/dildos-vibrates" >
+            <img src="{{ '../assets/images/vibrating-dildos.jpg' | asset_url }}" alt="Shop Our Best Vibrating Dildos">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/dildos-harness" >
+            <img src="{{ '../assets/images/strap-on-dildos.jpg' | asset_url }}" alt="Shop Our Best Harness Dildos">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/dildos-homemade" >
+            <img src="{{ '../assets/images/homemade-dildos.jpg' | asset_url }}" alt="Shop Our Best Homemade Dildos">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/dildos-porn-star" >
+            <img src="{{ '../assets/images/porn-star-molded.jpg' | asset_url }}" alt="Shop Our Best Porn Star Molded Dildos">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/dildos-metal" >
+            <img src="{{ '../assets/images/metal-dildos.jpg' | asset_url }}" alt="Shop Our Best Metal Dildos">
+            </a></li>
+        </ul>
+      {% elsif collection.handle == "female-toys" %}
+        <ul class="mobile-fblock-grid-2 tablet-small-fblock-grid-4 fblock-grid__expand">
+          <li><a href="https://simplipleasure.com/collections/female-rabbits" >
+            <img src="{{ '../assets/images/female-rabbits.jpg' | asset_url }}" alt="">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/female-clitoral">
+            <img src="{{ '../assets/images/clitoral-2.png' | asset_url }}" alt="">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/female-recharge" >
+            <img src="{{ '../assets/images/rechargeable-vibrators.jpg' | asset_url }}" alt="">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/female-luxury" >
+            <img src="{{ '../assets/images/luxury-vibrators.jpg' | asset_url }}" alt="">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/female-dildos" >
+            <img src="{{ '../assets/images/female-dildos.jpg' | asset_url }}" alt="">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/female-ben-wa-balls" >
+            <img src="{{ '../assets/images/ben-wa-balls.jpg' | asset_url }}" alt="">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/female-essentials">
+            <img src="{{ '../assets/images/female-sex-essentials.jpg' | asset_url }}" alt="">
+            </a></li>
+          <li><a href="/pages/top-10-sex-toys-for-WOmen" >
+            <img src="{{ '../assets/images/top-ten-toys-for-women.jpg' | asset_url }}" alt="Shop Our Best Top 10 Female Toys">
+            </a></li>
+        </ul>
+      {% elsif collection.handle == "kegel-health-toys" %}
+        <ul class="mobile-fblock-grid-2 tablet-small-fblock-grid-4 fblock-grid__expand">
+          <li><a href="https://simplipleasure.com/collections/kegel-health-toys-kegel" >
+            <img src="{{ '../assets/images/kegel-excercisers.jpg' | asset_url }}" alt="Shop Our Best Kegel Exercisers & Sets">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/kegel-health-toys-ben-wa" >
+            <img src="{{ '../assets/images/kegel-ben-wa-balls.jpg' | asset_url }}" alt="Shop Our Best Ben Wa Balls">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/kegel-health-toys-vibrating-eggs" >
+            <img src="{{ '../assets/images/kegel-vibrating-eggs.jpg' | asset_url }}" alt="Shop Our Best Vibrating Love Eggs">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/kegel-health-toys-remote-eggs" >
+            <img src="{{ '../assets/images/kegel-remote-control-eggs.jpg' | asset_url }}" alt="Shop Our Best Remote Control Love Eggs">
+            </a></li>
+        </ul>
+      {% elsif collection.handle == "male-toys" %}
+        <div id="col-description">
+          {{ blurb[0] }}
+        </div>
+
+        <ul class="mobile-fblock-grid-2 tablet-small-fblock-grid-4 fblock-grid__expand">
+          <li><a href="https://simplipleasure.com/collections/male-toys-cock-rings" >
+            <img src="{{ '../assets/images/male-toys-cock-rings.jpg' | asset_url }}" alt="Shop Our Best Cock Rings">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/male-toys-masturbators" >
+            <img src="{{ '../assets/images/male-toys-male-masturbators.jpg' | asset_url }}" alt="Shop Our Best Male Masturbators">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/male-toys-sleeves" >
+            <img src="{{ '../assets/images/male-toys-sleeves-and-extensions.jpg' | asset_url }}" alt="Shop Our Best Penis Sleeves & Extensions">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/male-toys-prostate" >
+            <img src="{{ '../assets/images/male-toys-prostate-massgagers.jpg' | asset_url }}" alt="Shop Our Best Prostate Massagers">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/male-toys-real-vaginas" >
+            <img src="{{ '../assets/images/male-toys-realistic-vaginas.jpg' | asset_url }}" alt="Shop Our Best Realistic Vaginas">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/male-toys-pumps" >
+            <img src="{{ '../assets/images/male-toys-penis-pumps-and-enlargers.jpg' | asset_url }}" alt="Shop Our Best Penis Pumps & Enlargers">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/male-toys-hollow" >
+            <img src="{{ '../assets/images/male-toys-hollow-strap-ons.jpg' | asset_url }}" alt="Shop Our Best Hollow Strap On">
+            </a></li>
+          <li><a href="/pages/top-10-sex-toys-for-men" >
+            <img src="{{ '../assets/images/top-ten-toys-for-men.jpg' | asset_url }}" alt="Shop Our Best Top 10 Male Toys">
+            </a></li>
+        </ul>
+
+        <hr>
+        <div id="col-description">
+          {{ blurb[1] }}
+        </div>
+      {% elsif collection.handle == "sex-essentials" %}
+        <ul class="mobile-fblock-grid-2 tablet-small-fblock-grid-4 fblock-grid__expand">
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-lube-anal" >
+            <img src="{{ '../assets/images/anal-lubricants.jpg' | asset_url }}" alt="Shop Our Best Anal Lubricants">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-lube-cooling" >
+            <img src="{{ '../assets/images/cooling-lubes.jpg' | asset_url }}" alt="Shop Our Best Cooling Lubricants">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-lube-flavored" >
+            <img src="{{ '../assets/images/flavored-lubes.jpg' | asset_url }}" alt="Shop Our Best Flavored Lubricants">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-lube-masturbation" >
+            <img src="{{ '../assets/images/masturbation-creams.jpg' | asset_url }}" alt="Shop Our Best Masturbation Creams">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-lube-organic" >
+            <img src="{{ '../assets/images/organic-lubes.jpg' | asset_url }}" alt="Shop Our Best Organic Lube">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-oils-creams-massage" >
+            <img src="{{ '../assets/images/erotic-massage-oils-and-creams.jpg' | asset_url }}" alt="Shop Our Best Erotic Massage Oils & Creams">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-lube-silicone" >
+            <img src="{{ '../assets/images/silicone-lubes.jpg' | asset_url }}" alt="Shop Our Best Silicone Lubricants">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-lube-stim" >
+            <img src="{{ '../assets/images/stimulating-gels.jpg' | asset_url }}" alt="Shop Our Best Stimulating Lubricants">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-lube-vegan" >
+            <img src="{{ '../assets/images/vegan-lubes.jpg' | asset_url }}" alt="Shop Our Best Vegan Lubricants">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-lube-warming" >
+            <img src="{{ '../assets/images/warming-lube.jpg' | asset_url }}" alt="Shop Our Best Warming Lubricants">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-lube-water" >
+            <img src="{{ '../assets/images/waterbased-lubes.jpg' | asset_url }}" alt="Shop Our Best Water Based Lubricants">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-lube-women" >
+            <img src="{{ '../assets/images/womens-lube-ph-balance.jpg' | asset_url }}" alt="Shop Our Best Female Lubricants">
+            </a></li>
+        </ul>
+        <h4 style="color:#308bb2">Sex Enhancers</h4>
+        <ul class="mobile-fblock-grid-2 tablet-small-fblock-grid-4 fblock-grid__expand">
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-better-anal" >
+            <img src="{{ '../assets/images/better-anal-sex.jpg' | asset_url }}" alt="Shop Our Best Better Anal Sex">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-better-her" >
+            <img src="{{ '../assets/images/better-sex-for-her.jpg' | asset_url }}" alt="Shop Our Best Better Sex for Her">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-better-him" >
+            <img src="{{ '../assets/images/better-sex-for-him.jpg' | asset_url }}" alt="Shop Our Best Better Sex for Him">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-condoms" >
+            <img src="{{ '../assets/images/condoms-new-thumbnail.png' | asset_url }}" alt="Shop Our Best Safe Sex & Condoms">
+            </a></li>
+        </ul>
+        <h4 style="color:#308bb2">Sex Accessories</h4>
+        <ul class="mobile-fblock-grid-2 tablet-small-fblock-grid-4 fblock-grid__expand">
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-battery" >
+            <img  class="lazy" data-src="{{ '../assets/images/batteries.jpg' | asset_url }}" alt="Shop Our Best Batteries">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-cleaners" >
+            <img  class="lazy" data-src="{{ '../assets/images/toy-cleaners.jpg' | asset_url }}" alt="Shop Our Best Cleaners">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-storage" >
+            <img  class="lazy" data-src="{{ '../assets/images/toy-storagte.jpg' | asset_url }}" alt="Shop Our Best Toy Storage">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/sex-essentials-toy-accessories" >
+            <img  class="lazy" data-src="{{ '../assets/images/toy-accessories.jpg' | asset_url }}" alt="Shop Our Best Toy Accessories">
+            </a></li>
+        </ul>
+      {% elsif collection.handle == "strap-ons-harnesses" %}
+        <ul class="mobile-fblock-grid-2 tablet-small-fblock-grid-4 fblock-grid__expand">
+          <li><a href="https://simplipleasure.com/collections/strap-ons-harnesses-kit" >
+            <img src="{{ '../assets/images/harnesses-and-strap-ons.jpg' | asset_url }}" alt="Shop Our Best Strap On Harnesses & Kits">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/strap-ons-harnesses-vac-u-loc" >
+            <img src="{{ '../assets/images/vack-u-lock-strapons.jpg' | asset_url }}" alt="Shop Our Best Vac U Lock Strap Ons">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/strap-ons-harnesses-vibrates" >
+            <img src="{{ '../assets/images/vibrating-strapons.jpg' | asset_url }}" alt="Shop Our Best Vibrating Strap Ons">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/strap-ons-harnesses-beginner" >
+            <img src="{{ '../assets/images/beginners-strap-ons.jpg' | asset_url }}" alt="Shop Our Best Beginner Strap Ons">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/strap-ons-harnesses-hollow" >
+            <img src="{{ '../assets/images/hollow-strap-ons.jpg' | asset_url }}" alt="Shop Our Best Hollow Strap Ons">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/strap-ons-harnesses-lesbian" >
+            <img src="{{ '../assets/images/lesbian-strap-ons.jpg' | asset_url }}" alt="Shop Our Best Lesbian Strap Ons">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/strap-ons-harnesses-strapless" >
+            <img src="{{ '../assets/images/strapless-strapon.jpg' | asset_url }}" alt="Shop Our Best Strapless Strap Ons">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/strap-ons-harnesses-dildos" >
+            <img src="{{ '../assets/images/strap-on-dildos.jpg' | asset_url }}" alt="Shop Our Best Strap On Dildos">
+            </a></li>
+        </ul>
+      {% elsif collection.handle == "couples-toys" %}
+
+        <div id="col-description">
+          {{ blurb[0] }}
+        </div>
+
+        <ul class="mobile-fblock-grid-2 tablet-small-fblock-grid-4 fblock-grid__expand">
+          <li><a href="https://simplipleasure.com/collections/couples-cock-rings" >
+            <img src="{{ '../assets/images/couples-toys-couples-cock-rings.jpg' | asset_url }}" alt="Shop Our Best Couples Cock Rings">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/couples-bondage" >
+            <img src="{{ '../assets/images/couples-toys-bondage-toys.jpg' | asset_url }}" alt="Shop Our Best Bondage Toys">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/couples-swings" >
+            <img src="{{ '../assets/images/couples-toys-sex-swings.jpg' | asset_url }}" alt="Shop Our Best Sex Swings">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/couples-furniture" >
+            <img src="{{ '../assets/images/couples-toys-sex-furniture.jpg' | asset_url }}" alt="Shop Our Best Sex Furniture">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/couples-strap-ons" >
+            <img src="{{ '../assets/images/couples-toys-strap-ons-and-harnesses.jpg' | asset_url }}" alt="Shop Our Best Strap Ons & Harnesses">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/couples-sex-toys" >
+            <img src="{{ '../assets/images/couples-toys-couples-vibrators.jpg' | asset_url }}" alt="Shop Our Best Couples Sex Toys">
+            </a></li>
+          <li><a href="https://simplipleasure.com/collections/couples-games" >
+            <img src="{{ '../assets/images/couples-toys-couples-sex-games.jpg' | asset_url }}" alt="Shop Our Best Sex Games">
+            </a></li>
+          <li><a href="/pages/top-10-sex-toys-for-couples">
+            <img src="{{ '../assets/images/top-ten-toys-for-couples.jpg' | asset_url }}" alt="Sex Toys For Couples">
+            </a></li>
+        </ul>
+        <hr>
+        <div id="col-description">
+          {{ blurb[1] }}
+        </div>
+      {% elsif collection.handle == "games-gifts" %}
+        <ul class="mobile-fblock-grid-2 tablet-small-fblock-grid-4 fblock-grid__expand">
+          <li><a href="http://simplipleasure.com/collections/games-gifts-sex" >
+            <img src="{{ '../assets/images/sex-games.jpg' | asset_url }}"  />
+            </a></li>
+          <li><a href="http://simplipleasure.com/collections/games-gifts-massage" >
+            <img src="{{ '../assets/images/erotic-massage.jpg' | asset_url }}" />
+            </a></li>
+          <li><a href="http://simplipleasure.com/collections/games-gifts-dice" >
+            <img src="{{ '../assets/images/sex-dice.jpg' | asset_url }}" />
+            </a></li>
+          <li><a href="http://simplipleasure.com/collections/games-gifts-drinking" >
+            <img src="{{ '../assets/images/drinking-games.jpg' | asset_url }}" />
+            </a></li>
+        </ul>
+      {% elsif collection.handle == 'lingerie' %}
+        <ul class="mobile-fblock-grid-2 tablet-small-fblock-grid-3 fblock-grid__expand">
+         <li><a href="https://simplipleasure.com/collections/sexy-lingerie-costumes"><img src="{{ '../assets/images/sexy-costumes-and-outfits.jpg' | asset_url }}"></a></li>
+          <li><a href="https://simplipleasure.com/collections/sexy-lingerie-stockings"><img src="{{ '../assets/images/lingerie-stockings-and-hosiery.jpg' | asset_url }}"></a></li>
+          <li><a href="https://simplipleasure.com/collections/sexy-lingerie-plus"><img src="{{ '../assets/images/sexy-plus-size-lingerie.jpg' | asset_url }}"></a></li>
+          <li><a href="https://simplipleasure.com/collections/sexy-lingerie-sets"><img src="{{ '../assets/images/lingerie-sexy-lingerie-sets.jpg' | asset_url }}"></a></li>
+          <li><a href="https://simplipleasure.com/collections/sexy-lingerie-bras"><img src="{{ '../assets/images/bras-and-bra-sets.jpg' | asset_url }}"></a></li>
+          <li><a href="https://simplipleasure.com/collections/sexy-lingerie-panties"><img src="{{ '../assets/images/sexy-panties.jpg' | asset_url }}"></a></li>
+        </ul>
+        <p></p>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+</div>

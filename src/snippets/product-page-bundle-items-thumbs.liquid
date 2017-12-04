@@ -1,0 +1,6 @@
+{% for product in bundle_collection limit:bundle_num_items %}
+  <span class="combo-plus-icon product-{{ product.variants.first.id }}">+</span>
+  <div class="product-{{ product.variants.first.id }} bundle-item-thumb">
+    <img src="{{ product.featured_image |  product_img_url: 'small', format: 'pjpg' }}" title="{{ product.title }}">
+  </div>
+{% endfor %}

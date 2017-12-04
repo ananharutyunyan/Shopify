@@ -1,0 +1,3 @@
+local.log
+config/*.config.yml
+screenshot*

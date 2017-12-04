@@ -1,0 +1,86 @@
+{% capture day %}{{ 'now' | date: '%A' }}{% endcapture %}
+{% capture time %}{{ 'now' | date: '%H' }}{% endcapture %}
+
+{% paginate collection.products by 48 %}
+  {% assign tag_count = collection.all_tags | size %}
+  {% assign tag_threshold = 5 | minus: 0 %}
+
+  <div class="sixteen columns clearfix collection_nav">
+    {% include 'breadcrumbs-christmas' %}
+    <div class="ten columns alpha">
+    </div>
+    {% include 'sidebar-general', mobile: false, hide_sections: 'vibrators' %}
+    <div class="twelve columns">
+      {% if collection.handle =="christmas-bundle-2-for-60" %}
+        <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/700x200-60.jpg?12775467956459167314" width="99%">
+        {% elsif collection.handle =="christmas-bundle-2-for-30" %}
+        <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/700x200-30.jpg?12775467956459167314" width="99%">
+        {% elsif collection.handle =="sexy-christmas-gifts-under-20" %}
+        <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/700X200-20.jpg?12775467956459167314" width="99%">
+        {% elsif collection.handle =="nice-christmas-chifts" %}
+        <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/700x200-nice.jpg?12775467956459167314" width="99%">
+        {% elsif collection.handle =="naughty-christmas-gifts" %}
+        <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/700x200-naughty.jpg?12775467956459167314" width="99%">
+        {% endif %}
+        {{ collection.description }}
+    </div>
+
+    {% if current_tags %}
+      <div class="filter-group">
+        <strong>Current Tags:</strong>
+
+        <span class="clear2">
+          {% for tag in collection.all_tags %}
+            {% if current_tags contains tag %}
+              {% if tag == 'sale' %}
+                <span class="filter-clear2">{{ tag | link_to_remove_tag: tag }}</span>
+              {% else %}
+                {% assign tag_collection = collections[tag] %}
+                <span class="filter-clear2">{{ tag_collection.title | link_to_remove_tag: tag }}</span>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+          <span class="filter-clear3"><a href="{{ collection.url }}">Clear All</a></span>
+        </span>
+      </div>
+    {% endif %}
+
+
+    {% include 'sort-and-paginate' %}
+
+    {% if collection.products.size == 0 %}
+      <div class="center">
+        <div class="section clearfix">
+          <p class="quote">{{ 'collections.general.no_matches' | t }}</p>
+        </div>
+      </div>
+    {% else %}
+      <div class="main_product_list_sec">
+        {% assign products = collection.products %}
+
+        {% assign products_per_row = 4 %}
+
+        {% include 'product-loop' %}
+      </div>
+    {% endif %}
+
+    {% include 'pagination' with 'below' %}
+  </div>
+{% endpaginate %}
+
+
+{% include 'sidebar-general', mobile: true, hide_sections: 'vibrators' %}
+
+<style>
+  a.expired-offer {
+    color: #A0A0A0 ;
+    text-decoration: line-through;
+  }
+  h1.xmas {
+    text-transform: Capitalize;
+    font-size: 1.5em;
+    text-align: center;
+  }
+</style>
+
+

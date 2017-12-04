@@ -1,0 +1,140 @@
+/*############################################################################
+# Block Grid
+#
+# This block grid is based on the block grid mixin from Foundation 5.
+#
+###########################################################################*/
+
+// Breakpoint Variables:
+// see grid.scss.liquid
+
+//
+// Block Grid Variables
+//
+// We use this to control the maximum number of block grid elements per row
+$block-grid-elements: 12 !default;
+$block-grid-default-spacing: 8px !default;
+$block-grid-tight-spacing: 4px !default;
+$default-float: left !default;
+
+
+// We use this to do clear floats
+@mixin clearfix {
+  &:before, &:after { content: " "; display: table; }
+  &:after { clear: both; }
+}
+
+
+//
+// Block Grid Mixins
+//
+
+// Create a custom block grid
+//
+// $per-row - # of items to display per row. Default: false.
+// $spacing - # of ems to use as padding on each block item. Default: 8px
+// $include-spacing - Adds padding to our list item. Default: true.
+// $base-style - Apply a base style to block grid. Default: true.
+@mixin block-grid(
+  $per-row:false,
+  $spacing:$block-grid-default-spacing,
+  $include-spacing:true,
+  $base-style:true) {
+
+  @if $base-style {
+    display: block;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0 (-$spacing/2);
+    font-size: 100%;
+    @include clearfix;
+
+    > li {
+      display: block;
+      float: $default-float;
+      height: auto;
+      margin-bottom: 0;
+      box-sizing: border-box;
+      @if $include-spacing {
+        padding: 0 ($spacing/2) $spacing;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: inline-block;
+        vertical-align: middle;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  @if not $per-row and not $base-style {
+    margin: 0 (-$spacing/2);
+    > li {
+      padding: 0 ($spacing/2) $spacing;
+    }
+  }
+
+  @if $per-row {
+    > li {
+      list-style: none;
+      @if $include-spacing {
+        padding: 0 ($spacing/2) $spacing;
+      }
+      width: 100%/$per-row;
+
+      &:nth-of-type(1n) { clear: none; }
+      &:nth-of-type(#{$per-row}n+1) { clear: both; }
+    }  }
+}
+
+
+// Generate presentational markup for block grid.
+//
+// $size - Name of class to use, i.e. "desktop" will generate .desktop-fblock-grid-1, .desktop-fblock-grid-2, etc.
+@mixin block-grid-html-classes($size, $include-spacing) {
+  @for $i from 1 through $block-grid-elements {
+    .#{$size}-fblock-grid-#{($i)} {
+      @include block-grid($i, $block-grid-default-spacing, $include-spacing, false);
+    }
+  }
+}
+
+
+[class*="fblock-grid-"] { @include block-grid; }
+[class*="fblock-grid-"].fblock-grid__tight { @include block-grid(false,  $block-grid-tight-spacing, true, false); }
+
+@media #{$mobile-up} {
+  @include block-grid-html-classes($size:mobile, $include-spacing:false);
+}
+
+@media #{$tablet-small-up} {
+  @include block-grid-html-classes($size:tablet-small, $include-spacing:false);
+}
+
+@media #{$tablet-large-up} {
+  @include block-grid-html-classes($size:tablet, $include-spacing:false);
+}
+
+@media #{$desktop-small-up} {
+  @include block-grid-html-classes($size:desktop-small, $include-spacing:false);
+}
+
+@media #{$desktop-up} {
+  @include block-grid-html-classes($size:desktop, $include-spacing:false);
+}
+
+@media #{$desktop-wide-up} {
+  @include block-grid-html-classes($size:desktop-wide, $include-spacing:false);
+}
+
+// Use this style when a grid has a different number of columns for different breakpoints,
+// and you want to hide some at different breakpoints to make an even grid
+[class*="fblock-grid-"].fblock-grid__noclear > li {
+  clear: none !important;
+}
+
+[class*="fblock-grid-"].fblock-grid__expand > li img {
+  width: 100%;
+}

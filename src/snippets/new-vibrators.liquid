@@ -1,0 +1,31 @@
+{% assign product_found = false %}
+{% assign skip = false %}
+
+{% for product in collections.vibrators-luxury.products %}
+
+{% if product.tags contains 'simpli-pleasure' %}
+
+  {% if product.id == skip_product.id or skip == true %}
+    {% assign product_found = true %}
+  {% else %}
+{% if product.handle == '459311108' %}
+{% assign product_found = false %}
+{% else %}
+    {% if forloop.rindex0 == 0 and product_found == false and forloop.length != products.count and template != 'search' %}
+      {% assign skip = true %}
+    {% else %}
+
+      {% include 'product-thumbnail-2' with new-vibrators %}
+
+  {% if products_per_row == "2" %}
+        {% cycle '', new_row %}
+      {% elsif products_per_row == "3" %}
+        {% cycle '', '', new_row %}    
+      {% elsif products_per_row == "4" %}  
+        {% cycle '', '', '', new_row %}
+      {% endif %}
+    {% endif %}    
+  {% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}

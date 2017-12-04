@@ -1,0 +1,14 @@
+<!-- snippets/buyer-guides__articles-list.liquid -->
+{% for article in blog.articles %}
+  {% if article.tags contains buyer-guides__articles-list %}
+    <h4 class="newhome"><a href="{{ article.url }}" title="{{ article.title | escape }}">{{ article.title }}</a></h4>
+    {% if article.excerpt != blank %}
+      <a href="{{ article.url }}">
+        <p>{{ article.excerpt }}</p>
+      </a>
+      <br>
+    {% else %}
+      {{ article.content }}
+    {% endif %}
+  {% endif %}
+{% endfor %}

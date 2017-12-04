@@ -1,0 +1,78 @@
+<!-- snippets/pagination.liquid -->
+{% comment %}
+
+  This snippet renders a custom widget based on the current 'paginate' context,
+  defined in { % paginate XXXX by 5 % } tags wrapping the content.
+
+  Replace Text Example:
+    <div class="pagination">
+      {{ paginate | default_pagination | replace: 'Previous', 'Newer articles' | replace: 'Next', 'Older articles' }}
+    </div>
+
+  More information:
+   - http://docs.shopify.com/themes/liquid-variables/paginate
+
+{% endcomment %}
+
+{% if paginate.pages > 1 %}
+
+{% assign current_first_item = paginate.current_offset | plus:1 %}
+{% if paginate.pages == paginate.current_page %}
+{% assign current_displayed = paginate.items | modulo:paginate.page_size %}
+{% assign current_last_item = paginate.items %}
+{% else %}
+{% assign current_displayed = paginate.page_size %}
+{% assign current_last_item = paginate.current_offset | plus:paginate.page_size %}
+{% endif %}
+{% assign c_tag = '' %}
+{% for tag in current_tags %}
+	{% if forloop.last %}
+		{% assign c_tag = c_tag | append: tag %}
+	{% else %}
+		{% assign c_tag = c_tag | append: tag | append: '+' %}
+	{% endif %}
+{% endfor %}
+{% assign get_link = '/collections/' | append: collection.handle %}
+{% unless c_tag == '' %}
+	{% assign get_link = get_link | append: '/' | append: c_tag %}
+{% endunless %}
+{% if pagination == 'below' %}
+    <div class="twelve columns offset-by-four">
+    <div class="section clearfix">
+    <div class="paginate">
+{% endif %}
+        <div class="pagenumber">
+          Displaying {{ current_displayed }} of {{ paginate.items }} Products </div>
+     <div class="pagenav">
+       {% if paginate.current_page != 1 %}
+       <span class="first"><a href="{{ get_link }}?page=1" title="">« First</a></span>
+
+        {% if paginate.previous.is_link %}
+    <a href="{{ paginate.previous.url }}" rel="prev">{{ paginate.previous.title }}</a>
+{% endif %}{% endif %}
+
+     {% for part in paginate.parts %}
+    {% if part.is_link %}
+      <span class="paginate-shared-style-link page">{{ part.title | link_to: part.url }}</span>
+    {% else %}
+      {% if part.title == '…' %}
+       <span class="deco">{{ part.title }}</span>
+      {% else %}
+       <span class="paginate-shared-style current page">{{ part.title }}</span>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+       {% if paginate.next.is_link %}
+    <a href="{{ paginate.next.url }}" rel="next">{{ paginate.next.title }}</a>
+{% endif %}
+       {% if paginate.current_page != paginate.pages %}
+       <span class="last"><a href="{{ get_link }}?page={{ paginate.pages }}" title="">Last »</a></span>
+       {% endif %}
+        </div>
+{% if pagination == 'below' %}
+    </div>
+    </div>
+	</div>
+{% endif %}
+{% endif %}
+

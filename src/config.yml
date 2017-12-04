@@ -1,0 +1,15 @@
+development:
+  api_key: a8ed4df6a5373b69dc859e6e54695201
+  password: 2190cad0af77a4854117856eb42e4f29
+  theme_id: "264798216" # Dev: Anan dev theme
+  # theme_id: "264765448" # Dev: Taras dev theme
+  store: simplysex.myshopify.com
+  ignore_files:
+    #- settings_data.json # Uncomment this line to avoid resetting theme settings
+preview:
+  api_key: a8ed4df6a5373b69dc859e6e54695201
+  password: 2190cad0af77a4854117856eb42e4f29
+  theme_id: "243138568" # Preview
+  store: simplysex.myshopify.com
+  ignore_files:
+    #- settings_data.json # Uncomment this line to avoid resetting theme settings

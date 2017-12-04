@@ -1,0 +1,132 @@
+{% paginate collection.products by 48 %}
+  {% assign tag_count = collection.all_tags | size %}
+  {% assign tag_threshold = 5 | minus: 0 %}
+
+  <div class="sixteen columns clearfix collection_nav">
+    {% include 'breadcrumbs' %}
+    <div class="ten columns alpha">
+    </div>
+  </div>
+
+  {% if collection.description != blank %}
+    <div class="sixteen columns">
+      <div class="section clearfix">
+        {{ collection.description }}
+      </div>
+    </div>
+  {% endif %}
+
+{% include 'sidebar-general', mobile: false, hide_sections: 'vibrators' %}
+
+    <div class="twelve columns">
+{% if collection.image %}
+  <div class="bundleimages">
+    <img src="{{ collection.image | img_url: 'master' }}"></div>{% else %}{% endif %}
+
+{% if current_tags %}
+<div class="filter-group">
+<strong>Current Tags:</strong>
+
+<span class="clear2">
+{% for tag in collection.all_tags %}
+    {% if current_tags contains tag %}
+
+  		{% if tag == 'sale' %}
+  		<span class="filter-clear2">{{ tag | link_to_remove_tag: tag }}</span>
+  		{% else %}
+    	{% assign tag_collection = collections[tag] %}
+ 		<span class="filter-clear2">{{ tag_collection.title | link_to_remove_tag: tag }}</span>
+    	{% endif %}
+    {% endif %}
+{% endfor %}
+  <span class="filter-clear3"><a href="{{ collection.url }}">Clear All</a></span></span>
+  </div>
+
+
+{% endif %}
+<h4 style="margin-bottom:10px;"> </h4>
+
+  {% include 'sort-and-paginate' %}
+
+
+
+  {% if collection.products.size == 0 %}
+    <div class="center">
+      <div class="section clearfix">
+        <p class="quote">{{ 'collections.general.no_matches' | t }}</p>
+      </div>
+    </div>
+  {% else %}
+    <div class="main_product_list_sec">
+
+
+    {% assign products = collection.products %}
+
+
+
+    {% assign products_per_row = 4 %}
+
+    {% include 'product-loop'  %}
+    </div>
+  {% endif %}
+  </div>
+
+  {% include 'pagination' with 'below' %}
+{% endpaginate %}
+
+{% include 'sidebar-general', mobile: true, hide_sections: 'vibrators' %}
+
+            <style>
+
+     .bundle1 {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+  width: 49%;
+}
+.bundle2 {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+  width: 24%;
+}
+
+@media only screen and (max-width: 479px) {
+.bundle2 {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+  width: 49%;
+  clear: both;
+}
+  .bundle1 {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+  width: 98%;
+    clear: both;
+}
+}
+
+@media only screen and (min-width: 479px) {
+.bundle2 {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+  width: 24%;
+}
+  .bundle1 {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+  width: 49%;
+}
+}
+
+      </style>

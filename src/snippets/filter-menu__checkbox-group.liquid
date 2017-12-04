@@ -1,0 +1,51 @@
+<!-- snippets/filter-menu__checkbox-group.liquid -->
+
+<ul class="nav-{{ menu_key | split: '-' | last }} {% if has_selected %}has_selected{% endif %} blog_list toggle_list">
+  {% for menu_item in menu_items %}
+    {% assign filter_collection = collections[menu_item] %}
+    {% if filter_collection %}
+      {% if tag_list contains menu_item or current_tags contains menu_item or current_collection_handle == menu_item %}
+        {% if current_tags contains menu_item or current_collection_handle == menu_item %}
+          {% assign current_selected = current_selected | append: menu_item | append: '|' %}
+        {% endif %}
+        {% assign displayed_collection_handles = displayed_collection_handles | append: menu_item | append: '|' %}
+        <li class="collection-container {{ filter_collection.handle }} {% if tag_list contains menu_item %}active{% endif %} {% if current_tags contains menu_item or current_collection_handle == menu_item %}selected{% endif %}">
+          <div class="collection-name">
+            {% if current_tags contains menu_item %}
+              {{ '<i class="check-icon"></i> ' | append: filter_collection.title | link_to_remove_tag: menu_item }}
+            {% elsif current_collection_handle == menu_item %}
+              <a href="/collections/all{% if current_tags %}/{{ current_tags | join: '+' }}{% endif %}" title="{{ filter_collection.title | escape }}"><i class="check-icon"></i> {{ filter_collection.title | escape }}</a>
+            {% elsif current_collection_handle == 'all' %}
+              <a href="/collections/{{ menu_item }}{% if current_tags %}/{{ current_tags | join: '+' }}{% endif %}" title="{{ filter_collection.title | escape }}"><i class="check-icon"></i> {{ filter_collection.title | escape }}</a>{% unless current_tags %}<span class="collection-count">({{ filter_collection.all_products_count }})</span>{% endunless %}
+            {% else %}
+              {{ '<i class="check-icon"></i> ' | append: filter_collection.title | link_to_add_tag: menu_item }}
+            {% endif %}
+          </div>
+        </li>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</ul>
+{% unless '|' == current_selected %}
+  {% assign current_collection_handle_sep = current_collection_handle | prepend: '|' | append: '|' %}
+  {% if current_selected contains current_collection_handle_sep %}{% assign current_collection_handle_sep = 'all' %}
+    {% assign current_selected = current_selected | replace: current_collection_handle_sep, '|' %}
+  {% else %}
+    {% assign current_collection_handle_sep = collection.handle %}
+  {% endif %}
+  {% assign cleared_tags = current_tags | join: '|'  | prepend: '|' | append: '|' %}
+  {% assign current_selected_split = current_selected | split: '|' %}
+  {% for current_selected_tag in current_selected_split %}
+    {% unless '' == current_selected_tag %}
+      {% assign current_selected_tag = current_selected_tag | prepend: '|' | append: '|' %}
+      {% if cleared_tags contains current_selected_tag %}
+        {% assign cleared_tags = cleared_tags | replace: current_selected_tag, '|' %}
+      {% endif %}
+    {% endunless %}
+  {% endfor %}
+  {% assign cleared_tags = cleared_tags | replace: '||||', '|' | replace: '|||', '|' | replace: '||', '|' | remove_first: '|' | split: '|' | join: '+' %}
+  {% unless current_collection_handle_sep %}
+    {% assign current_collection_handle_sep = 'all' %}
+  {% endunless %}
+  <a class="filter-clear" href="/collections/{{ current_collection_handle_sep }}{% unless '|' == cleared_tags or '' == cleared_tags %}/{{ cleared_tags }}{% endunless %}">clear</a>
+{% endunless %}

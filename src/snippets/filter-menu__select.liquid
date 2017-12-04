@@ -1,0 +1,45 @@
+<!-- snippets/filter-menu__select.liquid -->
+{% assign filter_name = shop.metafields.pt_filter_header[menu_key] %}
+<ul class="nav-{{ menu_key | split: '-' | last }} {% if has_selected %}has_selected{% endif %} blog_list toggle_list">
+  <li>
+    <select class="filter-select-dropdown nav-{{ menu_key | split: '-' | last }}-select" data-collection-handle="{{ collection.handle }}">
+      <option value="">-- Select {{filter_name}} --</option>
+      {% for menu_item in menu_items %}
+        <!-- menu_item: {{menu_item}}-->
+        {% assign filter_collection = collections[menu_item] %}
+        <!-- filter_collection: {{filter_collection}}  current_collection_handle: {{current_collection_handle}} current_selected: {{current_selected}}-->
+        {% if filter_collection %}
+          <!--if filter_collection true -->
+          {% if tag_list contains menu_item or current_tags contains menu_item or current_collection_handle == menu_item %}
+            {% if current_tags contains menu_item or current_collection_handle == menu_item %}
+              {% assign current_selected = current_selected | append: menu_item | append: '|' %}
+            {% endif %}
+            {% assign displayed_collection_handles = displayed_collection_handles | append: menu_item | append: '|' %}
+
+            {% if filter_name == 'Vendor' %}
+              {% if current_tags contains menu_item %}
+              {% elsif current_collection_handle == menu_item %}
+                <option value="/collections/all{% if current_tags %}/{{ current_tags | join: '+' }}{% endif %}" {% if current_tags contains menu_item or current_collection_handle == menu_item %}selected{% endif %}>
+                  {{ filter_collection.title | escape }}
+                </option>
+              {% elsif current_collection_handle == 'all' %}
+                <option value="/collections/{{ menu_item }}{% if current_tags %}/{{ current_tags | join: '+' }}{% endif %}" {% if current_tags contains menu_item or current_collection_handle == menu_item %}selected{% endif %}>
+                  {{ filter_collection.title | escape }}
+                </option>
+              {% else %}
+                <option value="{% if current_tags %}{{ current_tags | join: '+' }}+{% endif %}{{ menu_item }}" {% if current_tags contains menu_item or current_collection_handle == menu_item %}selected{% endif %}>
+                  {{ filter_collection.title }}
+                </option>
+              {% endif %}
+            {% elsif filter_name == 'Material' %}
+              <option value="{{ menu_item }}" {% if current_tags contains menu_item or current_collection_handle == menu_item %}selected{% endif %}>
+                {{ filter_collection.title }}
+              </option>
+            {% endif %}
+
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </select>
+  </li>
+</ul>

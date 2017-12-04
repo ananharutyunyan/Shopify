@@ -1,0 +1,157 @@
+<!-- snippets/sidebar-general.liquid -->
+{% if  mobile %}
+  {% assign visibility_class = "hide-for-desktop" %}
+  {% assign toggle_class = "toggle_list" %}
+{% else %}
+  {% assign visibility_class = "show-for-desktop" %}
+  {% assign toggle_class = "" %}
+{% endif %}
+
+{% if sidebar_checkboxes %}
+  {% assign checkbox_class = "" %}
+{% else %}
+  {% assign checkbox_class = "sidebar__hide-checkboxes" %}
+{% endif %}
+
+
+{% if hide_sections %}
+  {% assign _hide_sections = "|" | append: hide_sections | append: '|' %}
+{% endif %}
+
+<div class="sidebar four columns {{visibility_class}} {{checkbox_class}}">
+  <div class="filter-group filter-group-dildos4">
+    {% include 'sidebar__section-title' with "Our Favorite Deals", mobile_title: "Sex Toy Specials" %}
+    <div class="widget-content {{toggle_class}}">
+      <ul class="sidebar__nav-list ">
+
+        {% include 'sidebar__item' with collections.sex-toy-blowout,               title: "Featured Specials >>>" %}
+        {% include 'sidebar__item' with collections.daily-deals,                   title: "Daily Deals" %}
+        {% include 'sidebar__item' with collections.weekly-deals,                  title: "Brand Of The Week" %}
+        {% include 'sidebar__item' with collections.couples-toys-specials,         title: "Couples Toy Deals" %}
+        {% include 'sidebar__item' with collections.luxury-sex-toy-specials-1,     title: "Luxury Toy Deals" %}
+        {% include 'sidebar__item' with collections.save-10,                       title: "10% Off Deals" %}
+        {% include 'sidebar__item' with collections.save-20,                       title: "20% Off Deals" %}
+        {% include 'sidebar__item' with collections.save-30,                       title: "30% Off Deals" %}
+        {% include 'sidebar__item' with collections.sale-50,                       title: "Up To Half Off Sale" %}
+
+        {% include 'sidebar__item' with collections.best-selling-sex-toys-for-men,     title: "Top 10 Toys For Men" %}
+        {% include 'sidebar__item' with collections.best-selling-sex-toys-for-women,   title: "Top 10 Toys For Women" %}
+        {% include 'sidebar__item' with collections.best-selling-sex-toys-for-couples, title: "Top 10 Toys For Couples" %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="filter-group filter-group-dildos2 ">
+    {% include 'sidebar__section-title' with "Sex Toys" %}
+    <div class="widget-content {{toggle_class}}">
+      <ul class="sidebar__nav-list ">
+        {% include 'sidebar__item' with collections.anal-sex-toys,                 title: "Anal Sex Toys" %}
+        {% include 'sidebar__item' with collections.vibrators,                     title: "Vibrators" %}
+        {% include 'sidebar__item' with collections.dildos,                        title: "Dildos" %}
+        {% include 'sidebar__item' with collections.cock-rings,                    title: "Cock Rings" %}
+        {% include 'sidebar__item' with collections.butt-plugs,                    title: "Butt Plugs" %}
+        {% include 'sidebar__item' with collections.bondage-gear,                  title: "Bondage Toys" %}
+        {% include 'sidebar__item' with collections.lingerie,                      title: "Sexy Lingerie" %}
+        {% include 'sidebar__item' with collections.games-gifts,                   title: "Games & Gifts" %}
+        {% include 'sidebar__item' with collections.male-toys-fleshlights,         title: "Fleshlights" %}
+        {% include 'sidebar__item' with collections.all,                           title: "View All Sex Toys" %}
+      </ul>
+    </div>
+  </div>
+
+  {% unless _hide_sections contains "|vibrators|" %}
+    <div class="filter-group filter-vibrators2 ">
+      {% include 'sidebar__section-title' with "Vibrators" %}
+      <div class="widget-content {{toggle_class}}">
+        <ul class="sidebar__nav-list ">
+
+          {% include 'sidebar__item' with collections.vibrators, title: "< View All Categories"%}
+          {% include 'sidebar__item' with collections.best-selling-vibes-2016-customer-favorites, title: "Best Selling Vibrators"%}
+
+          {% assign sidebar_parent = "vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-anal,              title: "Anal Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-bullet,            title: "Bullet Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-butterfly,         title: "Butterfly Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-classic,           title: "Classic Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-clitoral,          title: "Clitoral Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-couples,           title: "Couples Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-discreet,          title: "Discreet Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-dual,              title: "Dual Action Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-quiet,             title: "Extra Quiet Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-g-spot,            title: "G-Spot Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-large,             title: "Large Sized Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-luxury,            title: "Luxury Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-wand,              title: "Magic Wand Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-massager,          title: "Massager Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-rabbit,            title: "Rabbit Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-realistic,         title: "Realistic Dildo Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-kit,               title: "Vibrator Sets" %}
+          {% include 'sidebar__item' with collections.vibrators-remote,            title: "Remote Control Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-finger,            title: "Finger & Tongue Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-egg,               title: "Egg Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-recharge,          title: "Rechargeable Vibrators" %}
+          {% include 'sidebar__item' with collections.vibrators-attachments,       title: "Vibrator Attachments" %}
+        </ul>
+      </div>
+    </div>
+  {% endunless %}
+
+  <div class="filter-group filter-group-dildos2 ">
+    {% include 'sidebar__section-title' with "Toys For Women" %}
+    <div class="widget-content {{toggle_class}}">
+      <ul class="sidebar__nav-list ">
+        {% include 'sidebar__item' with collections.female-rabbits,                title: "Rabbit Vibrators" %}
+        {% include 'sidebar__item' with collections.female-clitoral,               title: "Clitoral Vibrators" %}
+        {% include 'sidebar__item' with collections.female-luxury,                 title: "Luxury Vibrators" %}
+        {% include 'sidebar__item' with collections.female-g-spot,                 title: "G-Spot Vibrators" %}
+        {% include 'sidebar__item' with collections.female-dildos,                 title: "Dildos" %}
+        {% include 'sidebar__item' with collections.female-toys,                   title: "View All Women's Sex Toys" %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="filter-group filter-group-dildos2 ">
+    {% include 'sidebar__section-title' with "Toys For Men" %}
+    <div class="widget-content {{toggle_class}}">
+      <ul class="sidebar__nav-list ">
+        {% include 'sidebar__item' with collections.male-toys-fleshlights,         title: "Fleshlights" %}
+        {% include 'sidebar__item' with collections.male-toys-hollow,              title: "Hollow Strap Ons" %}
+        {% include 'sidebar__item' with collections.male-toys-real-vaginas,        title: "Realistic Vaginas" %}
+        {% include 'sidebar__item' with collections.male-toys-pumps,               title: "Penis Pumps & Extensions" %}
+        {% include 'sidebar__item' with collections.male-toys-prostate,            title: "Prostate Massagers" %}
+        {% include 'sidebar__item' with collections.male-toys,                     title: "View All Male Sex Toys" %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="filter-group filter-group-couples-toys ">
+    {% include 'sidebar__section-title' with "Toys For Couples" %}
+    <div class="widget-content {{toggle_class}}">
+      <ul class="sidebar__nav-list ">
+        {% include 'sidebar__item' with collections.couples-sex-toys,              title: "Couples Sex Toys" %}
+        {% include 'sidebar__item' with collections.couples-cock-rings,            title: "Couples Cock Rings" %}
+        {% include 'sidebar__item' with collections.couples-bondage,               title: "Bondage Toys" %}
+        {% include 'sidebar__item' with collections.couples-strap-ons,             title: "Strap Ons" %}
+        {% include 'sidebar__item' with collections.couples-swings,                title: "Sex Swings" %}
+        {% include 'sidebar__item' with collections.couples-toys,                  title: "View All Couples Sex Toys" %}
+      </ul>
+    </div>
+  </div>
+
+  {% unless  _hide_sections contains "|sex-essentials|" %}
+    <div class="filter-group filter-group-sex-essentials ">
+      {% include 'sidebar__section-title' with "Sex Essentials" %}
+      <div class="widget-content {{toggle_class}}">
+        <ul class="sidebar__nav-list ">
+          {% include 'sidebar__item' with collections.sex-essentials-lube,           title: "Lubricants" %}
+          {% include 'sidebar__item' with collections.sex-essentials-condoms,        title: "Condoms" %}
+          {% include 'sidebar__item' with collections.sex-essentials-better-her,     title: "Better Sex For Her" %}
+          {% include 'sidebar__item' with collections.sex-essentials-better-him,     title: "Better Sex For Him" %}
+          {% include 'sidebar__item' with collections.sex-essentials-better-anal,    title: "Better Anal Sex" %}
+          {% include 'sidebar__item' with collections.sex-essentials,                title: "View All Sex Essentials" %}
+        </ul>
+      </div>
+    </div>
+  {% endunless %}
+</div>
+<!-- END snippets/sidebar-general.liquid -->

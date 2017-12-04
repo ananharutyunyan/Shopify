@@ -1,0 +1,115 @@
+
+<meta name="robots" content="noindex">
+
+<link rel="stylesheet" type="text/css" href='{{ "pre-cart-2.css" | asset_url }}'>
+
+
+<div class="eleven columns ">      
+            <a class="buttoncontinue" href="/">&lt;&lt; Continue Shopping</a>
+          </div>
+<div class="eleven columns hide-for-desktop">      
+ <a class="button2" style="width: 90%; margin-bottom: .5em;" href="/cart">Proceed to Cart</a>        
+</div>
+
+<hr>
+<div class="sixteen columns page">
+  {% if cart.item_count > 0 %}
+  	<div id="basketinfo" class="five columns pro_basketinfo">
+      <div>
+        {% assign cart_total = cart.item_count | pluralize: 'item', 'items'  %}
+        <strong>Your goods total: {{ cart.total_price | money }}</strong>
+        <span class="basket-item">
+          {{ cart.item_count }} {{ cart.item_count | pluralize: 'Item', 'Items' }} in your cart
+          <br>
+           
+              <a class="button2" href="/cart">Proceed to Cart</a>
+        </span>
+      </div>
+
+  	</div> 
+     
+  {% else %}
+    <div class="section clearfix">
+      <p class="quote">{{ 'cart.general.continue_browsing_html' | t }}</p>    
+    </div>
+  {% endif %}
+
+</div>
+<script>
+  
+  var cart_count = '{{ cart.item_count }}';
+  window.prod_title = '';
+  if(cart_count > 0)
+  {
+      var get_quantity = $.cookie('recent_quantity');
+      var get_var_title = $.cookie('recent_variant');
+  
+  	  var get_var_id = $.cookie('recent_variant_id');
+      //alert(get_quantity);
+  	  var get_recent_product = $.cookie('recent_added_product');
+  	  var quantity_line = get_quantity > 1 ? '<h2>'+get_quantity+' items were added to your cart</h2>' : '<h2>'+get_quantity+' item was added to your cart</h2>';
+  	  var set_html = '<div class="precart-sec">' + quantity_line;
+  	  set_html = set_html + '<div class="border-bottom">';
+      if(get_quantity != null && get_var_id != null && get_recent_product != null)
+      {
+        var cart_json = {{ cart.items | json }};
+        for(var t_item in cart_json)
+        {
+            var temp_item = cart_json[t_item];
+			var temp_item_handle = temp_item.handle;
+			var temp_item_title = temp_item.title;
+          	console.log(temp_item);
+          	console.log(get_recent_product);
+          	//console.log(temp_item.id+','+get_var_id);
+            if(temp_item.id == get_var_id || (temp_item_handle.indexOf(get_recent_product) > -1 && temp_item_title.indexOf(get_var_title) > -1))
+            {
+              	window.prod_title = temp_item.product_title;
+                var p_title = temp_item.title;
+                var formatted_price = Shopify.formatMoney(temp_item.price, "{{ shop.money_without_currency_format }}");
+                var prod_image = temp_item.image;
+                var prod_url = temp_item.url;
+                set_html = set_html + '<div id="prodinfo" class="ten columns"><div class="precart_prod_image"><img src="'+ prod_image +'"></div><div class="product_info"><a href="'+ prod_url +'" id="ibprodname">'+ p_title +'</a><div class="price">'+ formatted_price +'</div></div></div>';
+            }
+            
+        }
+
+		
+  
+  	  /*jQuery.getJSON('/cart.js', function(cart) {
+        var cart_total = Shopify.formatMoney({{ cart.total_price }}, "{{ shop.money_without_currency_format }}");
+        var item_count = cart.item_count > 1 ? '<strong>'+ cart.item_count +'</strong> items' : cart.item_count +'</strong> item';
+		set_html = set_html + '<div id="basketinfo" class="five columns"><div> <strong>Your goods total: '+ cart_total +'</strong><span class="basket-item">'+ item_count +' in your cart<br><a class="button2" href="/cart/">Proceed to Cart</a></span></div></div>';                                          
+        set_html = set_html + '</div></div>';
+        //alert(set_html);
+      });
+      */
+        
+          var cart_total = Shopify.formatMoney('{{ cart.total_price }}', "{{ shop.money_without_currency_format }}");
+          var item_count = '{{ cart.item_count }}' > 1 ? '<strong>{{ cart.item_count }}</strong> items' : {{ cart.item_count }} +'</strong> item';
+          set_html = set_html + '<div id="basketinfo" class="five columns"><div> <strong>Your goods total: '+ cart_total +'</strong><span class="basket-item">'+ item_count +' in your cart<br><a class="button2" href="/cart">Proceed to Cart</a></span></div></div>';                                          
+          set_html = set_html + '</div></div>'; 
+        
+      
+      //alert(set_html);
+         $('.sixteen.columns.page').html(set_html);
+      
+      }
+  }
+  else
+  {
+    
+  	$.removeCookie("recent_quantity");
+    $.removeCookie("recent_variant");
+    $.removeCookie("recent_variant_id");
+    $.removeCookie("recent_added_product");
+  }
+  </script>
+<hr>
+{% include 'limespot-featured-collection', template: 'search' %}
+{% include 'limespot-recently-viewed', template: 'search' %}
+{% include 'limespot-trending', template: 'search' %}
+{% include 'limespot-you-may-like', template: 'search' %}
+{% include 'limespot-most-popular', template: 'search' %}
+
+  {% include 'handle_product_form' %}
+

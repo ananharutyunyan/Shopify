@@ -1,0 +1,15 @@
+<!-- snippets/head__convert-experiments.liquid -->
+<script type="text/javascript">
+var _conv_page_type = "{% if template == 'index' %}homepage{% else template == "collections" %}collection{% else template == "article" %}article{% else template == "product" %}product{% else template == "cart" %}cart{% else %}other{% endif %}";
+ var _conv_category_id = "";
+ var _conv_category_name = "{{ collection.title }}";
+ var _conv_product_sku = "";
+ var _conv_product_name = "{{ product.title }}";
+ var _conv_product_price = "{{ product.compare_at_price_min | money }}";
+ var _conv_customer_id = "";
+ var _conv_custom_v1 = "{{ tag }}";
+ var _conv_custom_v2 = "{{ order.shipping_address.province }}";
+ var _conv_custom_v3 = "{{ cart.item_count }}";
+ var _conv_custom_v4 = "{{ cart.total_price | money_without_currency }}";
+</script>
+<script type="text/javascript" async src="//cdn-3.convertexperiments.com/js/10021773_1002797.js"></script>

@@ -1,0 +1,154 @@
+<link rel="stylesheet" type="text/css" href='{{ "new.css" | asset_url }}'>
+
+
+<meta name="robots" content="noindex, follow" />
+<div class="sixteen columns clearfix collection_nav">
+ 
+</div>
+
+
+{% include 'sidebar-general', mobile: false, hide_sections: 'vibrators' %}
+{% include 'sidebar-general', mobile: true, hide_sections: 'vibrators' %}
+
+    <div class="twelve columns">
+       <div id="bundleimages">
+<img src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/couples-blowout.png?3447208544616848771" width="98%">
+      </div>
+    {% comment %}
+<div class="three columns alpha thumbnail even" style="margin-bottom: 0px;margin-top: 0px;"><a href="http://simplipleasure.com/products/simpli-dual-action-vibrator" title=""><img src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/dual-action-pink-vibrator-top-left.png?5954782089004276286" style="margin-bottom: 0px;margin-top: 0px;"/></a></div>
+<div class="three columns alpha thumbnail odd" style="margin-bottom: 0px;margin-top: 0px;"><a href="http://simplipleasure.com/products/simpli-three-beaded-multi-vibrator" title=""><img src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/couples-pink-vibrator-top-right.png?17085469867255389053" style="margin-bottom: 0px;margin-top: 0px;"/></a></div>
+
+      <div class="three columns alpha thumbnail even" style="margin-bottom: 0px;margin-top: 0px;"><a href="http://simplipleasure.com/products/simpli-g-spot-vibrator" title=""><img src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/g-spot-pink-vibrator-bottom-left.png?4608660439250308458" style="margin-bottom: 0px;margin-top: 0px;"/></a></div>
+      <div class="three columns alpha thumbnail odd" style="margin-bottom: 0px;margin-top: 0px;"><a href="http://simplipleasure.com/products/simpli-pleasure-universal-vibrator" title=""><img src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/universal-pink-bottom-right-vibrator.png?10113910203350944316" style="margin-bottom: 0px;margin-top: 0px;"/></a></div>
+
+
+      <div id="bundleimages">
+
+     <img class="bundle2" src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/bundle-1.png?16723677451485590590" style="margin-bottom: 0px;margin-top: 0px;"/>
+
+      <img class="bundle2" src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/bundle-2.png?6046316211019778270" style="margin-bottom: 0px;margin-top: 0px;"/>
+  <img class="bundle2" src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/bundle-3.png?11098327235481715129" style="margin-bottom: 0px;margin-top: 0px;"/>
+     <img class="bundle2" src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/bundle-4-1.png?16626475491523412726" style="margin-bottom: 0px;margin-top: 0px;"/>
+      </div>
+
+      <div id="bundleimages">
+      <a href="/collections/couples-sex-toy-specials"><img class="bundle1" src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/couples-save-here.png?4312820886214935767">
+        </a>
+        <img class="bundle1" src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/luxury-deals.png?1692419691055965230">
+      </div>
+        <hr>
+      {% endcomment %}
+      <div class="main_product_list_sec">
+
+    <div class="intro">  <h3 class="newpage">Luxury vibrators for her</h3>
+      <p>Save in style! Up to half price off our best selling luxury toys...</p>
+      </div>
+      <p></p>
+    {% include 'new-vibrators' %}
+       
+        <br>
+  
+      </div>
+      
+      
+   </div>
+  
+  
+   
+   
+    <div class="twelve columns">
+      
+    
+      <div class="main_product_list_sec">
+
+    <div class="intro">  <h3 class="newpage">Perfect toys for couples</h3>
+      <p>Spice up your bedroom fun with these best selling toys meant for two!</p>
+      </div>
+      <p></p>
+    {% include 'simpli-sale-2' %}
+       
+        <br>
+     
+      </div>
+      
+      
+   </div>
+  
+
+<script>
+  function hr(){
+var W_width = $(window).width();
+//alert(W_width);
+if(W_width <= 462){	
+    //alert('less than 479');
+	
+		if($('hr').hasClass('add_border_first')){}
+		else
+		{
+    	$('.twelve.columns .main_product_list_sec .product_listing').each(function(index, element) {
+         //console.log(index);
+		  
+          if(index < (48 - 1))
+          {
+             if((index+1)%2==0)
+             {
+                 $(this).after('<hr class="add_border_first">')  
+             }
+          }
+        });
+		}
+  }
+
+  else if((W_width >= 463) && (W_width <= 750)){
+    //alert('between 480 and 767');
+		if($('hr').hasClass('add_border_sec')){}
+		else
+		{
+    	$('.twelve.columns .main_product_list_sec .product_listing').each(function(index, element) {
+			//console.log(index);
+     	  if(index < (48 - 1))
+          {
+               if((index+1)%3==0)
+               {
+                   $(this).after('<hr class="add_border_sec">')  
+               }
+       	  }
+        });
+		}
+  }
+
+  else{
+     //alert('greater than 767');
+    	if($('hr').hasClass('border')){}
+		else
+		{
+ 		$('.twelve.columns .main_product_list_sec .product_listing').each(function(index, element) {
+			//console.log(index);
+          
+          if(index < (48 - 1))
+          {
+               if((index+1)%4==0)
+               {
+                   $(this).after('<hr class="border">')  
+               }
+          }
+          
+        });
+        }
+  }
+  }
+  
+  jQuery(function($){
+  var windowWidth = $(window).width();
+  hr();
+  $(window).resize(function() {
+   if(windowWidth != $(window).width()){
+   hr();
+   return;
+   }
+  });
+ });
+  
+
+</script>
+   

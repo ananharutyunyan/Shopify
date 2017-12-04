@@ -1,0 +1,59 @@
+<!-- snippets/product-tabs.liquid -->
+
+{% include 'limespot-related-product' %}
+
+<hr>
+
+<br class="clear" />
+<div class="section clearfix product-description-tabs-container">
+  {% if product.description != blank %}
+    <a id="desc"></a>
+    <ul class="tabs" data-tabs>
+      <li>
+        <a class="active" href="#tab1">Description</a>
+      </li>
+      <li>
+        <a href="#tab2" class="product__tabs-reviews">Reviews</a>
+      </li>
+      <li>
+        <a href="#tab3" class="">FAQs</a>
+      </li>
+    </ul>
+    <ul class="tabs-content">
+      <li id="tab1" class="active" style="display: block;">
+        <span itemprop="description">
+          <p class="tabs">
+            <span class="description-h4">Product Description</span>
+            {% if product.description contains '<!-- split -->'  %}{{ my_description[1] }}{{ my_description[2] }} {{ my_description[3] }}  {{ my_description[4] }}
+            {% else %} {{ product.description | remove: '<h4>Product Description</h4>' }} {% endif %}
+          </p>
+        </span>
+        <hr>
+      </li>
+      <li id="tab2" class="" style="display: none;">
+
+        <div class="stamped-widget-title"><span class="stamped-widget-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span><span class="stamped-widget-text">Based on {{ product.metafields.stamped.reviews_count }} reviews</span></div>
+        <br/>
+        <div id="stamped-reviews-widget" data-widget-type="full-page" data-random="True" data-show-avatar="False" data-min-rating="0" data-product-ids="{{product.id}}"></div>
+      </li>
+      <li id="tab3" class="" style="display: none;">
+        {% include 'online-faq' %}
+      </li>
+    </ul>
+
+    {% include 'product-form', product_form_identifier: 'bottom' %}
+
+  {% endif %}
+  {% if product.available %}<hr />{% endif %}
+
+  <div class="meta">
+  </div>
+
+  <span class="label">Brand:</span><span itemprop="brand">
+    <a href="{{shop.url}}/collections/{{product.vendor | handleize }}">{{product.vendor}}</a>
+  </span>
+
+  <p>
+    <span class="label">Product #:</span>  {{ product.variants.first.sku }}
+  </p>
+</div> <!-- END div.product-description-tabs-container -->

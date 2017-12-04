@@ -1,0 +1,73 @@
+<!-- snippets/product-thumbnail-2.liquid -->
+{% if product-thumbnail-2 %}
+  <div class="product_listing {% if products_per_row == "2" %}six columns {% cycle 'alpha', 'omega' %}{% elsif products_per_row == "3" %}four columns {% cycle 'alpha', 'beta', 'omega' %}{% else %}three columns {% cycle 'alpha', 'beta', 'gema', 'omega' %}{% endif %} thumbnail {% cycle 'even', 'odd' %}">
+{% else %}
+  <div class="product_listing {% if products_per_row == "2" %}eight columns {% cycle 'alpha', 'omega' %}{% elsif products_per_row == "3" %}one-third column {% cycle 'alpha', 'beta', 'omega' %}{% else %}four columns {% cycle 'alpha', 'beta', 'gema', 'omega' %}{% endif %} thumbnail {% cycle 'even', 'odd' %}">
+{% endif %}
+
+  {% if product.featured_image.alt contains 'youtube' or image.alt contains 'vimeo' %}
+    {% assign alt_text = product.title %}
+  {% else %}
+    {% assign alt_text = product.featured_image.alt %}
+  {% endif %}
+
+  <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+    <img src="{{ product.featured_image | product_img_url: 'compact' }}" alt="{{ alt_text | escape }}" />
+    {% if product.compare_at_price_max > product.price %}
+      <div class="banner-container">
+        <div class="sale_banner">Sale</div>
+      </div>
+    {% endif %} </a>
+    <div class="info">
+      <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+        {{ product.title }}
+
+      </a>
+    </div>
+    <div class="starprice">
+      <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+        <span class="price {% if product.compare_at_price_max > product.price %}sale{% endif %}">
+          {% if product.available %}
+            {% if product.price_varies %}
+              <small><em>from</em></small>
+            {% endif %}
+            {% include 'shappify-qb-min-price' with product %}
+          {% else %}
+            <span class="sold_out"> - </span>{% include 'shappify-bdl-min-price' with product %}
+          {% endif %}
+          {% if product.compare_at_price_max > product.price %}
+            <span class="was_price">{{ product.compare_at_price_max | money }}</span>
+          {% endif %}
+        </span>
+      </a>
+      <center>
+        {% assign counter = counter | plus:1 %}
+        <span class="savings">{% if product.compare_at_price_max > product.price %} <strong>You Save:</strong> {{ product.compare_at_price_max  | minus: product.price | money }}   ({{ product.compare_at_price_max | minus: product.price | times: 100 | divided_by: product.compare_at_price_max | money_without_currency | times: 100 | remove: '.0' }}%) {% else %} <span class="nosave">No Savings</span> {% endif %} </span>
+        <div>
+          <form action="" data-id="{{ product.id }}" data-handle="{{ product.handle }}" method="post" class="variants main_prod_form_{{ counter }}" id="product-actions" enctype="multipart/form-data" style="padding:0px;">
+            <div style="display:none;">
+              <select id="product-select" name="id" class="product-select-{{ product.id }}">
+                {% for var in product.variants %}
+                  <option value="{{ var.id }}">{{ var.title | escape }} - {{ var.price | money }}</option>
+                {% endfor %}
+              </select>
+
+              <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" />
+            </div>
+            <input class="btn add_to_cart" type="submit" name="add" id="add-to-cart" value="Add to Cart" data-counter="{{ counter }}"/>
+          </form>
+        </div>
+      </center>
+    </div>
+
+    {% for col in product.collections %}
+      {% if col.handle == 'new' %}
+        <div class="banner-container">
+          <div class="new_banner">New</div>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+  </div>
+

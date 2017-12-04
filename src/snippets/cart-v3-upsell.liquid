@@ -1,0 +1,111 @@
+<!-- snippets/cart-v3-upsell.liquid -->
+<div class="clear"></div>
+<div id="for-better-sex-upsells-container" class="sixteen columns section clearfix">
+  <div class="clear"></div>
+  <div id="cart__sex_for_him" class="one-third column alpha">
+    <strong style="color:#cc3366">For Better Sex With Her&hellip;</strong><br>
+    <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+      {% assign counter = 0 %}
+      {% assign counter = counter | plus:1 %}
+      {% for product in collections.cart-upsell-him.products limit:5 %}
+        {% include 'cart-upsell-item', product: product %}
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div id="cart__sex_for_her" class="one-third column alpha">
+    <strong style="color:#cc3366">For Better Sex With Him&hellip;</strong><br>
+    <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+      {% for product in collections.cart-upsell-her.products limit:5 %}
+        {% include 'cart-upsell-item', product: product %}
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="one-third column alpha" id="better-anal">
+    <strong style="color:#cc3366">For Better Anal Sex&hellip;</strong><br>
+    <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+      {% for product in collections.cart-upsell-anal.products limit:5 %}
+        {% include 'cart-upsell-item', product: product %}
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div style="float:right;" class="cart__add-extras-form">
+    <form action="" data-id="{{ product.id }}" data-handle="{{ product.handle }}" method="post" class="variants main_prod_form_{{ counter }}" id="product-actions" enctype="multipart/form-data" style="padding:0px;">
+      <div class="select" style="visibility: hidden;">
+        <input name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }} product_variant_drop"/>
+      </div>
+      <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" style="display:none;"/>
+
+      <input class="btn add_to_cart" type="submit" name="add" id="add-to-cart" value="Add Extras &nbsp►" data-counter="{{ counter }}"/>
+    </form>
+  </div>
+</div>
+
+
+<style>
+  @media only screen and (min-width:768px) and (max-width:960px) {
+    .five.columns.alpha {
+      width: 48%!important;
+    }
+  }
+
+  @media only screen and (min-width:568px) and (max-width:767px) {
+    .five.columns.alpha {
+      width: 50%!important;
+    }
+
+  }
+
+  @media only screen and (min-width:415px) and (max-width:960px) {
+    div#better-anal.five.columns.alpha {
+      display: none;
+    }
+  }
+
+
+  @media only screen and (max-width:960px) {
+    div#cart-upsell-desk.sixteen.columns {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width:767px) {
+    div#cart-upsell-tab.sixteen.columns {
+      display: none;
+    }
+
+    .sixteen.columns.section.clearfix {
+      margin-top: 40px;
+    }
+
+
+  }
+
+  @media only screen and (min-width:960px) {
+    div#cart-upsell-tab.sixteen.columns {
+      display: none;
+    }
+  }
+
+  @media only screen and (min-width:767px) {
+    div#cart-upsell-mob.sixteen.columns {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 959px) and (min-width: 600px) {
+    div#cart__sex_for_him,
+    div#cart__sex_for_her {
+      width: 50% !important;
+    }
+  }
+
+  @media only screen and (max-width: 959px) and (min-width: 415px) {
+    div#better-anal {
+      display: none;
+    }
+  }
+
+</style>

@@ -1,0 +1,85 @@
+{% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+{% assign my_description = product.description | split: '<!-- split -->'  %}
+
+<div class="best-sellers__product-thumbnail thumbnail">
+
+  <div class="banner-container">
+    <div class="new_banner">#{{ forloop.index }}</div>
+    {% assign _has_sale = false %}
+    {% for variant in product.variants %}
+      {% if variant.metafields.shappify_qb.qb_hide == "1" and product.compare_at_price_max > product.price or variant.metafields.shappify_qb.qb_hide == "1" %}
+        {% unless collection.handle contains 'offer' %}
+          <div class="new_banner">Offer</div>
+        {% endunless %}
+      {% elsif product.compare_at_price_max > product.price %}
+        {% unless _has_sale %}
+          <div class="sale_banner">Sale</div>
+          {% assign _has_sale = true %}
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <p class="info-title">
+    <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+      {{ product.title }}
+    </a>
+  </p>
+
+  <ul class="mobile-fblock-grid-1 tablet-fblock-grid-2 fblock-grid__tight">
+    <li>
+      {% if product.featured_image.alt contains 'youtube' or image.alt contains 'vimeo' %}
+        {% assign alt_text = product.title %}
+      {% else %}
+        {% assign alt_text = product.featured_image.alt %}
+      {% endif %}
+
+      <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+        <img class="lazy" data-src="{{ featured_image | product_img_url: 'medium', format: 'pjpg' }}" alt="{{ alt_text | escape }}" />
+      </a>
+
+      <div class="starprice">
+        <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+          <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ product.id }}">{{ product.metafields.stamped.badge }}</span>
+          <span class="price {% if product.compare_at_price_max > product.price %}sale{% endif %}">
+            {% if product.available %}
+              {% if product.price_varies %}
+                <small><em>from</em></small>
+              {% endif %}
+              {% include 'shappify-qb-min-price' with product %}
+            {% else %}
+              <span class="sold_out">Sorry - Out of stock</span>
+              {% include 'shappify-qb-min-price' with product %}
+            {% endif %}
+            {% if product.compare_at_price_max > product.price and product.available %}
+              <span class="was_price">{{ product.compare_at_price_max | money }}</span>
+            {% endif %}
+          </span>
+        </a>
+      </div>
+    </li>
+
+
+    <li>
+      <div class="info">
+        <p class="info-desc">
+          {{ my_description[0] }}
+        </p>
+        <hr>
+        {{ my_description[2] }}
+        <form action="/cart/add" method="post" class="clearfix product_form" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}" id="product-form-{{ product.id }}">
+
+          <div class="best-sellers__button-container">
+
+            <a class="continue-shopping" href="{{ product.url | within: collection }}">View Product</a>
+
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/>
+            <input type="submit" class="cart_button2" name="add" value="Add to Cart" data-counter="{{ counter }}">
+          </div>
+        </form>
+
+      </div>
+    </li>
+  </ul>
+  <hr>
+</div>

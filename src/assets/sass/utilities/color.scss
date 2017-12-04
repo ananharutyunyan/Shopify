@@ -1,0 +1,11 @@
+@each $key, $color in $colors {
+
+  .u-color--#{$key} {
+    color: #{$color} !important
+  }
+
+  .u-bg-color--#{$key} {
+    background-color: #{$color} !important
+  }
+
+}

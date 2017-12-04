@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+  <link rel="stylesheet" type="text/css" href='{{ "custom-checkout.css" | asset_url }}'>
+
+  <head>
+    {% include 'limespot' %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+
+    <title>{{ shop.name }} - {{ page_title }}</title>
+    {% include 'head__convert-experiments' %}
+
+    {{ content_for_header }}
+
+    {{ checkout_stylesheets }} 
+    {{ checkout_scripts }}
+  </head>
+  <body>
+    <div class="banner" data-header>
+      <div class="wrap">
+        {{ content_for_logo }}
+      </div>
+    </div>
+
+    {{ order_summary_toggle }}
+
+    <div class="content" data-content>
+      <div class="wrap">
+        <div class="sidebar">
+          <div class="sidebar__header">
+            {{ content_for_logo }}
+          </div>
+          <div class="sidebar__content">
+                <div class="addedcontent sealswrapper">
+	  	<div class="sealholder">
+		  	<img src="//cdn.shopify.com/s/files/1/1790/4935/t/3/assets/protalus_checkout_seal_1.png?16347456113792353971" title="SECURE" class="checkoutseal">
+			</div>
+
+		    <div class="sealholder">
+		  	 		<img src="//cdn.shopify.com/s/files/1/1790/4935/t/3/assets/protalus_checkout_seal_2.png?16347456113792353971" title="SECURE" class="checkoutseal">
+
+			</div>
+
+		  	<div class="sealholder">
+		  						<img src="//cdn.shopify.com/s/files/1/1790/4935/t/3/assets/protalus_checkout_seal_3.png?16347456113792353971" title="SECURE" class="checkoutseal">
+
+			</div>
+
+
+		  	</div>
+            {{ content_for_order_summary }}
+          </div>
+        </div>
+        <div class="main" role="main">
+          <div class="main__header">
+            {{ content_for_logo }}
+            {{ breadcrumb }}
+            {{ alternative_payment_methods }}
+          </div>
+          <div class="main__content">
+            {{ content_for_layout }}
+          </div>
+          <div class="main__footer" role="contentinfo">
+            {{ content_for_footer }}
+                 <!-- IS+ Product Recommendation Widget START -->
+    <div title="You Might Also Like..." layout="horizontal" sources="related_purchase,related_cart,related_views,similar_products"  id="isp-related-widget-1"></div>
+    <script src="https://acp-magento.appspot.com/js/isp_related_products.js?v=1.0.8&UUID=b94835bf-f961-46f3-a6f2-523d5345d5d3&store=3860093"></script>
+<!-- IS+ Product Recommendation Widget END -->
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    {{ tracking_code }}
+  <link href="https://limespot.azureedge.net/storefront/2.0.0/css/recommendations.min.css" rel="stylesheet" />
+{% include 'limespot-custom-css' %}
+
+</body>
+</html>
+
+<style>
+  span.btn__content a {
+    color: #fff!important;
+  }
+</style>

@@ -1,0 +1,21 @@
+<!-- snippets/sidebar__collection-title.liquid dbg: {{dbg}} -->
+{% if viz %} {% assign _viz = viz %} {% else %} {% assign _viz = 'show-for-desktop' %}{% endif %}
+
+{% if sidebar_parent %}
+  {% assign _backlink = sidebar_parent %}
+{% else %}
+  {% assign _backlink = "all" %}
+{% endif %}
+
+<div class="sidebar__collection-title {{_viz}}">
+  <a href="/collections/{{_backlink}}">
+    <h4>
+      {% if mobile and mobile_title %}
+        {{ mobile_title }}
+      {% else %}
+        {{ sidebar__collection-title }}
+      {% endif %}
+    </h4>
+  </a>
+  <a class="filter-clear" href="/">home &gt;</a>
+</div>

@@ -1,0 +1,26 @@
+server: "hub-cloud.browserstack.com"
+user: "BROWSERSTACK_USERNAME"
+key: "BROWSERSTACK_ACCESS_KEY"
+
+urls:
+  store:
+    https://www.simplipleasure.com
+
+common_caps:
+  "build": "simplipleasure-live"
+  "browserstack.debug": true
+
+browser_caps:
+  -
+    "browser": "chrome"
+  -
+    "browser": "internet explorer"
+  -
+    "browser": "safari"
+  -
+    "device": "iPhone 7"
+    "realMobile": "true"
+  -
+    'browserName': 'android'
+    'platform': 'ANDROID'
+    'device': 'Samsung Galaxy S5'

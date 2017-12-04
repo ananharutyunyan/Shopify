@@ -1,0 +1,85 @@
+<!--snippets/cart-interstitial.liquid -->
+<div id="cart-interstitial" class="hidden cart-intr sixteen columns" style="display: none;">
+  <section class="cart-intr__recently-added">
+    <div class="cart-intr__cart-top clearfix">
+      <a href="/cart" class="atc action_button add_to_cart">
+        Proceed to cart
+        <i class="fa fa-arrow-circle-right fa-fw" aria-hidden="true"></i>
+      </a>
+    </div>
+
+    <h2 class="cart-intr__added slid-out-right">
+      <i class="fa fa-check fa-lg cart-intr__check-icon" aria-hidden="true"></i>
+      <span class="items">1 item</span> added to your cart
+    </h2>
+
+    <div class="cart-intr__errors" style="display: none;"></div>
+
+
+    <div class="clearfix">
+      <div class="cart-intr__cart">
+        <div class="cart-intr__cart-total-line">Your total <span class="cart-intr__cart-total"></span> USD</div>
+        <div class="cart-intr__cart-items-line"><span class="cart-intr__cart-items"></span> in your cart</div>
+        <a href="/cart" class="atc action_button add_to_cart">
+          Proceed to cart
+          <i class="fa fa-arrow-circle-right fa-fw" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <div class="cart-intr__added-prod">
+        <div class="cart-intr__prod">
+          <img class="cart-intr__prod-thumb" src="{{ featured_image | product_img_url: '120x120', format: 'pjpg' }}" />
+          <div class="cart-intr__prod-blurb">
+            <a href="{{ product.url }}" title="{{ product.title | escape }}" class="cart-intr__prod-title">{{ product.title}}</a>
+            <p class="cart-intr__prod-price"><span class="cart-intr__amount">{{ variant.price | money }}</span><span class="was_price">{% if variant.price < variant.compare_at_price %}{{ variant.compare_at_price | money }}{% endif %}</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="cart-intr__upsells">
+
+  </section>
+  <section class="cart-intr__featured-upsells">
+    <h2 class="cart-intr__featured-upsells-head">Take care of your toys!</h2>
+    <p class="cart-intr_body">From our our best selling water based lubes, sex toy cases and toy cleaners, make your toys last longer and stay cleaner - or just add some extra pleasure to your purchase!</p>
+    <ul class="cart-intr__featured-upsells-list">
+      {% if product.metafields.interstitial.category == 'anal-sex-toys' %}
+      {% assign upsells = 'cart-interstitial-anal-sex-toys' %}
+      {% else %}
+      {% assign upsells = 'cart-interstitial-default-upsells' %}
+            {% endif %}
+
+      {% for link in linklists[upsells].links %}
+        {% assign item_product = link.object %}
+        {% assign item_variant = item_product.selected_or_first_available_variant %}
+        {% if true or item_variant.available %}
+          <li class="cart-intr__prod-item">
+            {% if item_variant.image %}
+              {% assign item_variant_image = item_variant.image %}
+            {% else %}
+              {% assign item_variant_image = item_product.featured_image %}
+            {% endif %}
+
+            <img class="cart-intr__prod-thumb" src="{{ item_variant_image |  product_img_url: '80x80', format: 'pjpg' }}" />
+            <div class="cart-intr__prod-blurb">
+              <a href="{{ item_variant.url }}" class="cart-intr__prod-title">{{item_product.title}}</a>
+              {% assign variant_desc_name = 'upsell_' | append: item_variant.id | append: '_desc' %}
+              <p class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ item_product.id }}">{{ item_product.metafields.stamped.badge }}</p>
+              <p class="cart-intr__prod-desc">
+                {{item_variant.metafields.LOC.upsell_desc}}
+              </p>
+            </div>
+            <div class="v-align-bottom">
+              <p class="cart-intr__prod-price">
+                Our Price <span class="cart-intr__amount">{{ item_variant.price | money }}</span><span class="was_price">{% if item_variant.price < item_variant.compare_at_price %}{{ item_variant.compare_at_price | money }}{% endif %}</span></p>
+              <a href="/cart" class="cart-intr__upsell-atc atc action_button add_to_cart" data-variant-id="{{item_variant.id}}" data-compare-at-price="{{item_variant.compare_at_price}}">Add to Cart</a>
+            </div>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </section>
+</div>
+
+<!--END: snippets/cart-interstitial.liquid -->

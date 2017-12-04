@@ -1,0 +1,39 @@
+.responsive_default {
+    display:inline-block;
+}
+.responsive_100, .responsive_768, .responsive_960, .responsive_1152 {
+    display:none;
+}
+
+@media only screen and  (min-width: 100px) and (max-width: 767px) {
+    .responsive_default {
+        display:none;
+    }
+}
+
+@media only screen and  (min-width: 768px) and (max-width: 959px) {
+    .responsive_default {
+        display:none;
+    }
+    .responsive_768 {
+        display:inline-block;
+    }
+}
+
+@media only screen and  (min-width: 960px) and (max-width: 1151px) {
+    .responsive_default {
+        display:none;
+    }
+    .responsive_960 {
+        display:inline-block;
+    }
+}
+
+@media only screen and  (min-width: 1152px) {
+    .responsive_default {
+        display:none;
+    }
+    .responsive_1152 {
+        display:inline-block;
+    }
+}

@@ -1,0 +1,669 @@
+<!-- snippets/product-page-upsells.liquid -->
+
+
+{% if product.type == 'upsell.fleshlight' %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-fleshlight.products limit:6 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+{% elsif product.metafields.upsell.lelo == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-lelo.products limit:6 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+    </script>
+            {% endfor %}
+     </ul>
+
+{% elsif product.metafields.upsell.double == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-double.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+{% elsif product.metafields.upsell.triple == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-triple.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+
+{% elsif product.metafields.upsell.anal == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-anal.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+{% elsif product.metafields.upsell.anal2 == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-anal2.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+{% elsif product.metafields.upsell.anal3 == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-anal3.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+     </script>
+            {% endfor %}
+     </ul>
+
+{% elsif product.metafields.upsell.anal4 == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-anal4.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+
+{% elsif product.metafields.upsell.basic == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-basic.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+
+{% elsif product.metafields.upsell.cockring == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-cockring.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+
+
+{% elsif product.metafields.upsell.dildo == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-dildo.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+
+
+
+
+{% elsif product.metafields.upsell.glass == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-glass.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+
+
+{% elsif product.metafields.upsell.luxury == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-luxury.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+
+
+{% elsif product.metafields.upsell.masturbator == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-masturbator.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+
+{% elsif product.metafields.upsell.masturbator2 == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-masturbator2.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+
+
+{% elsif product.metafields.upsell.masturbator3 == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-masturbator3.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+
+
+{% elsif product.metafields.upsell.men == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-men.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+
+
+{% elsif product.metafields.upsell.strapon == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-strapon.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+
+
+{% elsif product.metafields.upsell.vibrator == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-vibrator.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+
+
+{% elsif product.metafields.upsell.women == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-women.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+
+{% elsif product.metafields.upsell.bondage == "TRUE" %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-bondage.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+{% else %}
+ <strong style="color:#cc3366"> Simpli Pleasure Recommends:</strong><br>
+
+  <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+
+   {% for product in collections.upsell-basic.products limit:5 %}
+
+
+  <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}  >
+<label>
+  <img src="{{ product.featured_image |  product_img_url: 'thumb', format: 'pjpg' }}">
+
+    <input type="checkbox"  id="product-{{ product.variants.first.id }}" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/><span>{{ product.title }} <span class="upsellprice">
+  {% include 'shappify-qb-min-price' with product %}</span></span></label>
+</li>
+    <script type="text/javascript">
+
+                    $('#product-{{ product.variants.first.id }}').change(function() {
+                       if(this.checked) {
+                          jQuery.post("/cart/add.js", {  quantity: 1,  id: {{ product.variants.first.id }} });
+                       }
+                       else {
+                          jQuery.post('/cart/change.js', { quantity: 0, id: {{ product.variants.first.id }} });
+                       }
+                    });
+                  </script>
+            {% endfor %}
+     </ul>
+
+{% endif %}
+
+<!-- END: snippets/product-page-upsells.liquid -->

@@ -1,0 +1,247 @@
+<!-- snippets/product-page-bundle -->
+{% assign bundle_num_items = 6 %}
+
+{% unless product.metafields.upsell.double == "TRUE" or product.metafields.upsell.triple == "TRUE" %}
+
+  {% if product.metafields.upsell %}
+    <!-- product.metafields.upsell true-->
+
+    {% assign collection_name = "upsell-" | append: product.metafields.upsell.first.first %}
+    {% assign bundle_num_items = 3 %}
+
+
+  {% elsif product.tags contains "upsell-jimmyjane" %}
+    <!--product.tags contains "upsell-jimmyjane" -->
+    {% assign collection_name = "upsell-jimmyjane" %}
+    {% elsif product.type == 'upsell.luxury' %}
+    {% assign collection_name = "upsell-luxury" %}
+  {% elsif product.vendor == "Lelo" or product.tags contains "luxury-new2" %}
+    {% assign collection_name = "upsell-lelo" %}
+  {% else %}
+    <!-- using upsell-basic -->
+    {% assign collection_name = "upsell-basic" %}
+    {% assign bundle_num_items = 3 %}
+  {% endif %}
+{% else %}
+  <!-- products with batteries -->
+  {% assign collection_name = "upsell-basic" %}
+  {% assign bundle_num_items = 3 %}
+{% endunless %}
+
+<!-- collection_name: {{collection_name}} collections[collection_name].products.length: {{collections[collection_name].products.length}}-->
+
+{% if collections[collection_name] %}
+  {% if collections[collection_name].products.length > 0 %}
+    <div class="sixteen columns" id="prod-bundle-upsell">
+      <hr>
+      <h4 class="ls-box-title" style="text-decoration:none;border:none">Frequently bought together</h4>
+
+      <div clas="five columns" class="bundle_image" style="float:left;">
+        <div id="prod-bundle-upsell" class="prod_bundle">
+          <div id="save" style="margin-top:20px;">
+            <div class="combo-prod-selected">
+              <div class="current-prod bundle-item-thumb">
+                <img src="{{ product.featured_image |  product_img_url: 'small', format: 'pjpg' }}" title="{{ product.title }}">
+              </div>
+              {% include 'product-page-bundle-items-thumbs' bundle_collection: collections[collection_name].products, limit: 6 %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bundle-dropdown_mob">
+        Buy all <span class="bundle_count_item"></span>: <span class="price_text_color">$<span class="u-tot-price"></span></span> <span class="down_arrow"></span>
+      </div>
+
+      <div class="four columns add_bundle_desktop" id="prod-bundle-upsell">
+        <div class="combo-price-box">
+          <div class="combo-price">
+            <div class="kit-price"><span>Total Price: </span>$<span class="u-tot-price"></span></div>
+            <div class="kit-price"><span>You Save: </span>$<span class="u-save-price"></span></div>
+          </div>
+
+          <input class="add_to_cart {% if product.options[0] != "Title" %}group_pro_3{% else %}add_to_cart_bundle{% endif %}" type="submit" name="add" id="add-to-cart" value="Add Bundle" data-counter="{{ counter }}" style="    width: 100%;"/>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+
+      <form action="/cart/add" method="post" style="display:none;" class="bundle-cart-form" data-triggers-cart-interstitial>
+        <div class="hide_product"></div>
+        <input type="submit" class="atc" data-abgoal-add-to-cart-click />
+      </form>
+
+      <div class="bundle_toggle">
+        <div id="prod-bund-1" class="prod_bundle_mobile">
+          <ul class="upsell" style="margin-left:0px; margin-top:5px;">
+            <li>
+              <label>
+                <input type="checkbox" disabled readonly checked
+                  name="id[]"
+                  value="{{ product.variants.first.id }}"
+                  class="bundle-select"
+                  data-bundle-input-product-id="{{product.id}}"
+                  data-price="{{  product.price_max }}"
+                  data-id="{% if product.price < product.compare_at_price_min %}{{ product.compare_at_price_min | money }}{% else '0' %}{% endif %}"/>
+                <span>
+                  <strong>This item:</strong> {{ product.title }}
+                  <span class="upsellprice" >
+                    {% include 'shappify-qb-min-price' with product %}<span class="was_price"> {% if product.price < product.compare_at_price_min %}
+         {{ product.compare_at_price_min | money }}{% endif %}</span>
+                 </span>
+                </span>
+              </label>
+              <input onfocus="this.select()" class="quantity field" data-id="{{ product.variants.first.id }}" min="0" type="hidden" value="1" tabindex="1">
+            </li>
+
+            {% include 'product-page-bundle-items-checkboxes' bundle_collection: collections[collection_name].products, limit: 6 %}
+
+          </ul>
+        </div>
+
+        <div class="four columns add_bundle_mob" id="prod-bundle-upsell">
+          <div class="combo-price-box">
+            <div class="combo-price">
+              <div class="kit-price"><span>Total Price: </span><span class="price_text_color">$<span class="u-tot-price"></span></span></div>
+              <div class="kit-price"><span>You Save: </span><span class="price_text_color">$<span class="u-save-price"></span></span></div>
+            </div>
+            <div style="display:none;">
+              <select id="product-select" name="id" class="product-select-{{ product.id }}">
+                {% for variant in product.variants %}
+                  <option {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %} value="{{ variant.id }}">{{ variant.title }}</option>
+                {% endfor %}
+              </select>
+              <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" />
+            </div>
+            <input class="add_to_cart {% if product.options[0] != "Title" %}group_pro_3{% else %}add_to_cart_bundle{% endif %}" type="submit" name="add" id="add-to-cart" value="Add All to Cart" data-counter="{{ counter }}" style="    width: 100%;"/>
+          </div>
+          <div style="clear:both"></div>
+        </div>
+      </div>
+
+      <script>
+        $('.upsell li input').change(function(e) {
+          $('.hide_product').html(' ');
+          $(".upsell .bundle-select").each(function(index, element) {
+            var $input = $(this);
+            var id = $input.val();
+            var pid = $input.data('bundleInputProductId');
+            if($input.is(":checked")) {
+              $('.hide_product').append('<input type="hidden" name="id[]" value="'+ id +'" id="bundle_checkbox_'+ pid +'">');
+            }else{
+              $('bundle_checkbox_'+pid).remove();
+            }
+          });
+        });
+      </script>
+
+      <script type="text/javascript">
+
+        $('.bundle-select').change(function() {
+          var $input = $(this);
+          var $allBundleSelect = $(".bundle-select");
+          console.log('.bundle-select change handler', $input);
+          if($input.is(":checked")) {
+            var pro_id = $input.attr('id');
+            $("."+pro_id).show();
+            var total_cart=0;
+            var total_save=0;
+            var bundle_count=0;
+            $allBundleSelect.each(function(index, element) {
+              var $bundleSelect = $(this)
+              if($bundleSelect.is(":checked")) {
+                var combo1_price = $bundleSelect.data('price');
+                var formatted_price = Shopify.formatMoney(combo1_price, "{{ shop.money_without_currency_format }}");
+                var price_i_f=formatted_price.split('$')[1];
+                total_cart=parseFloat(parseFloat(total_cart)+parseFloat(price_i_f)).toFixed(2);
+
+                var save=$bundleSelect.data('id');
+                if(save == ''){
+                  save=formatted_price;
+                }
+                var save_f=save.split('$')[1];
+                total_save=parseFloat(parseFloat(total_save)+parseFloat(save_f)).toFixed(2);
+                bundle_count++;
+              }
+            });
+            $(".u-tot-price").text(total_cart);
+            var bundle_count = toWords(bundle_count);
+            $(".bundle_count_item").text(bundle_count);
+            $(".bundle_toggle #add-to-cart").val("Add All "+bundle_count+" To Cart");
+            var act_total_save=parseFloat(parseFloat(total_save) - parseFloat(total_cart)).toFixed(2);
+            $(".u-save-price").text(act_total_save);
+          } else{
+            var pro_id = $input.attr('id');
+            $("."+pro_id).hide();
+            var total_cart=0;
+            var total_save=0;
+            var bundle_count=0;
+            $allBundleSelect.each(function(index, element) {
+              var $bundleSelect = $(this)
+              if($bundleSelect.is(":checked")) {
+                var combo1_price = $bundleSelect.data('price');
+                var formatted_price = Shopify.formatMoney(combo1_price, "{{ shop.money_without_currency_format }}");
+                var price_i_f=formatted_price.split('$')[1];
+                total_cart=parseFloat(parseFloat(total_cart)+parseFloat(price_i_f)).toFixed(2);
+                var save = $bundleSelect.data('id');
+                if(save == ''){
+                  save=formatted_price;
+                }
+                var save_f=save.split('$')[1];
+                total_save=parseFloat(parseFloat(total_save)+parseFloat(save_f)).toFixed(2);
+                bundle_count++;
+              }
+            });
+            $(".u-tot-price").text(total_cart);
+            var bundle_count = toWords(bundle_count);
+            $(".bundle_count_item").text(bundle_count);
+            $(".bundle_toggle #add-to-cart").val("Add All "+bundle_count+" To Cart");
+            var act_total_save=parseFloat(parseFloat(total_save) - parseFloat(total_cart)).toFixed(2);
+            $(".u-save-price").text(act_total_save);
+          }
+        });
+
+        setTimeout(function(){
+          $('#prod-bundle-upsell #prod-bund-1 ul li input[type="checkbox"]').trigger( "click" );
+        } ,3000);
+      </script>
+
+      <!-- ========= product popup ============= -->
+      <div class="ajax-success-modal" style="display: none;">
+        <div class="content">
+          <div class="ajax_left">
+            <img class="ajax_product_image" alt="&nbsp;" src="{{ product.featured_image |  product_img_url: 'small', format: 'pjpg' }}">
+          </div>
+          <div class="pro_info">
+            <h5>{{product.title}}</h5>
+            {% include 'product-form', product_form_identifier: 'bundle-popup', atc_style: "add_bundle" %}
+          </div>
+        </div>
+        <div class="remove_popup">X</div>
+      </div>
+
+      <script>
+        $(".group_pro_3").click(function(e) {
+          $(".ajax-success-modal").show();
+          $("body").addClass("overlay_popup");
+        });
+
+        $(".add_to_cart_bundle").click(function(e) {
+          e.preventDefault();
+          console.log('.add_to_cart_bundle click handler', $(".bundle-cart-form .atc"));
+          $(".bundle-cart-form .atc").trigger("click");
+        });
+
+        $(".remove_popup").click(function() {
+          $(".ajax-success-modal").hide();
+          $("body").removeClass("overlay_popup");
+        });
+
+        $(".bundle-dropdown_mob").click(function() {
+          $(".bundle_toggle").toggle();
+          $(".bundle-dropdown_mob").hide();
+        });
+      </script>
+    </div>
+  {% endif %}
+{% endif %}
+

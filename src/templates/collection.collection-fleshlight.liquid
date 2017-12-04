@@ -1,0 +1,169 @@
+{% paginate collection.products by 48 %}
+  {% assign tag_count = collection.all_tags | size %}
+  {% assign tag_threshold = 5 | minus: 0 %}
+
+  <div class="sixteen columns clearfix collection_nav">
+    {% include 'breadcrumbs' %}
+    <div class="ten columns alpha">
+    </div>
+  </div>
+
+  {% if collection.description != blank %}
+    <div class="sixteen columns">
+      <div class="section clearfix">
+        {{ collection.description }}
+      </div>
+    </div>
+  {% endif %}
+
+    {% include 'collection-sidebar', mobile: false %}
+    <div class="twelve columns">
+
+  <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/fl_banner.jpg?15281824468991562710" class="fl">
+
+
+
+{% if current_tags %}
+<div class="filter-group">
+<strong>Current Tags:</strong>
+
+<span class="clear2">
+{% for tag in collection.all_tags %}
+    {% if current_tags contains tag %}
+
+  		{% if tag == 'sale' %}
+  		<span class="filter-clear2">{{ tag | link_to_remove_tag: tag }}</span>
+  		{% else %}
+    	{% assign tag_collection = collections[tag] %}
+ 		<span class="filter-clear2">{{ tag_collection.title | link_to_remove_tag: tag }}</span>
+    	{% endif %}
+    {% endif %}
+{% endfor %}
+  <span class="filter-clear3"><a href="{{ collection.url }}">Clear All</a></span></span>
+  </div>
+
+
+{% endif %}
+<h4 style="margin-bottom:10px;"> </h4>
+
+  {% include 'sort-and-paginate' %}
+
+  {% if collection.products.size == 0 %}
+    <div class="center">
+      <div class="section clearfix">
+        <p class="quote">{{ 'collections.general.no_matches' | t }}</p>
+      </div>
+    </div>
+  {% else %}
+    <div class="main_product_list_sec">
+    {% assign products = collection.products %}
+
+    {% assign products_per_row = 4 %}
+
+    {% include 'product-loop'  %}
+    </div>
+  {% endif %}
+  </div>
+
+  {% include 'pagination' with 'below' %}
+{% endpaginate %}
+         {% include 'collection-sidebar', mobile: true %}
+            <style>
+   .filter-group.filter-group-toys {
+display: none;
+}
+
+   .filter-group.filter-group-essentials {
+display: none;
+}
+
+   .filter-group.filter-group-dildos {
+display: none;
+}
+          .filter-group.filter-group-rings {
+display: none;
+}
+
+
+
+   .filter-group.filter-group-gear {
+display: none;
+}
+              .filter-group.filter-group-vibrators {
+display: none;
+}
+
+.filter-group.filter-group-harnes {
+display: none;
+}
+
+        .filter-group.filter-group-men {
+display: none;
+}
+
+            .filter-group.filter-group-love {
+display: none;
+}
+              .filter-group.filter-group-type.has_group_selected {display: none;}
+              .filter-group.filter-group-vendor.has_group_selected {display: none;}
+                .filter-group.filter-group-toys2 { display: none; }
+.filter-group.filter-group-rings2 { display: none; }
+                .filter-group.filter-group-lingerie2 { display: none; }
+    .filter-group.filter-group-games-gifts2 { display: none; }
+.filter-group.filter-group-plugs2 { display: none; }
+.filter-group.filter-group-men2 { display: none; }
+.filter-group.filter-group-women2 { display: none; }
+.filter-group.filter-group-couplestoy2 { display: none; }
+.filter-group.filter-group-dildos2 { display: none; }
+.filter-group.filter-vibrators2 { display: none; }
+.filter-group.filter-harnes2 { display: none; }
+.filter-group.filter-gear2 { display: none; }
+.filter-group.filter-toy2 { display: none; }
+.filter-group.filter-essentials2 { display: none; }
+
+   .filter-group.filter-group-plugs {
+display: none;
+}
+           .filter-group.filter-group-toy {
+display: none;
+}
+
+                 .filter-group.filter-group-types {
+display: none;
+}
+
+              .filter-group.filter-group-femaledildos {
+  display: none;
+}
+
+.filter-group.filter-group-lingerie {
+  display: none;
+}
+
+.filter-group.filter-group-gamesgifts {
+  display: none;
+}
+
+.filter-group.filter-group-not-shown.has_group_selected {
+  display: none;
+}
+
+          .filter-group.filter-group-women {
+display: none;
+}
+
+        .filter-group.filter-group-couplestoy {
+display: none;
+}
+
+                  .filter-group.filter-group-femalevibrators {display: none;}
+
+             .fl { max-width: 98%;
+    top: 10%;
+    left: 10%;
+    border-radius: 3px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.9);
+}
+
+
+      </style>

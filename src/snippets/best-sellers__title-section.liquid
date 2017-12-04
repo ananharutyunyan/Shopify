@@ -1,0 +1,42 @@
+<!-- snippets/best-sellers__title-section.liquid -->
+{% assign collection_parent = collection.metafields.LOC.collection_parent %}
+
+{% case  collection_parent %}
+  {% when 'best-sellers-vibrators' %}
+    {% assign _links = linklists.top-10-vibrators.links %}
+    {% if collection.handle == 'best-selling-vibes-2016-customer-favorites' %}
+      {% capture _top_img %}
+        <img class="best-sellers__title-img" src="https://cdn.shopify.com/s/files/1/0386/0093/files/best_selling_vibrators_2017.jpg?16992796386020829816" alt="Top 50 Best Selling Vibrators 2016">
+      {% endcapture %}
+    {% endif %}
+
+  {% when 'best-sellers-dildos' %}
+    {% assign _links = linklists.top-10-dildos.links %}
+
+  {% when 'best-sellers-anal-sex-toys' %}
+    {% assign _links = linklists.top-10-anal-sex-toys.links %}
+
+  {% when 'best-sellers-male-toys' %}
+    {% assign _links = linklists.top-10-male-sex-toys.links %}
+{% endcase %}
+
+
+
+
+{% if _top_img %}
+  {{ _top_img }}
+{% endif %}
+
+
+<h1 class="collection-title">{{ collection.title }}</h1>
+
+{{ collection.description }}
+
+{% if _links %}
+  <hr>
+  <p class="bm-0">View Our Top 10 {{ _title }} In Every Category:</p>
+  {% for link in _links %}
+    <a class="top-10" href="{{ link.url }}">{{ link.title }}</a>
+    <span class="top-divider"></span>
+  {% endfor %}
+{% endif %}

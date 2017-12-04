@@ -1,0 +1,68 @@
+Curious about key change -- did you change this file, or does limespot regenerate it?
+
+
+diff --git a/snippets/limespot.liquid b/snippets/limespot.liquid
+index 2de2ef57..dd0a8ca6 100644
+--- a/snippets/limespot.liquid
++++ b/snippets/limespot.liquid
+@@ -1,4 +1,4 @@
+-<script type="text/javascript" async src="https://edge.personalizer.io/storefront/2.0.0/js/shopify/storefront.min.js?key=kmulw-cl1nzq1ngn7vyv1c2p-ffq5q"></script>
++<script type="text/javascript" async src="https://edge.personalizer.io/storefront/2.0.0/js/shopify/storefront.min.js?key=bf0nl-xu1lo1d7a1t2bv-1kw2p"></script>
+ <script>
+ window.LimeSpot = window.LimeSpot === undefined ? {} : LimeSpot;{% assign t = template | prepend: '/' | append: '.' %}
+ {% if t contains '/product.' %}LimeSpot.PageInfo = { Type: "Product", ReferenceIdentifier: "{{ product.id }}"};
+@@ -15,5 +15,4 @@ LimeSpot.StoreInfo = { Theme: "{{ theme.name }}" };
+ 	{% assign cart_product_ids = cart_product_ids | append: ',' | append: item.product.id %}
+ {% endfor %}
+ LimeSpot.CartItems = [{{ cart_product_ids | remove_first: "," }}];
+-</script>
+-{% comment %}Checksum: ddba13605415ddd33b54239d0864e350{% endcomment %}
+\ No newline at end of file
++</script>
+\ No newline at end of file
+
+
+
+
+this was in there from way back -- I haven't touched it because I didn't have a way to check 3000 products to see if any images broke. Any idea what it is trying to accomplish?
+
+diff --git a/snippets/product-thumbnail.liquid b/snippets/product-thumbnail.liquid
+index 57944624..9d41251b 100644
+--- a/snippets/product-thumbnail.liquid
++++ b/snippets/product-thumbnail.liquid
+@@ -1,7 +1,8 @@
+-<!-- snippets/product-thumbnail.liquid -->
++{% assign progressive = true %}
++
+ {% if progressive %}
+   {% assign thumbnail_css = "thumbnail progressive" %}
+-  {% assign _product_image_url = {{ product | img_url: '200x200' | split:'?' | first | format: 'pjpg' }} %}
++  {% assign _product_image_url = product.featured_image | img_url: '200x200', format: 'pjpg' %}
+ {% else %}
+   {% assign thumbnail_css = "thumbnail" %}
+   {% assign _product_image_url = product.featured_image | product_img_url: '200x' %}
+@@ -15,7 +16,7 @@
+   {% endif %}
+
+   <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+-    <img class="product_listing__img" src="{{_product_image_url}}" alt="{{ product.title }}" />
++    <img class="product_listing__img lazy" data-src="{{_product_image_url}}" alt="{{ product.title }}" />
+     {% for variant in product.variants %}
+       {% if product.compare_at_price_max > product.price and product.available %}
+         <div class="banner-container">
+
+
+
+
+Shopify.OptionSelector and Shopify.formatMoney (at least) are used. Shopify.OptionSelector and the associated callback are really awful code and at some point I will replace them with something cleaner. option_selection is used on page templates, not just product, and possibly also in some body html of blog/articles & pages
+
+{% comment %}
+
+<!-- Following part of code looks not using at all. Just uncomment if I'm wrong. -->
+
+{{ "api.jquery.js" | shopify_asset_url | script_tag }}
+{{ "option_selection.js" | shopify_asset_url | script_tag }}
+{{ "jquery.cookie.min.js" | asset_url | script_tag }}
+
+{% endcomment %}
+

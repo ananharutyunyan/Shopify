@@ -1,0 +1,10 @@
+<!-- snippet: sort-and-paginate -->
+<div class="paginate">
+  {% include 'sort-collection' %}
+  {% include 'pagination' %}
+  <script>
+    if($('.paginate .pagenav').length == 0) {
+      $('#sort-by-coll').addClass('pages-not-found');
+    }
+  </script>
+</div>

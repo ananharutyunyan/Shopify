@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <!-- layout/theme.liquid  for {{template}} . Good morning michael-->
+  <head>
+    {% include 'jqv' with '1' %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% include 'jqv' with '2' %}
+    <!-- START content_for_header -->
+    {{content_for_header}}
+    <!-- END content_for_header -->
+    {% include 'jqv' with '3' %}
+  </head>
+  <body class="{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} ab__smaller-breadcrumb">
+    {% include 'jqv' with '4' %}
+
+    {{ content_for_layout }}
+
+    {% include 'jqv' with '5' %}
+
+  </body>
+</html>

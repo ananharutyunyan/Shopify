@@ -1,0 +1,13 @@
+<!-- snippets/sidebar__section-title.liquid -->
+<h4 class="{% if  mobile %}toggle{% endif %}">
+  {% if mobile %}
+    <span>+</span>
+    {% if mobile_title %}
+      {{ mobile_title }}
+    {% else %}
+      {{ sidebar__section-title }}
+    {% endif %}
+  {% else %}
+    {{ sidebar__section-title }}
+  {% endif %}
+</h4>

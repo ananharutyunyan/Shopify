@@ -1,0 +1,35 @@
+<!-- snippets/collection-sidebar.liquid  {{collection.metafields.LOC.collection_parent}} mobile: {{mobile}}-->
+{% if  mobile %}
+  {% assign visibility_class="hide-for-desktop" %}
+{% else %}
+  {% assign visibility_class="show-for-desktop" %}
+{% endif %}
+
+{% assign sidebar_checkboxes = true %}
+
+<div class="sidebar four columns {{visibility_class}}">
+
+  {% unless mobile %}
+    {% if collection.handle == 'all' %}
+      <a href="/collections/sex-toy-blowout" onclick="ga('send', 'event', 'Collections All', 'Sidebar Click Through', 'Sex Toy Blowout');">
+        <img src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/sex-toy-blow-thumb.png?10981429758712927942">
+      </a>
+    {% endif %}
+  {% endunless %}
+
+  {% include 'sidebar__collection-categories' %}
+
+  {% unless mobile %}
+    {% include 'sidebar__current-tags' %}
+    {% include 'filter-menu' %}
+  {% endunless %}
+
+</div>
+
+<!-- END: snippets/collection-sidebar.liquid  mobile: {{mobile}}-->
+
+
+
+
+
+

@@ -1,0 +1,5 @@
+<!-- snippets/cart-counter.liquid -->
+<a href="/cart" class="cart {% if cart.item_count > 0 %}active{% endif %}" title="{{ 'layout.general.cart' | t }}">
+  Cart
+  <span class="show-for-desktop">(</span>{% if cart.item_count > 0 %}<span class="cart-count">{{ cart.item_count }}</span>{% else %}<span class="cart-count-0">0</span>{% endif %}<span class="show-for-desktop">)</span>
+</a>

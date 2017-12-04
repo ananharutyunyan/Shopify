@@ -1,0 +1,61 @@
+<script>
+  $(window).load(function(e){
+Shopify.itemsToAdd = [];
+	
+Shopify.redirect = function(){
+  	window.location.href = '/pages/add-to-cart';
+  }
+  
+   $('.add_to_cart').click(function(e){
+      e.preventDefault();
+     
+      $.removeCookie("recent_quantity");
+      $.removeCookie("recent_variant");
+      $.removeCookie("recent_variant_id");
+      $.removeCookie("recent_added_product");
+     
+      var counter = $(this).data('counter');
+      //alert(counter);
+	  Shopify.itemsToAdd = [];
+      var get_quantity = 0;
+	  /* Set cookie for continue shopping btn */
+      if($('.main_prod_form_'+counter+' .upsell').length){
+          $.cookie('Collection_handle','{{ collection.handle }}',{'path': '/'});
+          $('.upsell :checkbox').each(function(){
+                     if( this.checked ) {
+                         get_quantity = get_quantity + 1; 
+                     } 
+          });
+          
+      }
+     
+     
+     
+     	
+     
+	  var quantity = parseInt($('.main_prod_form_'+counter+' .quantity').val(), 10);
+      var p_id = $('.main_prod_form_'+counter).data('id');
+      var p_handle = $('.main_prod_form_'+counter).data('handle');
+    
+	  var var_id = $('.main_prod_form_'+counter+' .product-select-'+p_id).val();
+      //var var_title = $('#product-select-'+p_id).text();
+      //var element = $('#product-select-'+p_id);
+      var var_title = $('.main_prod_form_'+counter+' .product-select-'+p_id+' option:selected').text();
+	  
+	  
+	  var total = get_quantity + quantity;
+    
+	  $.cookie('recent_quantity', total , {'path': '/'});
+	  $.cookie('recent_added_product', p_handle , {'path': '/'});
+	  $.cookie('recent_variant', var_title , {'path': '/'});
+      $.cookie('recent_variant_id', var_id , {'path': '/'});
+      //console.log('quantity :'+ total + 'product :'+ p_handle +' var title :'+var_title +'var id :'+var_id);
+	  if (quantity) {
+        Shopify.addItem(var_id, quantity, Shopify.redirect);
+      }
+      
+      //console.log($.cookie('Collection_handle'));
+      //return true;
+    }); 
+  });
+</script>   

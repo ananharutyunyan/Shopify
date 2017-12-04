@@ -1,0 +1,11 @@
+diff --git a/layout/theme-bare.liquid b/layout/theme-bare.liquid
+index 8a1d..2b630d60 100644
+--- a/layout/theme-bare.liquid
++++ b/layout/theme-bare.liquid
+@@ -1,3 +1 @@
+-module.exports = "<!doctype html>\n<html lang=\"en\">\n  <!-- layout/theme.liquid  for {{template}} . Good morning michael-->\n  <head>
+-{% include 'limespot' %}\n    {% include 'jqv' with '1' %}\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>\n    {% include 'jqv' with '2' %}\n    <!-- START content_for_header -->\n    {{content_for_header}}\n    <!-- END content_for_header -->\n    {% include 'jqv' with '3' %}\n  </head>\n  <body class=\"{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} ab__smaller-breadcrumb\">\n    {% include 'jqv' with '4' %}\n\n    {{ content_for_layout }}
+-<limespot></limespot>\n\n    {% include 'jqv' with '5' %}\n\n  </body>\n</html>\n"
+\ No newline at end of file
++module.exports = "<!doctype html>\n<html lang=\"en\">\n  <!-- layout/theme.liquid  for {{template}} . Good morning michael-->\n  <head>\n    {% include 'jqv' with '1' %}\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>\n    {% include 'jqv' with '2' %}\n    <!-- START content_for_header -->\n    {{content_for_header}}\n    <!-- END content_for_header -->\n    {% include 'jqv' with '3' %}\n  </head>\n  <body class=\"{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} ab__smaller-breadcrumb\">\n    {% include 'jqv' with '4' %}\n\n    {{ content_for_layout }}\n\n    {% include 'jqv' with '5' %}\n\n  </body>\n</html>\n"
+\ No newline at end of file

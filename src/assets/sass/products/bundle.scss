@@ -1,0 +1,153 @@
+#check-img {
+  display: none;
+  background: #eef;
+  padding: 10px;
+  text-align: center;
+}
+
+.box-bundle td.plus {
+  text-align: center;
+  padding: 0 5px 0 5px;
+  font-size: 105%;
+  font-weight: bold;
+  color: #999;
+  vertical-align: middle;
+}
+
+
+.upsell-1 input[type="checkbox"] {
+  display: inline;
+  margin-top: 5px;
+}
+.upsell-1 li {
+  margin-bottom: 0px;
+}
+.upsell-1 .upsellprice {
+  display: inline;
+  color: #cc3366;
+}
+
+table tr td {
+  padding: 0px;
+  border-bottom: 0px solid #fff;
+  border-left: 0px solid #fff;
+  background: #fff;
+}
+
+table tr {
+  padding-left: 0px;
+}
+table tr td:first-child {
+  text-align: left;
+  padding-left: 0px;
+  border-left: 0;
+}
+
+table {
+  // color: #fff;
+  text-shadow: 1px 1px 0px #fff;
+  background: #fff;
+  border: none;
+  margin-bottom: 20px;
+}
+
+table tr:hover td {
+  background: #fff;
+}
+
+.unselected {
+  opacity: .20;
+  filter: alpha(opacity=20);
+  zoom: 1;
+}
+
+.bundle-dropdown_mob {
+  display: none;
+}
+
+.bundle_toggle .add_bundle_mob {
+  display: none;
+}
+
+@media only screen and (max-width: 767px) {
+  .combo-prod-selected {
+    text-align: center;
+  }
+
+}
+
+@media only screen and (max-width: 767px) {
+  div#prod-bundle-upsell.add_bundle_desktop {
+    display: none;
+  }
+  div#prod-bundle-upsell.add_bundle_mob {
+    display: block;
+  }
+  .prod_bundle {
+    border: 1px solid color('border-gray');
+  }
+  .bundle-dropdown_mob {
+    border: 1px solid color('border-gray');
+    border-top: 0;
+    border-bottom: 0;
+    text-align: center;
+    display: inline-block;
+    width: 99.5%;
+    height: 40px;
+    line-height: 40px;
+    font-weight: 700;
+    font-size: 18px;
+    position: relative;
+  }
+  .bundle-dropdown_mob .down_arrow {
+    height: 20px;
+    width: 20px;
+    background: url( ../images/down-arrow-icon.png ) no-repeat;
+    background-size: 100%;
+    position: absolute;
+    top: 17px;
+    right: 10px;
+  }
+  .bundle_toggle {
+    display: none;
+  }
+  .bundle_toggle .upsell {
+    margin-bottom: 0;
+  }
+  .bundle_toggle .upsell label {
+    margin: 0;
+  }
+  .bundle_toggle .upsell li {
+    border: 1px solid color('border-gray');
+    border-top: 0;
+    margin: 0;
+    padding: 8px;
+  }
+  .add_bundle_mob {
+    border: 1px solid color('border-gray');
+    border-bottom: 0;
+    border-top: 0;
+    padding: 10px;
+    padding-bottom: 12px;
+    width: 100% !important;
+    position: relative;
+    box-sizing: border-box;
+  }
+  .add_bundle_mob .combo-price-box {
+    margin: 0px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .bundle_image {
+    width: 100%;
+  }
+  .price_text_color {
+    color: color('pink');
+  }
+
+}
+
+input.group_pro_3 {
+  text-transform: capitalize
+}

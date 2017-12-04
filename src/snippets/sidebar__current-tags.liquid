@@ -1,0 +1,25 @@
+<!-- snippets/sidebar__current-tags.liquid -->
+{% unless collection.products.size < 9 %}
+  {% if current_tags %}
+    <div class="filter-group">
+      <h4>Current Tags</h4>
+      <div class="clear2">
+        <ul>
+          {% for tag in collection.all_tags %}
+            {% if current_tags contains tag %}
+              {% if tag == 'sale' %}
+                {% assign title = tag %}
+              {% else %}
+                {% assign tag_collection = collections[tag] %}
+                {% assign title = tag_collection.title %}
+              {% endif %}
+              <li collection-container {{% tag %}} active selected ><span class="filter-clear2">{{ title | link_to_remove_tag: tag }}</span></li>
+            {% endif %}
+          {% endfor %}
+          <li collection-container active selected ><span class="filter-clear3"><a href="{{ collection.url }}">Clear All</a></span></li>
+        </ul>
+      </div>
+    </div>
+  {% endif %}
+{% endunless %}
+<!-- END snippets/sidebar__current-tags.liquid -->

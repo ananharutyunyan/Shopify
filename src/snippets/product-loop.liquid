@@ -1,0 +1,89 @@
+{% comment %}
+  skip_product:           if assigned, it won't be displayed. This is so we can use the loop
+                          on product page, to show related products.
+  skip_tags:              comma-delimited list of tags, products with those tags will be skipped. default: 'top-10'
+  skip_shappify_hidden:   if true, no products with metafield inventory:ShappifyHidden=true
+                          will be displayed
+  grid_classes:           space-delimited grid classes to use for the ul block grid product layout.
+                          Default is "mobile-fblock-grid-2 tablet-small-fblock-grid-3
+                          tablet-fblock-grid-4 fblock-grid__tight"
+  list_class:             css class for the list. Default: "products__lined"
+  thumbnail_snippet:      which snippet to use for the product thumbnail. Default: 'product-thumbnail'
+  num_products:           number of products to display. Default: 48
+{% endcomment %}
+
+
+
+{% assign product_found = false %}
+{% assign skip = false %}
+
+{% if grid_classes %}
+  {% assign _grid_classes = grid_classes %}
+{% else %}
+  {% assign _grid_classes = "mobile-fblock-grid-2 tablet-small-fblock-grid-3 tablet-fblock-grid-4 fblock-grid__tight" %}
+{% endif %}
+
+{% if list_class %}
+  {% assign _list_class = list_class %}
+{% else %}
+  {% assign _list_class = "products__lined" %}
+{% endif %}
+
+{% if skip_tags %}
+  {% assign _skip_tags = skip_tags | split: ',' %}
+{% else %}
+  {% assign _skip_tags = 'top-10' | split: ',' %}
+{% endif %}
+
+{% if thumbnail_snippet.size %}
+  {% assign _thumbnail_snippet = thumbnail_snippet %}
+{% else %}
+  {% assign _thumbnail_snippet = "product-thumbnail" %}
+{% endif %}
+
+{% if num_products.size %}
+  {% assign _num_products = num_products | plus: 0 %}
+{% else %}
+  {% assign _num_products = 48 %}
+{% endif %}
+
+{% assign _products_shown = 0 %}
+
+{% capture new_row %}
+  <br class="clear product_clear" />
+{% endcapture %}
+
+<!-- snippets/product-loop.liquid  skip_tags: {{skip_tags}}  _num_products: {{_num_products}} _thumbnail_snippet: {{_thumbnail_snippet}}-->
+<ul itemtype="http://schema.org/ItemList" class="products {{_list_class}} {{_grid_classes}}">
+
+  {% for product in products %}
+    {% assign should_skip = false %}
+
+
+    {% if skip_product %}
+      {% if product.id == skip_product.id %}
+        {% assign should_skip = true %}
+      {% endif %}
+    {% endif %}
+
+    {% for skip_tag in _skip_tags %}
+      {% if product.tags contains skip_tag %}
+        {% assign should_skip = true %}
+      {% endif %}
+    {% endfor %}
+
+    {% if skip_shappify_hidden and product.metafields.inventory.ShappifyHidden == "true" %}
+      {% assign should_skip = true %}
+    {% endif %}
+
+    {% unless should_skip %}
+      <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+        {% include _thumbnail_snippet %}
+      </li>
+      {% assign _products_shown = _products_shown | plus: 1 %}
+      {% if _products_shown >= _num_products %}
+        {% break %}
+      {% endif %}
+    {% endunless %}
+  {% endfor %}
+</ul>

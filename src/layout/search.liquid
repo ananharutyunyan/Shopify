@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+  <!--layout/search.liquid -->
+  <head>
+    {% include 'limespot' %}
+    <!-- IS+ Instant Search Widget -->
+    <script async src="https://acp-magento.appspot.com/js/acp-magento.js?v=3&mode=shopify&UUID=b94835bf-f961-46f3-a6f2-523d5345d5d3&store=3860093"></script>
+    <!-- IS+ Instant Search Widget -->
+    <!-- leave at top, to ensure our jquery is the one first loaded -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% include 'translations' %}
+
+    {% include 'head__meta' %}
+
+    <title> {% include 'collection-meta-titles' %}</title>
+
+    {% include 'head__convert-experiments' %}
+
+    {% include 'head__next-prev' %}
+
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,600" rel="stylesheet">
+
+    <!--[if lte IE 8]>
+      <link rel="stylesheet" type="text/css" href='{{ "ie.css" | asset_url }}'>
+    <![endif]-->
+
+
+    <!-- Icons -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ 'favicon.png' | asset_url }}">
+
+    {% include 'head__customers-templates' %}
+    {% include 'head__collections-templates' %}
+    {% include 'head__cart-templates' %}
+
+
+    {% include 'head__3rd-party-apps' %}
+
+    <!-- *********** START Content For Header ************* -->
+    {{ content_for_header }}
+    <!-- *********** END Content For Header ************* -->
+
+    {% if template contains 'collection' or 'page' %}
+    <style>
+      @media only screen and (max-width: 400px) {
+        div#colander .three.columns.thumbnail {
+          width: 47%!important;
+          margin-left: 4px!important
+        }
+      }
+
+      @media only screen and (min-width: 400px) {
+        div#colander .three.columns.thumbnail {
+          width: 30%;
+          margin-left: 5px;
+        }
+      }
+      @media only screen and (max-width: 550px)  {
+        .container.main.content {
+          width: 98%;
+        }
+        .container .twelve.columns {
+          width: 100%;
+        }
+
+        .container .four.columns {
+          width: 100%
+        }
+
+        .sixteen.columns.clearfix.collection_nav {
+          width: 100%
+        }
+
+        .product_listing.three.columns {
+          width: 50%;
+          margin-left: 0px!important;
+          margin-right: 0px!important;
+        }
+
+        div#paginatebelow {
+          width: 100%;
+        }
+
+        .main_product_list_sec .three.columns.product_listing:nth-of-type(3n+1) {
+          clear: none;
+        }
+
+        .main_product_list_sec .three.columns.product_listing:nth-of-type(3n) {
+          clear: none;
+        }
+
+        .twelve .three.columns.product_listing:nth-of-type(2n+1) {
+          clear: left;
+        }
+
+        br.product_clear, .border {
+          display: block;
+        }
+      }
+
+      @media only screen and (min-width: 550px) and  (max-width: 750px) {
+        .product_listing.three.columns {
+          width: 33.3333%;
+          margin-right: 0px;
+          margin-left: 0px;
+        }
+      }
+
+      .product_listing.three.columns:after {
+        border-bottom: 1px dotted #ccc;
+        margin-top: 20px;
+        content: ".";
+        text-indent: 120%!important;
+        white-space: nowrap!important;
+        overflow: hidden!important;
+        display: block;
+        font-size: 0!important;
+        color: transparent;
+        visibility: visible;
+      }
+
+      @media only screen and (min-width: 767px) {
+        .product_listing.three.columns {
+          margin-left: 0px;
+          margin-right: 0px;
+          width: 25%;
+        }
+      }
+    </style>
+    {% endif %}
+
+      </head>
+
+  <body class="{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}">
+    <script type="text/javascript">
+      console.log("-------- search layout ----------");
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W2GQNVS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+    {% include 'facebook-sdk' %}
+
+    {% include 'header-two-tighter' %}
+
+    <div class="toggle_menu nav">
+         <ul class="mobile_menu">
+
+        {% for link in linklists['main-menu'].links %}
+          {% if linklists[link.handle] == empty %}
+            <li {% if link.active %}class="active"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+          {% else %}
+            <li {% if link.active %}class="active"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}" class="toggle"><span>+</span>{{ link.title }}</a>
+              <ul>
+                {% for link in linklists[link.handle].links %}
+                  {% if linklists[link.handle] == empty %}
+                    <li {% if link.active %}class="active"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+                  {% else %}
+                  <li {% if link.active %}class="active"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}" class="toggle"><span>+</span>{{ link.title }}</a>
+                    <ul>
+                      {% for link in linklists[link.handle].links %}
+                        <li {% if link.active %}class="active"{% endif %}><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </li>
+          {% endif %}
+        {% endfor %}
+        {% for link in linklists['footer'].links %}
+          <li>
+            <a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+        {% if shop.customer_accounts_enabled %}
+          {% if customer %}
+            <li>
+              <a href="/account">{{ customer.name }}</a>
+            </li>
+            <li>
+              {{ 'layout.customer.log_out' | t | customer_logout_link }}
+            </li>
+          {% else %}
+            <li>
+              {{ 'layout.customer.log_in' | t | customer_login_link }}
+            </li>
+          {% endif %}
+        {% endif %}
+      </ul>
+    </div>
+
+
+      <div class="fixed_header"></div>
+
+        <!-- template: {{template}} -->
+        <div class="container main content desktop-extend">
+
+      {% if template contains 'list-collections' %}
+        {% include 'collection-listing' %}
+      {% else %}
+        {% unless template contains 'index' or template contains 'cart' or template contains 'collection' or blog.template_suffix =="about" or article.template_suffix == "buyer-guide" or blog.template_suffix == "buyer-guides" %}
+          <div id="breadcrumb">
+            <ol class="breadcrumbsol" itemscope itemtype="http://schema.org/BreadcrumbList">
+              {% if template contains 'product' %}
+                {% if collection %}
+                  <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="/" class="homepage-link" title="Back to the home"><span itemprop="name">Home</span></a>
+                    <meta itemprop="position" content="1" />
+                  </li>
+                  <span class="separator">&rsaquo;</span>
+                  {% if collection.handle %}
+                    {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+                    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/collections/{{ collection.handle }}">
+                      <span itemprop="name">  {{ collection.title }}</span></a>
+                      <meta itemprop="position" content="2" />
+                    </li>
+                  {% endif %}
+                {% else %}
+                  <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="/" class="homepage-link" title="Back to the home"><span itemprop="name">Home</span></a>
+                    <meta itemprop="position" content="1" />
+                  </li>
+                  <span class="separator">&rsaquo;</span>
+                  <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="/collections/{{product.vendor | handleize }}">
+                    <span itemprop="name"> {{product.vendor}}</span></a>
+                    <meta itemprop="position" content="2" />
+                  </li>
+                {% endif %}
+              {% elsif template contains 'article' %}
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                  <a itemprop="item" href="/" class="homepage-link" title="Back to the home"><span itemprop="name">Home</span></a>
+                  <meta itemprop="position" content="1" />
+                </li>
+
+                <span class="separator">&rsaquo;</span>
+
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                  <a itemprop="item" href="/blogs/{{ blog.handle }}">
+                    <span itemprop="name">{{ blog.title }}</span>
+                  </a>
+                  <meta itemprop="position" content="2" />
+                </li>
+
+                <span class="separator">&rsaquo;</span>
+
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                  <span itemprop="name">{{ article.title }}</span>
+                  <meta itemprop="position" content="3" />
+                </li>
+
+              {% elsif template contains 'blog' %}
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                  <a itemprop="item" href="/" class="homepage-link" title="Back to the home"><span itemprop="name">Home</span></a>
+                  <meta itemprop="position" content="1" />
+                </li>
+                <span class="separator">&rsaquo;</span>
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                  <a itemprop="item" href="/blogs/{{ blog.handle }}">
+                    <span itemprop="name">{{ blog.title }}</span>
+                  </a>
+                  <meta itemprop="position" content="2" />
+                </li>
+
+              {% elsif template contains 'page' %}
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                  <a itemprop="item" href="/" class="homepage-link" title="Back to the home"><span itemprop="name">Home</span></a>
+                  <meta itemprop="position" content="1" />
+                </li>
+                <span class="separator">&rsaquo;</span>
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                  <span itemprop="name">{{ page.title }}</span>
+                  <meta itemprop="position" content="2" />
+                </li>
+              {% else %}
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                  <a itemprop="item" href="/" class="homepage-link" title="Back to the home"><span itemprop="name">Home</span></a>
+                  <meta itemprop="position" content="1" />
+                </li>
+                <span class="separator">&rsaquo;</span>
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                  <span itemprop="name">{{ page.title }}</span>
+                  <meta itemprop="position" content="2" />
+                </li>
+              {% endif %}
+            </ol>
+          </div>
+        {% endunless %}
+
+        {{ content_for_layout }}
+      {% endif %}
+
+
+      <div class="clear"></div>
+
+      {% unless template == "cart.new" %}
+        <div class="footer-search-sec">
+          <form class="search_form" action="/pages/search-results">
+            <input type="hidden" name="type" value="product" />
+            <input type="text" name="q" class="search_box footer_search" placeholder="Search..." value="" autocapitalize="off" autocomplete="off" autocorrect="off" />
+          </form>
+          <a href="{{ shop.url }}/pages/brands" class="brand_link">View All Of Our Brands</a>
+        </div>
+
+        {% include 'klaviyo-newsletter' %}
+      {% endunless %}
+    </div> <!-- end container -->
+
+    {% include 'footer-theme', include_authorize_net_seal: true, favourite_toys_linklist: "all-toys" %}
+
+
+      <script type="text/javascript">
+        (function() {
+          var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+          po.src = 'https://apis.google.com/js/plusone.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+      </script>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.async=true;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+<input type="hidden" name="_pc_params" value="{{ shop.permanent_domain }}:{{ customer.id }}" />
+
+
+      <script type="text/javascript">
+  var _learnq = _learnq || [];
+
+  _learnq.push(['account', 'batDZz']);
+
+  (function () {
+  var b = document.createElement('script'); b.type = 'text/javascript'; b.async = true;
+  b.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'a.klaviyo.com/media/js/analytics/analytics.js';
+  var a = document.getElementsByTagName('script')[0]; a.parentNode.insertBefore(b, a);
+  })();
+</script>
+
+
+    <!-- begin olark code -->
+<script data-cfasync="false" type='text/javascript'>/*<![CDATA[*/window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
+f[z]=function(){
+(a.s=a.s||[]).push(arguments)};var a=f[z]._={
+},q=c.methods.length;while(q--){(function(n){f[z][n]=function(){
+f[z]("call",n,arguments)}})(c.methods[q])}a.l=c.loader;a.i=nt;a.p={
+0:+new Date};a.P=function(u){
+a.p[u]=new Date-a.p[0]};function s(){
+a.P(r);f[z](r)}f.addEventListener?f.addEventListener(r,s,false):f.attachEvent("on"+r,s);var ld=function(){function p(hd){
+hd="head";return["<",hd,"></",hd,"><",i,' onl' + 'oad="var d=',g,";d.getElementsByTagName('head')[0].",j,"(d.",h,"('script')).",k,"='",l,"//",a.l,"'",'"',"></",i,">"].join("")}var i="body",m=d[i];if(!m){
+return setTimeout(ld,100)}a.P(1);var j="appendChild",h="createElement",k="src",n=d[h]("div"),v=n[j](d[h](z)),b=d[h]("iframe"),g="document",e="domain",o;n.style.display="none";m.insertBefore(n,m.firstChild).id=z;b.frameBorder="0";b.id=z+"-loader";if(/MSIE[ ]+6/.test(navigator.userAgent)){
+b.src="javascript:false"}b.allowTransparency="true";v[j](b);try{
+b.contentWindow[g].open()}catch(w){
+c[e]=d[e];o="javascript:var d="+g+".open();d.domain='"+d.domain+"';";b[k]=o+"void(0);"}try{
+var t=b.contentWindow[g];t.write(p());t.close()}catch(x){
+b[k]=o+'d.write("'+p().replace(/"/g,String.fromCharCode(92)+'"')+'");d.close();'}a.P(2)};ld()};nt()})({
+loader: "static.olark.com/jsclient/loader0.js",name:"olark",methods:["configure","extend","declare","identify"]});
+/* custom configuration goes here (www.olark.com/documentation) */
+olark.identify('9980-493-10-8258');/*]]>*/</script><noscript><a href="https://www.olark.com/site/9980-493-10-8258/contact" title="Contact us" target="_blank">Questions? Feedback?</a> powered by <a href="http://www.olark.com?welcome" title="Olark live chat software">Olark live chat software</a></noscript>
+<!-- end olark code -->
+
+
+
+
+<link href="https://limespot.azureedge.net/storefront/2.0.0/css/recommendations.min.css" rel="stylesheet" />
+
+{% include 'limespot-custom-css' %}
+
+<!-- Google Code for Remarketing Tag -->
+<!-- ------------------------------------------------
+Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+------------------------------------------------- -->
+
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 965807838;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/965807838/?guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+
+
+				<script>
+					//littledata script
+					LittledataLayer = {};
+					(function(){
+				    	{% if template == "collection" %}
+				            var collectionNames = [];
+				            {% if collection.handle == "all" %}
+				            	var collections = {{collections | json}};
+				            {% endif %}
+				            {% if collection.handle != "all" %}
+				            	var collections = [{{collection | json}}];
+				            {% endif %}
+				            collections.forEach((c)=>{
+				            	collectionNames.push(c.handle);
+				            });
+						  	var collectionProducts = {{ collection.products | json }} || [];
+						{% endif %}
+				        {% if template == "product" %}
+				          	var product = {{ product | json }} || {};
+				        {% endif %}
+				        {% if template == "search" %}
+				        	var searchResults = {{search.results | json}} || {};
+				        {% endif %}
+						LittledataLayer.ecommerce = {
+					     	'currencyCode' : '{{shop.currency}}',
+			                'impressions' : []
+					    }
+				        {% if template == "collection" %}
+				        	collectionNames.forEach((c)=>{
+				              	var pos = 1;
+				              	collectionProducts.forEach((p)=>{
+				                	LittledataLayer.ecommerce.impressions.push({
+				               			id: p.id,
+				                		name: p.title,
+				                  		price: (p.price/100).toFixed(0),
+				                  		brand: p.vendor,
+				                  		category: p.type,
+				                  		position : pos++,
+				                  		variants : p.variants.map(function(variant) { return { id: variant.id , sku : variant.sku } }),
+				                  		list : location.pathname,
+				                  		handle : p.handle
+				                	})
+				            	})
+							});
+				        {% endif %}
+				        {% if template == "product" %}
+							LittledataLayer.ecommerce.impressions.push({
+						    	id: product.id,
+						    	name: product.title,
+						      	price: (product.price/100).toFixed(0),
+						      	brand: product.vendor,
+						      	category: product.type,
+						      	variants : product.variants.map(function(variant) { return { id: variant.id , sku : variant.sku } }),
+						      	quantity : 1
+							})
+
+						{% endif %}
+
+						LittledataLayer.ecommerce.impressions = getUniqueProducts(LittledataLayer.ecommerce.impressions)
+
+						function getUniqueProducts(array){
+						   var u = {}, a = [];
+						   for(var i = 0, l = array.length; i < l; ++i){
+						      if(u.hasOwnProperty(array[i].id)) {
+						         continue;
+						      }
+						      a.push(array[i]);
+						      u[array[i].id] = 1;
+						   }
+						   return a;
+						}
+					})()
+				</script>
+			</body>
+</html>
+
+<!--layout/search.liquid -->
+
+<style>
+  .filter-group.filter-group-material{ display: none; }
+
+.filter-group.filter-group-vendor{ display: none; }
+.filter-group.filter-group-toys { display: none; }
+.filter-group.filter-group-rings { display: none; }
+.filter-group.filter-group-plugs { display: none; }
+.filter-group.filter-group-men { display: none; }
+.filter-group.filter-group-women { display: none; }
+.filter-group.filter-group-couplestoy { display: none; }
+.filter-group.filter-group-dildos { display: none; }
+.filter-group.filter-group-vibrators { display: none; }
+.filter-group.filter-group-harnes { display: none; }
+.filter-group.filter-group-gear { display: none; }
+.filter-group.filter-group-toy { display: none; }
+.filter-group.filter-group-essentials { display: none; }
+
+
+
+  div#breadcrumb {
+margin-left: 10px;
+}
+
+  div#breadcrumb a:hover {
+text-decoration: underline;
+}
+
+
+  div#breadcrumb a:visited {
+color: #cc3366;
+}
+
+
+
+  @media only screen and (max-width: 479px) {
+input.search_box {
+width: 90% !important;
+
+}
+  }
+
+</style>

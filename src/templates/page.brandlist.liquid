@@ -1,0 +1,44 @@
+{% assign counter = 0 %}
+{% for vendor in shop.vendors %}
+  {% assign counter = counter | plus: 1 %}
+{% endfor %}
+
+{% assign counter_divided_by_3 = counter | divided_by: 3 | floor %}
+<div class="sixteen columns clearfix collection_nav">
+
+</div>
+
+{% include 'sidebar-general', mobile: false, hide_sections: 'vibrators' %}
+<div class="twelve columns page">
+   <h1 class="collection_title">
+    {{ page.title }}
+
+  </h1>
+  <hr>
+{{ page.content }}
+
+  <ul class="vendor-list mobile-fblock-grid-2 tablet-fblock-grid-4">
+    {% for product_vendor in shop.vendors %}
+      {% assign its_a_match = false %}
+      {% capture my_collection_handle %} {{ product_vendor | handleize | strip | escape  }} {% endcapture %}
+      {% capture my_collection_img %} {{ collection | img_url: 'small' }} {% endcapture %}
+      {% assign my_collection_handle_stripped = my_collection_handle | strip | escape %}
+
+      {% for collection in collections %}
+        {% if my_collection_handle_stripped == collection.handle %}
+          <li>
+            <a href="/collections/{{ product_vendor | handleize }}">
+              <img src="{{ collection | img_url: 'medium' }}" class="brand-icon" alt="{{ collection.title | escape }}"/>
+              <p class="brand-title">{{ product_vendor }}</p>
+            </a>
+          </li>
+          {% assign its_a_match = true %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </ul>
+</div>
+
+
+
+{% include 'sidebar-general', mobile: true, hide_sections: 'vibrators' %}

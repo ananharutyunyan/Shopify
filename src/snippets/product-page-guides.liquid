@@ -1,0 +1,63 @@
+<!-- snippets/product-page-guides.liquid -->
+<br>
+
+<h4 style="margin-bottom:10px;">Need Help Shopping? Check Out Our Buyer's Guides...</h4>
+<div class="breadcrumbs" style="margin-bottom:10px;">
+  <a href="/blogs/sex-toy-guides" class="homepage-link" title="Back to the home">Sex Toys Guides</a> <span class="separator">&rsaquo;</span>
+  <span class="page-title"><a href="/blogs/sex-toy-guides" class="homepage-link">Click Here To View All Buying Guides</a></span>
+</div>
+
+<div class="breadcrumbs" style="margin-bottom:10px;">
+  <a href="/blogs/sex-toy-guides" class="homepage-link" title="Back to the home">Sex Toys Guides</a> <span class="separator">&rsaquo;</span>
+
+  {% if product.tags contains "vibrators" %}
+    <span class="page-title"><a href="https://www.simplipleasure.com/blogs/vibrator-buying-guides" class="homepage-link">Vibrator Buying Guides</a></span>
+    <span class="separator">&rsaquo;</span>
+    <span class="page-title"><a href="https://www.simplipleasure.com/blogs/vibrator-buying-guides/guide-to-buying-vibrators" class="homepage-link">Our Big Guide To Buying The Perfect Vibrator</a></span>
+
+  {% elsif product.tags contains 'vibrators-clitoral' %}
+
+    <span class="page-title"><a href="https://www.simplipleasure.com/blogs/vibrator-buying-guides" class="homepage-link">Vibrator Buying Guides</a></span>
+    <span class="separator">&rsaquo;</span>
+    <span class="page-title"><a href="https://www.simplipleasure.com/blogs/vibrator-buying-guides/clitoral-vibrator-buying-guide" class="homepage-link">Your Guide To Buying The Best Clitoral Vibrator</a></span>
+
+  {% elsif product.tags contains 'vibrators-anal' %}
+
+    <span class="page-title"><a href="https://www.simplipleasure.com/blogs/vibrator-buying-guides" class="homepage-link">Vibrator Buying Guides</a></span>
+    <span class="separator">&rsaquo;</span>
+    <span class="page-title"><a href="https://www.simplipleasure.com/blogs/vibrator-buying-guides/how-to-choose-the-best-anal-vibrator" class="homepage-link">Choosing The Best Anal Vibrator</a></span>
+
+  {% elsif product.tags contains 'vibrators-luxury' %}
+
+    <span class="page-title"><a href="https://www.simplipleasure.com/blogs/vibrator-buying-guides" class="homepage-link">Vibrator Buying Guides</a></span>
+    <span class="separator">&rsaquo;</span>
+    <span class="page-title"><a href="https://www.simplipleasure.com/blogs/vibrator-buying-guides/your-guide-to-luxury-vibrators" class="homepage-link">Your Guide To Luxury Vibrators</a></span>
+
+  {% elsif product.tags contains 'vibrators-wand' %}
+
+  <div class="breadcrumbs" style="margin-bottom:10px;">
+    <span class="page-title"><a href="https://www.simplipleasure.com/blogs/vibrator-buying-guides" class="homepage-link">Vibrator Buying Guides</a></span>
+    <span class="separator">&rsaquo;</span>
+    <span class="page-title"><a href="https://www.simplipleasure.com/blogs/vibrator-buying-guides/which-magic-wand-vibrator-is-the-best" class="homepage-link">Which Magic Wand Vibrator Is The Best?</a></span>
+
+  {% elsif product.tags contains 'vibrators-bullet' %}
+
+  <div class="breadcrumbs" style="margin-bottom:10px;">
+    <span class="page-title"><a href="https://www.simplipleasure.com/blogs/vibrator-buying-guides" class="homepage-link">Vibrator Buying Guides</a></span>
+    <span class="separator">&rsaquo;</span>
+    <span class="page-title"><a href="https://www.simplipleasure.com/blogs/vibrator-buying-guides/bullet-vibrator-buying-guide" class="homepage-link">Bullet Vibrator Buying Guide</a></span>
+
+  {% elsif product.tags contains "butt-plugs" %}
+    <span class="page-title"><a href="https://www.simplipleasure.com/blogs/butt-plug-buying-guides" class="homepage-link">Butt Plug Buying Guides</a></span>
+    <span class="separator">&rsaquo;</span>
+    <span class="page-title"><a href="https://www.simplipleasure.com/blogs/butt-plug-buying-guides/general-butt-plugs-guide" class="homepage-link">Beginners Guide To Buying The Best Butt Plug</a></span>
+
+  {% elsif product.tags contains "dildos" %}
+    <span class="page-title"><a href="https://www.simplipleasure.com/blogs/dildo-buying-guides" class="homepage-link">Dildo Buying Guides</a></span>
+    <span class="separator">&rsaquo;</span>
+    <span class="page-title"><a href="https://www.simplipleasure.com/blogs/dildo-buying-guides/general-dildos-buying-guide" class="homepage-link">How To Buy The Right Dildo - Beginners Guide</a></span>
+
+  {% endif %}
+</div>
+<br>
+

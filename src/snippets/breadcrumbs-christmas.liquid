@@ -1,0 +1,32 @@
+<div id="breadcrumbs">
+  <ol class="breadcrumbsol" itemscope itemtype="http://schema.org/BreadcrumbList">
+  <li itemprop="itemListElement" itemscope
+      itemtype="http://schema.org/ListItem">
+    <a itemprop="item" href="/" class="homepage-link">
+        <span itemprop="name">Home</span></a>
+    <meta itemprop="position" content="1" />
+  </li>
+
+  <span class="separator">&rsaquo;</span>
+
+   <li itemprop="itemListElement" itemscope
+      itemtype="http://schema.org/ListItem">
+    <a itemprop="item" href="/collections/best-sex-toys-for-christmas">
+      <span itemprop="name">Best Sex Toys For Christmas</span></a>
+    <meta itemprop="position" content="2" />
+  </li>
+
+    <span class="separator">&rsaquo;</span>
+
+    <li itemprop="itemListElement" itemscope
+      itemtype="http://schema.org/ListItem">
+    <p itemprop="item">
+      <span itemprop="name">
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        {{ collection.title }}
+ </span></p>
+    <meta itemprop="position" content="3" />
+  </li>
+
+  </ol>
+</div>

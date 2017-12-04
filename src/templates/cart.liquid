@@ -1,0 +1,217 @@
+<!--templates/cart.liquid -->
+
+{% assign scripttotal = 0 %}
+{% for item in cart.items %}
+  {% if item.variant.compare_at_price > item.variant.price %}
+    {% capture scriptsave %}{{ item.variant.compare_at_price | minus: item.variant.price }} {% endcapture %}
+    {% assign scripttotal = scripttotal | plus: scriptsave %}
+  {% endif %}
+
+{% endfor %}
+{% assign cartsubtotal = 0 %}
+{% for item in cart.items %}
+  {% if item.variant.compare_at_price > item.variant.price %}
+    {% capture savings %}
+      {{ item.variant.compare_at_price | minus: item.variant.price | times: item.quantity }}
+    {% endcapture %}
+    {% assign cartsubtotal = cartsubtotal | plus: savings %}
+  {% endif %}
+{% endfor %}
+
+
+{% if cart.item_count == 0 %}
+  <div class="sixteen columns">
+    <div class="section clearfix">
+      <p class="quote">{{ 'cart.general.continue_browsing_html' | t }}</p>
+      <br class="clear" />
+      <br class="clear" />
+    </div>
+  </div>
+{% else %}
+
+<div>
+
+  {% include 'breadcrumbs-cart' %}
+  {% include 'sidebar-general', mobile: false, hide_sections: 'vibrators' %}
+
+  <div class="twelve columns">
+    <form action="/cart" method="post" class="cart_form c-cart__form">
+      <div class="clearfix">
+
+        <div class="c-cart__top-payment-section">
+          <button type="submit" class="cart_button2 c-cart__checkout-btn" id="checkout" name="checkout">
+            Proceed to Checkout&nbsp;<i class="fa fa-arrow-circle-right fa-lg"></i>
+          </button>
+        </div>
+
+        <h2 class="c-cart__contains-header">
+          Your Cart Contains
+          <span class="u-color--pink">
+            {{ cart.item_count }} {{ cart.item_count | pluralize: 'Item', 'Items' }}
+          </span>
+        </h2>
+      </div>
+
+      <hr>
+
+      <ul class="o-list">
+        {% for item in cart.items %}
+          <li class="c-cart-item">
+            <div class="c-cart-item-section c-cart-item-section__thumb">
+              <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_image">
+                <img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}" />
+              </a>
+            </div>
+
+
+            <div class="c-cart-item-section c-cart-item-section__desc">
+              <a href="{{ item.url }}" title="{{ item.title | escape }}">
+                {{ item.title | escape | remove: 'Default' | replace: '2+', '( Special Offer )' | replace: '3+', '( Special Offer )'  }}
+              </a>
+              {% if item.message %}
+                <p class="u-text--small u-color--pink">
+                  {{ item.message }}
+                </p>
+              {% endif %}
+
+            </div>
+
+            <div class="c-cart-item-section c-cart-item-section__item-price">
+              {{ item.price | money }}
+              {% if item.total_discount > 0 %}
+                <s>{{ item.variant.price | money }}</s>
+              {% elsif item.variant.compare_at_price > item.variant.price %}
+                <s>{{ item.variant.compare_at_price | money }}</s>
+              {% endif %}
+            </div>
+
+            <div class="c-cart-item-section c-cart-item-section__remove">
+              <a href="/cart/change?line={{ forloop.index }}&quantity=0" onclick="" title="{{ 'cart.general.remove' | t }}" class="c-cart-item__minimal-btn">
+                Remove
+              </a>
+            </div>
+
+            <div class="c-cart-item-section c-cart-item-section__quantity" id="quantity_{{ forloop.index }}">
+              <input class="c-cart-item__minimal-btn c-cart-item__update-qty-btn" type="submit" value="Update Qty">
+              <input type="number" min="0" size="2" class="c-cart-item__quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
+            </div>
+
+            <div class="c-cart-item-section c-cart-item-section__ext-price">
+              {{ item.line_price | money }}
+              {% if item.total_discount > 0 %}
+                <s>{{ item.original_line_price | money }}</s>
+              {% elsif item.variant.compare_at_price > item.variant.price%}
+                <s>{{ item.variant.compare_at_price | times: item.quantity | money }}</s>
+              {% endif %}
+              {% if item.total_discount > 0 or item.variant.compare_at_price > item.variant.price %}
+                <ul class="c-cart-item__price-details">
+                  <li>
+                    Retail Price:
+                    {% if item.variant.compare_at_price > item.variant.price and item.total_discount == 0  %}
+                      {{ item.variant.compare_at_price | times: item.quantity | money }}
+                    {% elsif item.total_discount > 0 and item.variant.compare_at_price > item.variant.price %}
+                      {{ item.variant.compare_at_price | times: item.quantity | money }}
+                    {% elsif item.total_discount > 0 %}
+                      {{ item.original_line_price | money }}
+                    {% endif %}
+                  </li>
+                  {% if item.variant.compare_at_price > item.variant.price %}
+                    <li>
+                      Sale Price: {{ item.original_price | money }}
+                    </li>
+                  {% endif %}
+                  <li class="u-text--small u-color--pink">
+                    You Save:
+                    {% if item.variant.compare_at_price > item.variant.price %}
+                      {{ item.variant.compare_at_price | minus: item.variant.price | money }}
+                    {% else %}
+                      {{ item.total_discount | money }}
+                    {% endif %}
+                  </li>
+                </ul>
+              {% endif %}
+            </div>
+
+
+
+          </li>
+        {% endfor %}
+      </ul>
+
+      <ul class="o-list c-cart-summary">
+        <li class="c-cart-summary__item">
+          <span>Subtotal</span>
+          <span>
+            {{ cartsubtotal | plus: cart.total_price | plus: cart.total_discount | money }}
+          </span>
+        </li>
+
+        {% if cart.total_discount > 0  or cartsubtotal > 0 %}
+          <li class="c-cart-summary__item u-color--pink">
+            <span>Total Savings</span>
+            <span>
+              {{ cart.total_discount | plus: cartsubtotal | money }}
+              <p class="c-cart-summary__savings u-color--text-gray">off your order!</p>
+            </span>
+          </li>
+        {% endif %}
+
+        {% if cart.total_price >= 6000 %}
+          <li class="c-cart-summary__item u-color--green">
+            <span>Standard Shipping</span>
+            <span>FREE</span>
+          </li>
+        {% endif %}
+
+        <li class="c-cart-summary__item">
+          <span>Order total including taxes</span>
+          <span>
+            {{ cart.total_price | money_without_currency }}
+            <span class="subdued">{{shop.currency}}</span>
+          </span>
+        </li>
+      </ul>
+
+      {% include 'cart-payment-form', includeBadges: true %}
+
+      <div class="c-cart__faq">
+        <h3>Shipping FAQ</h3>
+        <ul class="o-list o-list--bullet">
+          <li>
+            Same business day dispatch &amp; free tracking updates on ALL orders!
+          </li>
+          <li>
+            Tracked Priority Shipping is FREE for orders over $59.99
+          </li>
+          <li>
+            Overnight express shipping is available (Contiguous US only, on orders placed before 2pm EST)
+          </li>
+          <li>
+            International shipping available
+          </li>
+        </ul>
+      </div>
+      <div class="c-cart__faq">
+        <h3>Payment FAQ</h3>
+        <ul class="o-list o-list--bullet">
+          <li>
+            We accept all major credit and debit cards, as well as PayPal
+          </li>
+          <li>
+            If you're not happy with the product you ordered, or it has a defect, we will make things right, no questions asked within a 60 day period.
+          </li>
+          <li>
+            Just start a chat below, or call us at 1-800-918-6308 and mention our 100% Satisfaction Guarantee, and we will give you our best options in order to get you satisfied in the most effective way possible (a refund, store credit, an exchange, or a warranty replacement)
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+{% endif %}
+
+
+
+<!-- END: templates/cart.liquid -->

@@ -1,0 +1,70 @@
+{
+  "name": "blank-pipeline",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {},
+  "scripts": {
+    "serve": "shopify-pipeline serve",
+    "watch": "shopify-pipeline build --preview",
+    "build": "shopify-pipeline build",
+    "deploy": "shopify-pipeline build --deploy",
+    "test": "shopify-pipeline test --coverage",
+    "start": "node ./serve.js",
+    "build": "node ./build.js",
+    "webpack": "webpack-dev-server --hot"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "dependencies": {
+    "@fancyapps/fancybox": "^3.2.5",
+    "babel-loader": "^7.1.2",
+    "bourbon": "^4.3.4",
+    "chalk": "^2.3.0",
+    "concurrently": "^3.5.1",
+    "elevatezoom": "github:lastobelus/elevatezoom",
+    "express": "^4.16.2",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "ez-plus": "^1.2.1",
+    "fs": "0.0.1-security",
+    "hmr-loader": "^1.0.5",
+    "html-webpack-plugin": "^2.30.1",
+    "imports-loader": "^0.7.1",
+    "jest-cli": "^21.2.1",
+    "jquery": "^3.2.1",
+    "js-cookie": "^2.1.4",
+    "minimist": "^1.2.0",
+    "node-bourbon": "^4.2.8",
+    "number-to-words": "^1.2.3",
+    "path": "^0.12.7",
+    "paths": "^0.1.1",
+    "react-dev-utils": "^4.2.1",
+    "sass-loader": "^6.0.6",
+    "serve-favicon": "^2.4.5",
+    "shopify-pipeline": "^0.2.3",
+    "slick-carousel": "^1.8.1",
+    "webpack": "^3.8.1",
+    "webpack-dev-middleware": "^1.12.1",
+    "webpack-hot-middleware": "^2.21.0",
+    "webpack-merge": "^4.1.1",
+    "webpack-svgstore-plugin": "^4.0.1",
+    "yamljs": "^0.3.0"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/8834130/shopify-theme.git"
+  },
+  "bin": {
+    "web": "./cli.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/8834130/shopify-theme/issues"
+  },
+  "homepage": "https://github.com/8834130/shopify-theme#readme",
+  "description": ""
+}

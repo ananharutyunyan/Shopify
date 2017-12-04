@@ -1,0 +1,35 @@
+/*
+
+Media Query examples for the Sass Grid
+
+screen: @media #{$screen} */
+@media only screen {}
+/* Mobile and up: @media #{$mobile-up} */
+@media only screen {}
+/* Mobile Only: @media #{$mobile-only} */
+@media only screen and (max-width: 479px) {}
+/* Tablet-small and Up: @media #{$tablet-small-up} */
+@media only screen and (min-width:480px) {}
+/* Tablet-small Only: @media #{$tablet-small-only} */
+@media only screen and (min-width:480px) and (max-width:599px) {}
+/* Tablet-large and Up: @media #{$tablet-large-up} */
+@media only screen and (min-width:600px) {}
+/* Tablet-large Only: @media #{$tablet-large-only} */
+@media only screen and (min-width:600px) and (max-width:767px) {}
+/* Tablet Only: @media #{$tablet-only} */
+@media only screen and (min-width:480px) and (max-width:767px) {}
+/* Desktop-small and Up: @media #{$desktop-small-up} */
+@media only screen and (min-width:768px) {}
+/* Desktop-small Only: @media #{$desktop-small-only} */
+@media only screen and (min-width:768px) and (max-width:959px) {}
+/* Desktop and Up: @media #{$desktop-up} */
+@media only screen and (min-width:960px) {}
+/* Desktop Only: @media #{$desktop-only} */
+@media only screen and (min-width:960px) and (max-width:1151px) {}
+/* Desktop Overhang Only: @media #{$desktop-overhang-only} */
+@media only screen and (min-width:980px) and (max-width:1151px) {}
+/* Desktop-wide and Up: @media #{$desktop-wide-up} */
+@media only screen and (min-width:1152px) {}
+/* Desktop-wide Only: @media #{$desktop-wide-only} */
+@media only screen and (min-width:1152px) and (max-width:99999999px) {}
+

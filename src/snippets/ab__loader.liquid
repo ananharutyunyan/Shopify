@@ -1,0 +1,97 @@
+<!-- snippets/ab__loader.liquid -->
+
+{% if loadText %}
+  {% assign _loadText = loadText %}
+{% else %}
+  {% assign _loadText = "Loading&hellip;" %}
+{% endif %}
+
+{% if variations %}
+  {% assign _num_variations = variations | minus: 1 %}
+{% else %}
+  {% assign _num_variations = 1 %}
+{% endif %}
+
+
+{% for _variation in (0.._num_variations) %}
+  {% include 'ab__variation', testName: testName, variation: _variation, snippetName: snippetName %}
+{% endfor %}
+
+{% unless showLoader == false %}
+  <div class="ab__loader" data-ab-test="{{testName}}">
+    <i class="fa fa-spinner fa-spin fa-fw"></i>
+    {{ _loadText }}
+  </div>
+{% endunless %}
+
+
+{% if theme.name contains "dev theme" %}
+  <!-- setting isDevTheme true -->
+  {% assign isDevTheme = true %}
+{% else %}
+  {% assign isDevTheme = false %}
+{% endif %}
+
+
+{% if debug and isDevTheme %}
+  <h3>{{testName}} (convert experience id: {{convertId}})</h3>
+  <ul class="ab__variation-chooser">
+    {% for _variation in (0.._num_variations) %}
+      <li data-variation="{{_variation}}">Variation {{_variation}}</li>
+    {% endfor %}
+  </ul>
+  <script>
+    console.log('theme.name: ', '{{theme.name}}')
+    console.log('debug: ', '{{debug}}')
+    console.log("debug and isDevTheme -- setting up variation chooser")
+    $(function() {
+      $('.ab__variation-chooser li').on('click', function() {
+        var $li = $(this)
+        $('.ab__variation-chooser li').removeClass('active')
+        $li.addClass('active')
+        var variation = $li.data('variation')
+        var testSelector = '.ab__variation[data-ab-test={{testName}}]'
+        $('.ab__loader[data-ab-test={{testName}}]').hide()
+        $(testSelector).hide()
+        var variationSelector = testSelector + '[data-ab-variation='+variation+']'
+        $(variationSelector).show()
+      })
+    });
+  </script>
+  <style>
+    .ab__variation-chooser li {
+      display: inline-block;
+      cursor: pointer;
+      padding: 5px;
+      border: 1px dotted gray;
+      background: #eee;
+      margin: 2px;
+    }
+    .ab__variation-chooser li.active {
+      background: #ccc;
+    }
+  </style>
+{% else %}
+  <script>
+    console.log("registering loader")
+    window.registerABLoader('{{testName}}', '{{convertId}}')
+  </script>
+{% endif %}
+
+{% comment %}
+
+  in convert code editor for each variation:
+
+ var testName = 'ab4'
+  var variation = 0
+
+  if(convert._$('.footer').length > 0) {
+	  var numVariationElms = $('.ab__variation[data-ab-test='+testName+'][data-ab-variation='+variation+']').length
+	  convert._$('.ab__variation[data-ab-test='+testName+'][data-ab-variation='+variation+']').show()
+	  console.log('2341 showing ' + convert.$('.ab__variation[data-ab-test='+testName+'][data-ab-variation='+variation+']').length + ' elms', $('.ab__variation[data-ab-test='+testName+'][data-ab-variation='+variation+']').length)
+	  convert._$('.ab__variation[data-ab-test='+testName+']').not('[data-ab-variation='+variation+']').hide()
+	//  convert.$('.ab__loader[data-ab-test='+testName+']').hide()
+  }
+
+
+{% endcomment %}

@@ -1,0 +1,30 @@
+<div class="sidebar four columns">
+ <h4 class="toggle"><span>+</span>All Male Sex Toys</h4>
+  <ul class="blog_list toggle_list">
+      {% for link in linklists.him.links %}
+        <li>
+          <a {% if link.active %}class="active"{% endif %} href="{{ link.url }}" title="{{ link.title | escape }}">{{ link.title }}</a>
+          
+          {% if linklists[link.handle] != empty %}
+            {% assign display_sublinks = false %}
+          
+            {% for link in linklists[link.handle].links %}
+              {% if link.active %}
+                {% assign display_sublinks = true %}
+              {% endif %}
+            {% endfor %}
+
+            {% if display_sublinks or link.active %}
+              <ul>
+              {% for link in linklists[link.handle].links %}
+                <li>
+                  <a {% if link.active %}class="active"{% endif %} href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+</div>

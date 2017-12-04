@@ -1,0 +1,70 @@
+<!-- snippets/collection__template.liquid collection: {{collection.handle}}  collection_parent: {{collection.metafields.LOC.collection_parent}} -->
+
+{% if page_size %}
+  {% assign _page_size = page_size %}
+{% else %}
+  {% assign _page_size = 48 %}
+{% endif %}
+{% paginate collection.products by _page_size %}
+
+{% include 'breadcrumbs-new' %}
+
+{% include 'sidebar-collection'%}
+
+<div class="twelve columns">
+
+  {% include 'collection-title', viz: 'show-for-desktop', toggle: false %}
+  <hr>
+
+  {% unless current_tags %}
+    {% if collection.handle == "male-toys-masturbators" %}
+      {% include 'masturbator-lp' %}
+    {% endif %}
+  {% endunless %}
+
+  {% include 'collection-matrix' %}
+
+  {% if current_tags %}
+    <div class="filter-group">
+      <strong>Current Tags:</strong>
+      <span class="clear2">
+        {% for tag in collection.all_tags %}
+          {% if current_tags contains tag %}
+            {% if tag == 'sale' %}
+              <span class="filter-clear2">{{ tag | link_to_remove_tag: tag }}</span>
+            {% else %}
+              {% assign tag_collection = collections[tag] %}
+              <span class="filter-clear2">{{ tag_collection.title | link_to_remove_tag: tag }}</span>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        <span class="filter-clear3"><a href="{{ collection.url }}">Clear All</a></span>
+      </span>
+    </div>
+    <h4 style="margin-bottom:10px;"> </h4>
+  {% endif %}
+
+  {% include 'sort-and-paginate' %}
+
+  {% if collection.products.size == 0 %}
+    <div class="center">
+      <div class="section clearfix">
+        <p class="quote">{{ 'collections.general.no_matches' | t }}</p>
+      </div>
+    </div>
+  {% else %}
+    <div class="main_product_list_sec">
+      {% assign products = collection.products %}
+      {% assign products_per_row = 4 %}
+
+      {% include 'product-loop' %}
+    </div>
+  {% endif %}
+</div>
+
+{% include 'pagination' with 'below' %}
+{% endpaginate %}
+
+{% include 'sidebar-collection', show_filters: false %}
+
+<!-- END: snippets/collection__template.liquid -->

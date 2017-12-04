@@ -1,0 +1,24 @@
+{% for product in bundle_collection limit:bundle_num_items %}
+  <li>
+    <label>
+      <input type="checkbox"
+        id="product-{{ product.variants.first.id }}"
+        name="id[]"
+        value="{{ product.variants.first.id }}"
+        class="bundle-select"
+        data-price="{{  product.price_max }}"
+        data-bundle-input-product-id="{{product.id}}"
+        data-id="{% if product.price < product.compare_at_price_min %}{{ product.compare_at_price_min | money }}{% else '0' %}{% endif %}"
+      />
+      <span>
+        {{ product.title }}
+        <span class="upsellprice">
+          {% include 'shappify-qb-min-price' with product %}
+          <span class="was_price-1">
+            {% if product.price < product.compare_at_price_min %}{{ product.compare_at_price_min | money }}{% endif %}
+          </span>
+        </span>
+      </span>
+    </label>
+  </li>
+{% endfor %}

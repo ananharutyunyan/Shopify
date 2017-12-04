@@ -1,0 +1,945 @@
+<!-- templates/page.top-10.liquid -->
+
+<link rel="stylesheet" type="text/css" href='{{ "new-top-10.css" | asset_url }}'>
+<div class="sixteen columns clearfix collection_nav">
+  {% include 'breadcrumbs' %}
+</div>
+
+{% if page.handle == 'top-10-vibrators' %}
+  <div class="sixteen columns hide-for-desktop"></div>
+{% elsif page.handle == 'top-10-dildos' %}
+  <div class="sixteen columns hide-for-desktop"></div>
+{% elsif page.handle == 'top-10-butt-plugs' %}
+  <div class="sixteen columns hide-for-desktop"></div>
+{% elsif page.handle == 'top-10-cock-rings' %}
+  <div class="sixteen columns hide-for-desktop"></div>
+{% elsif page.handle == 'top-10-bondage-toys' %}
+  <div class="sixteen columns hide-for-desktop"></div>
+{% elsif page.handle == 'top-10-anal-sex-toys' %}
+  <div class="sixteen columns hide-for-desktop"></div>
+{% elsif page.handle == 'top-10-strap-ons' %}
+  <div class="sixteen columns hide-for-desktop">
+    <div align="center"> <img src=""></div><hr>
+  </div>
+{% endif %}
+
+{% include 'sidebar-general', hide_sections: 'vibrators' %}
+
+<div class="twelve columns">
+  {% if page.handle == 'top-10-vibrators' %}
+    <div class="mobile only" align="center"></div>
+    <hr>
+    <br>
+    {% for product in collections.vibrators.products limit: 10 %}
+      <div class="section product_section clearfix" id="product-{{ product.id }}">
+        <h2 class="top10">#{{ forloop.index }} {{ product.title }}</h2>
+        <div class="six columns alpha">
+    <div class="product__top-10-thumb">
+      <img src="{{ product.featured_image | product_img_url: 'large', format: 'pjpg' }}">
+    </div>
+        </div>
+        <div class="six columns omega">
+          <p class="modal_price">
+            <span style="font-size: 1.2em;">Only:</span> <span itemprop="price" class="current_price">
+              {% include 'shappify-bdl-min-price' with product %}
+            </span>
+            <span class="was_price">
+              {% if product.price < product.compare_at_price_max %}
+                {{ product.compare_at_price | money }}
+              {% endif %}
+            </span>
+          </p>
+          {% if product.available %}
+            <form action="" data-id="{{ product.id }}" data-handle="{{ product.handle }}" method="post" class="clearfix product_form main_prod_form_{{ forloop.index }}" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}"  id="product-form-{{ product.id }}">
+            <label for="quantity">Quantity:</label>
+    <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" />
+    {% if product.options.size > 1 %}
+      <div class="select">
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% elsif product.options.size == 1 and (shappify_bdl_options_count > 1 or product.options[0] != "Title") %}
+      <div class="select">
+        <label>{{ product.options[0] }}:</label>
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% else %}
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/>
+    {% endif %}
+
+    <div class="accordion" id="section1">Read The Details<span></span></div>
+    <div class="container2">
+<div class="content">
+  {{ product.description }}
+</div></div>
+    <div class="purchase clearfix">
+
+      <input type="submit" name="add" value="Add To Cart" class="action_button add_to_cart" data-counter="{{ forloop.index }}"/>
+    </div>
+
+  </form>
+    <a class="buttoncontinue" href="{{ product.url }}?top-10-vibrators">View Product</a>
+   </div>
+
+  {% if shappify_bdl_options_count > 1 or product.variants.size > 1 %}
+    <script type="text/javascript">
+      // <![CDATA[
+        $(function() {
+          $product = $('#product-' + {{ product.id }});
+          if($('.single-option-selector', $product).length == 0) {
+            new Shopify.OptionSelectors("product-select-{{ product.id }}", { product: {{ product | json }}, onVariantSelected: SP.selectCallback });
+
+            {% if product.available %}
+              {% assign found_one_in_stock = false %}
+              {% for variant in product.variants %}
+              {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+                {% if variant.available and found_one_in_stock == false %}
+                  {% assign found_one_in_stock = true %}
+                  {% for option in product.options %}
+                    $('.single-option-selector:eq(' + {{ forloop.index0 }} + ')', $product).val({{ variant.options[forloop.index0] | json }}).trigger('change');
+                  {% endfor %}
+                {% endif %}
+            {% endif %}  {% endfor %}
+            {% endif %}
+          }
+        });
+      // ]]>
+    </script>
+  {% endif %}
+  {% endif %}
+
+
+  </div>
+
+  {% unless forloop.last %}
+  <hr>
+  {% endunless %}
+  {% endfor %}
+
+
+
+       {% endif %}
+
+      {% if page.handle == 'top-10-dildos' %}
+
+     <div class="mobile only" align="center"> </div><hr>
+      <br>
+  {% for product in collections.dildos.products limit: 10 %}
+  <div class="section product_section clearfix" id="product-{{ product.id }}">
+    <h2 class="top10">#{{ forloop.index }} {{ product.title }}</h2>
+
+
+
+
+  <div class="six columns alpha">
+
+
+    <div class="product__top-10-thumb">
+      <img src="{{ product.featured_image | product_img_url: 'large', format: 'pjpg' }}">
+    </div>
+    </div>
+
+
+  <div class="six columns omega">
+
+    <p class="modal_price">
+      <span style="font-size: 1.2em;">Only:</span> <span itemprop="price" class="current_price">
+            {% include 'shappify-bdl-min-price' with product %}
+      </span>
+      <span class="was_price">
+          {% if product.price < product.compare_at_price_max %}
+            {{ product.compare_at_price | money }}
+          {% endif %}
+      </span>
+    </p>
+    {% if product.available %}
+  <form action="" data-id="{{ product.id }}" data-handle="{{ product.handle }}" method="post" class="clearfix product_form main_prod_form_{{ forloop.index }}" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}"  id="product-form-{{ product.id }}">
+  	<label for="quantity">Quantity:</label>
+    <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" />
+    {% if product.options.size > 1 %}
+      <div class="select">
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% elsif product.options.size == 1 and (shappify_bdl_options_count > 1 or product.options[0] != "Title") %}
+      <div class="select">
+        <label>{{ product.options[0] }}:</label>
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% else %}
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/>
+    {% endif %}
+
+    <div class="accordion" id="section1">Read The Details<span></span></div>
+    <div class="container2">
+<div class="content">
+  {{ product.description }}
+</div></div>
+    <div class="purchase clearfix">
+
+      <input type="submit" name="add" value="Add To Cart" class="action_button add_to_cart" data-counter="{{ forloop.index }}"/>
+    </div>
+
+  </form>
+    <a class="buttoncontinue" href="{{ product.url }}?top-10-vibrators">View Product</a>
+   </div>
+
+  {% if shappify_bdl_options_count > 1 or product.variants.size > 1 %}
+    <script type="text/javascript">
+      // <![CDATA[
+        $(function() {
+          $product = $('#product-' + {{ product.id }});
+          if($('.single-option-selector', $product).length == 0) {
+            new Shopify.OptionSelectors("product-select-{{ product.id }}", { product: {{ product | json }}, onVariantSelected: SP.selectCallback });
+
+            {% if product.available %}
+              {% assign found_one_in_stock = false %}
+              {% for variant in product.variants %}
+              {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+                {% if variant.available and found_one_in_stock == false %}
+                  {% assign found_one_in_stock = true %}
+                  {% for option in product.options %}
+                    $('.single-option-selector:eq(' + {{ forloop.index0 }} + ')', $product).val({{ variant.options[forloop.index0] | json }}).trigger('change');
+                  {% endfor %}
+                {% endif %}
+            {% endif %}  {% endfor %}
+            {% endif %}
+          }
+        });
+      // ]]>
+    </script>
+  {% endif %}
+  {% endif %}
+
+
+  </div>
+
+  {% unless forloop.last %}
+  <hr>
+  {% endunless %}
+  {% endfor %}
+
+
+
+       {% endif %}
+
+
+       {% if page.handle == 'top-10-butt-plugs' %}
+
+     <div class="mobile only" align="center"></div><hr>
+      <br>
+  {% for product in collections.butt-plugs.products limit: 10 %}
+  <div class="section product_section clearfix" id="product-{{ product.id }}">
+    <h2 class="top10">#{{ forloop.index }} {{ product.title }}</h2>
+
+
+
+
+  <div class="six columns alpha">
+
+
+    <div class="product__top-10-thumb">
+      <img src="{{ product.featured_image | product_img_url: 'large', format: 'pjpg' }}">
+    </div>
+    </div>
+
+
+  <div class="six columns omega">
+
+    <p class="modal_price">
+      <span style="font-size: 1.2em;">Only:</span> <span itemprop="price" class="current_price">
+            {% include 'shappify-bdl-min-price' with product %}
+      </span>
+      <span class="was_price">
+          {% if product.price < product.compare_at_price_max %}
+            {{ product.compare_at_price | money }}
+          {% endif %}
+      </span>
+    </p>
+    {% if product.available %}
+  <form action="" data-id="{{ product.id }}" data-handle="{{ product.handle }}" method="post" class="clearfix product_form main_prod_form_{{ forloop.index }}" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}"  id="product-form-{{ product.id }}">
+  	<label for="quantity">Quantity:</label>
+    <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" />
+    {% if product.options.size > 1 %}
+      <div class="select">
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% elsif product.options.size == 1 and (shappify_bdl_options_count > 1 or product.options[0] != "Title") %}
+      <div class="select">
+        <label>{{ product.options[0] }}:</label>
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% else %}
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/>
+    {% endif %}
+
+    <div class="accordion" id="section1">Read The Details<span></span></div>
+    <div class="container2">
+<div class="content">
+  {{ product.description }}
+</div></div>
+    <div class="purchase clearfix">
+
+      <input type="submit" name="add" value="Add To Cart" class="action_button add_to_cart" data-counter="{{ forloop.index }}"/>
+    </div>
+
+  </form>
+    <a class="buttoncontinue" href="{{ product.url }}?top-10-vibrators">View Product</a>
+   </div>
+
+  {% if shappify_bdl_options_count > 1 or product.variants.size > 1 %}
+    <script type="text/javascript">
+      // <![CDATA[
+        $(function() {
+          $product = $('#product-' + {{ product.id }});
+          if($('.single-option-selector', $product).length == 0) {
+            new Shopify.OptionSelectors("product-select-{{ product.id }}", { product: {{ product | json }}, onVariantSelected: SP.selectCallback });
+
+            {% if product.available %}
+              {% assign found_one_in_stock = false %}
+              {% for variant in product.variants %}
+              {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+                {% if variant.available and found_one_in_stock == false %}
+                  {% assign found_one_in_stock = true %}
+                  {% for option in product.options %}
+                    $('.single-option-selector:eq(' + {{ forloop.index0 }} + ')', $product).val({{ variant.options[forloop.index0] | json }}).trigger('change');
+                  {% endfor %}
+                {% endif %}
+            {% endif %}  {% endfor %}
+            {% endif %}
+          }
+        });
+      // ]]>
+    </script>
+  {% endif %}
+  {% endif %}
+
+
+  </div>
+
+  {% unless forloop.last %}
+  <hr>
+  {% endunless %}
+  {% endfor %}
+
+
+
+       {% endif %}
+
+      {% if page.handle == 'top-10-cock-rings' %}
+
+     <div class="mobile only" align="center"> <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/COCK-RINGS_3ea50225-374e-4d72-b14b-adc479a42d1e.png?754487238433689221"></div><hr>
+      <br>
+  {% for product in collections.cock-rings.products limit: 10 %}
+  <div class="section product_section clearfix" id="product-{{ product.id }}">
+    <h2 class="top10">#{{ forloop.index }} {{ product.title }}</h2>
+
+
+
+
+  <div class="six columns alpha">
+
+
+    <div class="product__top-10-thumb">
+      <img src="{{ product.featured_image | product_img_url: 'large', format: 'pjpg' }}">
+    </div>
+    </div>
+
+
+  <div class="six columns omega">
+
+    <p class="modal_price">
+      <span style="font-size: 1.2em;">Only:</span> <span itemprop="price" class="current_price">
+            {% include 'shappify-bdl-min-price' with product %}
+      </span>
+      <span class="was_price">
+          {% if product.price < product.compare_at_price_max %}
+            {{ product.compare_at_price | money }}
+          {% endif %}
+      </span>
+    </p>
+    {% if product.available %}
+  <form action="" data-id="{{ product.id }}" data-handle="{{ product.handle }}" method="post" class="clearfix product_form main_prod_form_{{ forloop.index }}" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}"  id="product-form-{{ product.id }}">
+  	<label for="quantity">Quantity:</label>
+    <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" />
+    {% if product.options.size > 1 %}
+      <div class="select">
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% elsif product.options.size == 1 and (shappify_bdl_options_count > 1 or product.options[0] != "Title") %}
+      <div class="select">
+        <label>{{ product.options[0] }}:</label>
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% else %}
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/>
+    {% endif %}
+
+    <div class="accordion" id="section1">Read The Details<span></span></div>
+    <div class="container2">
+<div class="content">
+  {{ product.description }}
+</div></div>
+    <div class="purchase clearfix">
+
+      <input type="submit" name="add" value="Add To Cart" class="action_button add_to_cart" data-counter="{{ forloop.index }}"/>
+    </div>
+
+  </form>
+    <a class="buttoncontinue" href="{{ product.url }}?top-10-vibrators">View Product</a>
+   </div>
+
+  {% if shappify_bdl_options_count > 1 or product.variants.size > 1 %}
+    <script type="text/javascript">
+      // <![CDATA[
+        $(function() {
+          $product = $('#product-' + {{ product.id }});
+          if($('.single-option-selector', $product).length == 0) {
+            new Shopify.OptionSelectors("product-select-{{ product.id }}", { product: {{ product | json }}, onVariantSelected: SP.selectCallback });
+
+            {% if product.available %}
+              {% assign found_one_in_stock = false %}
+              {% for variant in product.variants %}
+              {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+                {% if variant.available and found_one_in_stock == false %}
+                  {% assign found_one_in_stock = true %}
+                  {% for option in product.options %}
+                    $('.single-option-selector:eq(' + {{ forloop.index0 }} + ')', $product).val({{ variant.options[forloop.index0] | json }}).trigger('change');
+                  {% endfor %}
+                {% endif %}
+            {% endif %}  {% endfor %}
+            {% endif %}
+          }
+        });
+      // ]]>
+    </script>
+  {% endif %}
+  {% endif %}
+
+
+  </div>
+
+  {% unless forloop.last %}
+  <hr>
+  {% endunless %}
+  {% endfor %}
+
+
+
+       {% endif %}
+       {% if page.handle == 'top-10-bondage-toys' %}
+
+     <div class="mobile only" align="center"></div><hr>
+      <br>
+  {% for product in collections.bondage-gear.products limit: 10 %}
+  <div class="section product_section clearfix" id="product-{{ product.id }}">
+    <h2 class="top10">#{{ forloop.index }} {{ product.title }}</h2>
+
+
+
+
+  <div class="six columns alpha">
+
+
+    <div class="product__top-10-thumb">
+      <img src="{{ product.featured_image | product_img_url: 'large', format: 'pjpg' }}">
+    </div>
+    </div>
+
+
+  <div class="six columns omega">
+
+    <p class="modal_price">
+      <span style="font-size: 1.2em;">Only:</span> <span itemprop="price" class="current_price">
+            {% include 'shappify-bdl-min-price' with product %}
+      </span>
+      <span class="was_price">
+          {% if product.price < product.compare_at_price_max %}
+            {{ product.compare_at_price | money }}
+          {% endif %}
+      </span>
+    </p>
+    {% if product.available %}
+  <form action="" data-id="{{ product.id }}" data-handle="{{ product.handle }}" method="post" class="clearfix product_form main_prod_form_{{ forloop.index }}" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}"  id="product-form-{{ product.id }}">
+  	<label for="quantity">Quantity:</label>
+    <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" />
+    {% if product.options.size > 1 %}
+      <div class="select">
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% elsif product.options.size == 1 and (shappify_bdl_options_count > 1 or product.options[0] != "Title") %}
+      <div class="select">
+        <label>{{ product.options[0] }}:</label>
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% else %}
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/>
+    {% endif %}
+
+    <div class="accordion" id="section1">Read The Details<span></span></div>
+    <div class="container2">
+<div class="content">
+  {{ product.description }}
+</div></div>
+    <div class="purchase clearfix">
+
+      <input type="submit" name="add" value="Add To Cart" class="action_button add_to_cart" data-counter="{{ forloop.index }}"/>
+    </div>
+
+  </form>
+    <a class="buttoncontinue" href="{{ product.url }}?top-10-vibrators">View Product</a>
+   </div>
+
+  {% if shappify_bdl_options_count > 1 or product.variants.size > 1 %}
+    <script type="text/javascript">
+      // <![CDATA[
+        $(function() {
+          $product = $('#product-' + {{ product.id }});
+          if($('.single-option-selector', $product).length == 0) {
+            new Shopify.OptionSelectors("product-select-{{ product.id }}", { product: {{ product | json }}, onVariantSelected: SP.selectCallback });
+
+            {% if product.available %}
+              {% assign found_one_in_stock = false %}
+              {% for variant in product.variants %}
+              {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+                {% if variant.available and found_one_in_stock == false %}
+                  {% assign found_one_in_stock = true %}
+                  {% for option in product.options %}
+                    $('.single-option-selector:eq(' + {{ forloop.index0 }} + ')', $product).val({{ variant.options[forloop.index0] | json }}).trigger('change');
+                  {% endfor %}
+                {% endif %}
+            {% endif %}  {% endfor %}
+            {% endif %}
+          }
+        });
+      // ]]>
+    </script>
+  {% endif %}
+  {% endif %}
+
+
+  </div>
+
+  {% unless forloop.last %}
+  <hr>
+  {% endunless %}
+  {% endfor %}
+
+
+
+       {% endif %}
+
+       {% if page.handle == 'top-10-anal-sex-toys' %}
+
+     <div class="mobile only" align="center"></div><hr>
+      <br>
+  {% for product in collections.anal-sex-toys.products limit: 10 %}
+  <div class="section product_section clearfix" id="product-{{ product.id }}">
+    <h2 class="top10">#{{ forloop.index }} {{ product.title }}</h2>
+
+
+
+
+  <div class="six columns alpha">
+
+
+    <div class="product__top-10-thumb">
+      <img src="{{ product.featured_image | product_img_url: 'large', format: 'pjpg' }}">
+    </div>
+    </div>
+
+
+  <div class="six columns omega">
+
+    <p class="modal_price">
+      <span style="font-size: 1.2em;">Only:</span> <span itemprop="price" class="current_price">
+            {% include 'shappify-bdl-min-price' with product %}
+      </span>
+      <span class="was_price">
+          {% if product.price < product.compare_at_price_max %}
+            {{ product.compare_at_price | money }}
+          {% endif %}
+      </span>
+    </p>
+    {% if product.available %}
+  <form action="" data-id="{{ product.id }}" data-handle="{{ product.handle }}" method="post" class="clearfix product_form main_prod_form_{{ forloop.index }}" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}"  id="product-form-{{ product.id }}">
+  	<label for="quantity">Quantity:</label>
+    <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" />
+    {% if product.options.size > 1 %}
+      <div class="select">
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% elsif product.options.size == 1 and (shappify_bdl_options_count > 1 or product.options[0] != "Title") %}
+      <div class="select">
+        <label>{{ product.options[0] }}:</label>
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% else %}
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/>
+    {% endif %}
+
+    <div class="accordion" id="section1">Read The Details<span></span></div>
+    <div class="container2">
+<div class="content">
+  {{ product.description }}
+</div></div>
+    <div class="purchase clearfix">
+
+      <input type="submit" name="add" value="Add To Cart" class="action_button add_to_cart" data-counter="{{ forloop.index }}"/>
+    </div>
+
+  </form>
+    <a class="buttoncontinue" href="{{ product.url }}?top-10-vibrators">View Product</a>
+   </div>
+
+  {% if shappify_bdl_options_count > 1 or product.variants.size > 1 %}
+    <script type="text/javascript">
+      // <![CDATA[
+        $(function() {
+          $product = $('#product-' + {{ product.id }});
+          if($('.single-option-selector', $product).length == 0) {
+            new Shopify.OptionSelectors("product-select-{{ product.id }}", { product: {{ product | json }}, onVariantSelected: SP.selectCallback });
+
+            {% if product.available %}
+              {% assign found_one_in_stock = false %}
+              {% for variant in product.variants %}
+              {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+                {% if variant.available and found_one_in_stock == false %}
+                  {% assign found_one_in_stock = true %}
+                  {% for option in product.options %}
+                    $('.single-option-selector:eq(' + {{ forloop.index0 }} + ')', $product).val({{ variant.options[forloop.index0] | json }}).trigger('change');
+                  {% endfor %}
+                {% endif %}
+            {% endif %}  {% endfor %}
+            {% endif %}
+          }
+        });
+      // ]]>
+    </script>
+  {% endif %}
+  {% endif %}
+
+
+  </div>
+
+  {% unless forloop.last %}
+  <hr>
+  {% endunless %}
+  {% endfor %}
+
+
+
+       {% endif %}
+
+       {% if page.handle == 'top-10-strap-ons' %}
+
+     <div class="mobile only" align="center"> <img src=""></div><hr>
+      <br>
+  {% for product in collections.strap-ons-harnesses.products limit: 10 %}
+  <div class="section product_section clearfix" id="product-{{ product.id }}">
+    <h2 class="top10">#{{ forloop.index }} {{ product.title }}</h2>
+
+
+
+
+  <div class="six columns alpha">
+    <div class="product__top-10-thumb">
+      <img src="{{ product.featured_image | product_img_url: 'large', format: 'pjpg' }}">
+    </div>
+  </div>
+
+
+  <div class="six columns omega">
+
+    <p class="modal_price">
+      <span style="font-size: 1.2em;">Only:</span> <span itemprop="price" class="current_price">
+            {% include 'shappify-bdl-min-price' with product %}
+      </span>
+      <span class="was_price">
+          {% if product.price < product.compare_at_price_max %}
+            {{ product.compare_at_price | money }}
+          {% endif %}
+      </span>
+    </p>
+    {% if product.available %}
+  <form action="" data-id="{{ product.id }}" data-handle="{{ product.handle }}" method="post" class="clearfix product_form main_prod_form_{{ forloop.index }}" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}"  id="product-form-{{ product.id }}">
+  	<label for="quantity">Quantity:</label>
+    <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" />
+    {% if product.options.size > 1 %}
+      <div class="select">
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% elsif product.options.size == 1 and (shappify_bdl_options_count > 1 or product.options[0] != "Title") %}
+      <div class="select">
+        <label>{{ product.options[0] }}:</label>
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% else %}
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/>
+    {% endif %}
+
+    <div class="accordion" id="section1">Read The Details<span></span></div>
+    <div class="container2">
+<div class="content">
+  {{ product.description }}
+</div></div>
+    <div class="purchase clearfix">
+
+      <input type="submit" name="add" value="Add To Cart" class="action_button add_to_cart" data-counter="{{ forloop.index }}"/>
+    </div>
+
+  </form>
+    <a class="buttoncontinue" href="{{ product.url }}?top-10-vibrators">View Product</a>
+   </div>
+
+  {% if shappify_bdl_options_count > 1 or product.variants.size > 1 %}
+    <script type="text/javascript">
+      // <![CDATA[
+        $(function() {
+          $product = $('#product-' + {{ product.id }});
+          if($('.single-option-selector', $product).length == 0) {
+            new Shopify.OptionSelectors("product-select-{{ product.id }}", { product: {{ product | json }}, onVariantSelected: SP.selectCallback });
+
+            {% if product.available %}
+              {% assign found_one_in_stock = false %}
+              {% for variant in product.variants %}
+              {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+                {% if variant.available and found_one_in_stock == false %}
+                  {% assign found_one_in_stock = true %}
+                  {% for option in product.options %}
+                    $('.single-option-selector:eq(' + {{ forloop.index0 }} + ')', $product).val({{ variant.options[forloop.index0] | json }}).trigger('change');
+                  {% endfor %}
+                {% endif %}
+            {% endif %}  {% endfor %}
+            {% endif %}
+          }
+        });
+      // ]]>
+    </script>
+  {% endif %}
+  {% endif %}
+
+
+  </div>
+
+  {% unless forloop.last %}
+  <hr>
+  {% endunless %}
+  {% endfor %}
+
+
+
+       {% endif %}
+
+       {% if page.handle == 'top-10-kegel-health-toys' %}
+
+     <div class="mobile only" align="center"> <img src=""></div><hr>
+      <br>
+  {% for product in collections.kegel-health-toys.products limit: 10 %}
+  <div class="section product_section clearfix" id="product-{{ product.id }}">
+    <h2 class="top10">#{{ forloop.index }} {{ product.title }}</h2>
+    <div class="six columns alpha">
+      <div class="product__top-10-thumb">
+        <img src="{{ product.featured_image | product_img_url: 'large', format: 'pjpg' }}">
+      </div>
+    </div>
+
+
+  <div class="six columns omega">
+
+    <p class="modal_price">
+      <span style="font-size: 1.2em;">Only:</span> <span itemprop="price" class="current_price">
+            {% include 'shappify-bdl-min-price' with product %}
+      </span>
+      <span class="was_price">
+          {% if product.price < product.compare_at_price_max %}
+            {{ product.compare_at_price | money }}
+          {% endif %}
+      </span>
+    </p>
+    {% if product.available %}
+  <form action="" data-id="{{ product.id }}" data-handle="{{ product.handle }}" method="post" class="clearfix product_form main_prod_form_{{ forloop.index }}" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}"  id="product-form-{{ product.id }}">
+  	<label for="quantity">Quantity:</label>
+    <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" />
+    {% if product.options.size > 1 %}
+      <div class="select">
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% elsif product.options.size == 1 and (shappify_bdl_options_count > 1 or product.options[0] != "Title") %}
+      <div class="select">
+        <label>{{ product.options[0] }}:</label>
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% else %}
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/>
+    {% endif %}
+
+    <div class="accordion" id="section1">Read The Details<span></span></div>
+    <div class="container2">
+<div class="content">
+  {{ product.description }}
+</div></div>
+    <div class="purchase clearfix">
+
+      <input type="submit" name="add" value="Add To Cart" class="action_button add_to_cart" data-counter="{{ forloop.index }}"/>
+    </div>
+
+  </form>
+    <a class="buttoncontinue" href="{{ product.url }}?top-10-vibrators">View Product</a>
+   </div>
+
+  {% if shappify_bdl_options_count > 1 or product.variants.size > 1 %}
+    <script type="text/javascript">
+      // <![CDATA[
+        $(function() {
+          $product = $('#product-' + {{ product.id }});
+          if($('.single-option-selector', $product).length == 0) {
+            new Shopify.OptionSelectors("product-select-{{ product.id }}", { product: {{ product | json }}, onVariantSelected: SP.selectCallback });
+
+            {% if product.available %}
+              {% assign found_one_in_stock = false %}
+              {% for variant in product.variants %}
+              {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+                {% if variant.available and found_one_in_stock == false %}
+                  {% assign found_one_in_stock = true %}
+                  {% for option in product.options %}
+                    $('.single-option-selector:eq(' + {{ forloop.index0 }} + ')', $product).val({{ variant.options[forloop.index0] | json }}).trigger('change');
+                  {% endfor %}
+                {% endif %}
+            {% endif %}  {% endfor %}
+            {% endif %}
+          }
+        });
+      // ]]>
+    </script>
+  {% endif %}
+  {% endif %}
+
+
+  </div>
+
+  {% unless forloop.last %}
+  <hr>
+  {% endunless %}
+  {% endfor %}
+
+
+
+       {% endif %}
+  </div>
+
+
+
+{% include 'handle_product_form' %}
+<script type="text/javascript" src='{{ "jquery_accordion.js" | asset_url }}'></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('.accordion').accordion({
+    loadClose: function (elem, opts) { //replace the default close state with custom function
+      elem.next().hide();
+    },
+    cookieName: 'accordion_nav'
+
+  });
+});
+</script>
+
+<!-- END: templates/page.top-10.liquid -->
+
+
+
+

@@ -1,0 +1,101 @@
+/***************************************************************************
+* Product Slider, based on [Slick Slider](https://github.com/kenwheeler/slick)
+***************************************************************************/
+
+.product__slider-container {
+  width: inherit;
+}
+
+.product__slider:not(:first-child) {
+    visibility: hidden;
+}
+
+.slick-initialized.product__slider {
+    visibility: visible;
+}
+
+.product__slider-large {
+  width: inherit;
+  img {
+    min-height: 389px;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+.product__slider-nav {
+  text-align: center;
+  img {
+    min-height: 86px;
+    margin: 0 auto;
+  }
+  div {
+    box-sizing: border-box;
+  }
+  .slick-active img {
+    border-radius: 5px;
+    border: 2px solid color('white');
+  }
+  .slick-current img {
+    border-color: color('pink');
+  }
+}
+
+.slick-next:before,
+.slick-prev:before {
+  color: color('pink');
+  transform: scale(1.5,1);
+  font-size: 40px;
+  opacity: 0.5;
+  z-index: 1100;
+}
+
+.slick-next {
+  margin-left: -50px;
+}
+
+.slick-prev {
+  margin-right: -50px;
+}
+
+@mixin arrowSize($height) {
+  width: $height * 33 / 107;
+  height: $height;
+}
+
+.product__arrow {
+  stroke: color('pink');
+  background: ui-tint(30%);
+  opacity: 0.25;
+  &:hover {
+    opacity: 0.45;
+  }
+  z-index: 9001;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  &.product__arrow-large {
+    @include arrowSize(90px);
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  &.product__arrow-next {
+    right: 0;
+  }
+
+  &.product__arrow-small {
+    @include arrowSize(40px);
+    padding-top: 18px;
+    padding-bottom: 18px;
+    &.product__arrow-prev {
+      left: -10px;
+    }
+    &.product__arrow-next {
+      right: -10px;
+    }
+  }
+
+}

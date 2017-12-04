@@ -1,0 +1,87 @@
+<!--snippets/header-two-tighter.liquid -->
+
+<div class="header">
+  {% include 'hello-bar-mobile' %}
+  <div class="show-for-desktop sixteen columns phone-banner-container">
+    <div class="phone-banner">
+
+
+      <span class="contact-no banner-left">
+        <a href="http://simplipleasure.com/pages/contact-us">
+          1-800-918-6308 - Customer Support
+        </a>
+      </span>
+
+      <div id="safety" class="banner-right">
+        <a class="hello2" href="http://simplipleasure.com/pages/info#discreetb">100% Safe &amp; Secure Private Billing</a>
+        <span class="safety_divider">|</span>
+        <a class="hello2" href="http://simplipleasure.com/pages/info#discreetp"> Discreet Shipping </a>
+        <span class="safety_divider">|</span>
+        {% if shop.customer_accounts_enabled %}
+          {% if customer %}
+            <a class="hello2" href="/account">{{ customer.name }}</a>
+            <span class="safety_divider">|</span>  {{ 'layout.customer.log_out' | t | customer_logout_link }}
+          {% else %}
+            <a class="hello2">   {{ 'layout.customer.my_account' | t | customer_login_link }}</a>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+
+  <div id="sticky-search_menu_container" class="container content desktop-extend">
+    <div class="sixteen columns {% unless template contains "index" %}header_border{% else %}homepage{% endunless %}">
+
+      <div class="header-logo">
+        <a href="/" title="{{ shop.name }}">
+          <img class="show-for-desktop" src="{{ '../assets/images/logo.png' | asset_url }}" width="264px" height="44px" alt="{{ shop.name }}" />
+          <img class="hide-for-desktop" src="{{ '../assets/images/logo-mobile.png' | asset_url }}" alt="{{ shop.name }}" />
+        </a>
+      </div>
+
+      <div class="top-menu-container nav">
+
+        {% include 'hamburger_menu' %}
+
+        {% include 'search-form-with-button' %}
+
+      </div>
+    </div>
+
+    <div class="show-for-desktop sixteen columns columns__overhang nav">
+      <ul class="main menu">
+        {% for link in linklists['main-menu'].links %}
+          <li {% if forloop.last %}class="main-menu__last"{% endif %}>
+            {% if linklists[link.handle] == empty %}
+              e<a href="{{ link.url }}"  {% if link.active %}class="active"{% endif %}>{{ link.title }}</a>
+            {% else %}
+              <a href="{{ link.url }}"  {% if link.active %}class="active"{% endif %} {% for link in linklists[link.handle].links %}{% if link.active %} class="active"{% endif %}{% endfor %}>{{ link.title }}
+                <span class="arrow">▾</span>
+              </a>
+              <ul>
+                {% for link in linklists[link.handle].links %}
+                  {% if linklists[link.handle] == empty %}
+                    <li><a href="{{ link.url }}" >{{ link.title }}</a></li>
+                  {% else %}
+                  <li><a href="{{ link.url }}" >{{ link.title }} <span class="arrow"> ▸</span></a>
+                    <ul>
+                      {% for link in linklists[link.handle].links %}
+                        <li><a href="{{ link.url }}" >{{ link.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+
+  </div>
+
+  {% include 'sp-sticky-search' %}
+</div>

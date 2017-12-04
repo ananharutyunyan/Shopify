@@ -1,0 +1,80 @@
+{% assign collection_parent = collection.metafields.LOC.collection_parent %}
+<!-- snippets/breadcrumbs-new.liquid collection_parent: {{collection.metafields.LOC.collection_parent}} -->
+
+{% assign breadcrumb_index = 0 %}
+
+<div id="breadcrumbs" class="sixteen columns clearfix collection_nav">
+  <ol class="breadcrumbsol" itemscope itemtype="http://schema.org/BreadcrumbList">
+
+    {% include 'breadcrumbs__item', name: "Home", url: '/' %}
+
+    {% if collection_parent contains 'best-sellers-' or (collection.handle contains "best-selling" and collection.handle != 'best-selling-sex-toys') %}
+      {% include 'breadcrumbs__item', name: "Best Selling Sex Toys", url: '/collections/best-selling-sex-toys' %}
+
+      {% unless collection_parent != collection.handle %}
+
+        {% case  collection_parent %}
+
+          {% when 'best-sellers-vibrators' %}
+            {% include 'breadcrumbs__item', name: "Best Selling Vibrators",
+              url: 'https://www.simplipleasure.com/collections/best-selling-vibes-2016-customer-favorites' %}
+
+          {% when 'best-sellers-anal-sex-toys' %}
+            {% include 'breadcrumbs__item', name: "Best Selling Anal Sex Toys",
+              url: 'https://www.simplipleasure.com/collections/best-selling-anal-sex-toys' %}
+
+          {% when 'best-sellers-dildos' %}
+            {% include 'breadcrumbs__item', name: "Best Selling Dildos",
+              url: 'https://www.simplipleasure.com/collections/best-selling-dildos' %}
+
+          {% when 'best-sellers-male-toys' %}
+            {% include 'breadcrumbs__item', name: "Best Selling Toys For Men",
+              url: 'https://www.simplipleasure.com/collections/best-selling-sex-toys-for-men' %}
+
+        {% endcase %}
+      {% endunless %}
+      {% assign url = nil %}
+      {% include 'breadcrumbs__item' %}
+
+    {% elsif collection_parent != collection.handle %}
+
+      {% assign url = 'https://www.simplipleasure.com/collections/' | append: collection_parent %}
+      {% case  collection_parent %}
+
+        {% when 'dildos' %}
+          {% include 'breadcrumbs__item', name: "Dildos" %}
+        {% when 'butt-plugs' %}
+          {% include 'breadcrumbs__item', name: "Butt Plugs" %}
+        {% when 'vibrators' %}
+          {% include 'breadcrumbs__item', name: "Vibrators" %}
+        {% when 'cock-rings' %}
+          {% include 'breadcrumbs__item', name: "Cock Rings" %}
+        {% when 'anal-sex-toys' %}
+          {% include 'breadcrumbs__item', name: "Anal Sex Toys" %}
+        {% when 'female-toys' %}
+          {% include 'breadcrumbs__item', name: "Sex Toys For Women" %}
+        {% when 'male-toys' %}
+          {% include 'breadcrumbs__item', name: "Male Sex Toys" %}
+        {% when 'kegel-health-toys' %}
+          {% include 'breadcrumbs__item', name: "Kegel Health Toys" %}
+        {% when 'sex-essentials' %}
+          {% include 'breadcrumbs__item', name: "Sex Lubes & Essentials" %}
+        {% when 'strap-ons-harnesses' %}
+          {% include 'breadcrumbs__item', name: "Strap Ons" %}
+        {% when 'bondage-gear' %}
+          {% include 'breadcrumbs__item', name: "Bondage Gear" %}
+        {% when 'games-gifts' %}
+          {% include 'breadcrumbs__item', name: "Sex Games & Gifts" %}
+        {% when 'couples-toys' %}
+          {% include 'breadcrumbs__item', name: "Sex Toys For Couples" %}
+        {% when 'lingerie' %}
+          {% include 'breadcrumbs__item', name: "Sexy Lingerie" %}
+      {% endcase %}
+      {% assign url = nil %}
+
+      {% include 'breadcrumbs__item' %}
+    {% endif %}
+
+
+   </ol>
+</div>

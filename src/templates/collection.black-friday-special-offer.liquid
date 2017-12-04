@@ -1,0 +1,88 @@
+{% capture day %}{{ 'now' | date: '%A' }}{% endcapture %}
+{% capture time %}{{ 'now' | date: '%H' }}{% endcapture %}
+
+{% paginate collection.products by 48 %}
+  {% assign tag_count = collection.all_tags | size %}
+  {% assign tag_threshold = 5 | minus: 0 %}
+
+  <div class="sixteen columns clearfix collection_nav">
+    {% include 'breadcrumbs' %}
+    <div class="ten columns alpha">
+    </div>
+  </div>
+
+
+
+
+
+  {% if collection.handle == 'black-friday-sex-toy-deals' %}
+<div class="twelve columns hide-for-desktop">
+</div>{% endif %}
+{% include 'sidebar-general', mobile: false, hide_sections: 'vibrators' %}
+    <div class="twelve columns">
+
+  <div class="twelve columns">
+     {% if collection.handle == "dildo-bundle-2-for-50" %}  <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/700x200-dildobundle.jpg?1823448551150478939" width="98%" style="margin-bottom:15px;">
+    {% elsif collection.handle == "backdoor-bundle" %} <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/700x200-backdoorbundle.jpg?1858884502147479763" width="98%" style="margin-bottom:15px;">
+   {% elsif collection.handle == "jopen-luxury-bundle" %} <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/700x200-jopenluxury3.jpg?1803312562656530499" width="98%" style="margin-bottom:15px;">
+    {% endif %}
+    <h1>  {{ collection.title }}</h1>
+    {{ collection.description }}
+</div>
+
+{% if current_tags %}
+<div class="filter-group">
+<strong>Current Tags:</strong>
+
+<span class="clear2">
+{% for tag in collection.all_tags %}
+    {% if current_tags contains tag %}
+
+  		{% if tag == 'sale' %}
+  		<span class="filter-clear2">{{ tag | link_to_remove_tag: tag }}</span>
+  		{% else %}
+    	{% assign tag_collection = collections[tag] %}
+ 		<span class="filter-clear2">{{ tag_collection.title | link_to_remove_tag: tag }}</span>
+    	{% endif %}
+    {% endif %}
+{% endfor %}
+  <span class="filter-clear3"><a href="{{ collection.url }}">Clear All</a></span></span>
+  </div>
+
+
+{% endif %}
+
+
+  {% include 'sort-and-paginate' %}
+
+  {% if collection.products.size == 0 %}
+    <div class="center">
+      <div class="section clearfix">
+        <p class="quote">{{ 'collections.general.no_matches' | t }}</p>
+      </div>
+    </div>
+  {% else %}
+    <div class="main_product_list_sec">
+    {% assign products = collection.products %}
+
+    {% assign products_per_row = 4 %}
+
+    {% include 'product-loop'  %}
+    </div>
+  {% endif %}
+  </div>
+
+  {% include 'pagination' with 'below' %}
+{% endpaginate %}
+
+
+{% include 'sidebar-general', mobile: true, hide_sections: 'vibrators' %}
+
+<style>
+  a.expired-offer {
+    color: #A0A0A0 ;
+    text-decoration: line-through;
+  }
+      </style>
+
+

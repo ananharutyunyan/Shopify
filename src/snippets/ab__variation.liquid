@@ -1,0 +1,11 @@
+<!-- snippets/ab__variation.liquid -->
+{% assign _snip = testName | append: '-v' | append: variation | append: '--' | append: snippetName  %}
+
+{% capture _snippet %}
+  {% include _snip %}
+{% endcapture %}
+{% unless _snippet contains 'Liquid error:' %}
+  <div class="ab__variation {{testName}}-v{{variation}}" data-ab-test="{{testName}}" data-ab-variation="{{variation}}">
+    {{ _snippet }}
+  </div>
+{% endunless %}

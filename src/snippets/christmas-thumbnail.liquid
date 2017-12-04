@@ -1,0 +1,302 @@
+{% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+{% assign my_description = product.description | split: '<!-- split -->'  %}
+
+<div id ="best-selling" class="twelve columns {% cycle 'alpha', 'omega' %} thumbnail {% cycle 'even', 'odd' %}">
+  <p class="info-title">  <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+
+
+      {{ product.title }}
+
+        </a></p>
+  <div class="three columns">
+
+  <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+    <img src="{{ featured_image | product_img_url: 'medium', format: 'pjpg' }}" alt="{{ alt_text | escape }}" />
+
+    <div class="banner-container">
+      <div class="new_banner">#{{ forloop.index }}</div>
+
+      {% for variant in product.variants %}
+        {% if variant.metafields.shappify_qb.qb_hide == "1" and product.compare_at_price_max > product.price or variant.metafields.shappify_qb.qb_hide == "1" %}
+          {% unless collection.handle contains 'offer' %}
+            <div class="new_banner">Offer</div>
+          {% endunless %}
+        {% elsif product.compare_at_price_max > product.price %}
+          <div class="sale_banner">Sale</div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </a>
+
+      <div class="starprice">
+  <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+          <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+  <span class="price {% if product.compare_at_price_max > product.price %}sale{% endif %}">
+        {% if product.available %}
+          {% if product.price_varies %}
+            <small><em>from</em></small>
+          {% endif %}
+      {% include 'shappify-qb-min-price' with product %}
+        {% else %}
+          <span class="sold_out"> - </span>{% include 'shappify-qb-min-price' with product %}
+        {% endif %}
+        {% if product.compare_at_price_max > product.price %}
+          <span class="was_price">{{ product.compare_at_price_max | money }}</span>
+
+        {% endif %}
+      </span>
+
+  </a>  </div>
+    </div>
+    <div class="eight columns show-for-desktop">
+
+       <div class="info">
+
+
+
+         <h4 class="newhome">What makes this the perfect gift?</h4>
+      {{ product.metafields.xmas.top-10 }}
+
+ <form action="/cart/add" method="post" class="clearfix product_form" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}" id="product-form-{{ product.id }}">
+
+<div class="topmob" id="top-25" style="padding-bottom: 10px;">
+
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/>
+
+  <input type="submit" class="cart_button2" id="add-to-cart" name="add" value="Add to Cart" data-counter="{{ counter }}">
+
+
+    </div>
+
+
+</form>
+
+      </div>
+
+
+    </div>
+
+
+  <!--- MOBILE !-->
+
+      <div class="four columns hide-for-desktop">
+
+       <div class="info">
+
+      <p class="info-title">  <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+
+
+
+        </a></p>
+
+
+         <h4 class="newhome">What makes this the perfect gift?</h4>
+      {{ product.metafields.xmas.top-10 }}
+         <form action="/cart/add" method="post" class="clearfix product_form" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}" id="product-form-{{ product.id }}">
+
+<div class="topmob" id="top-25-mob" style="padding-bottom: 10px;">
+
+<button class="continue-shopping" id="top-25-mob"> <a href="{{ product.url | within: collection }}">View Product</a>
+    </button>
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/>
+
+  <input type="submit" class="cart_button2" id="add-to-cart" name="add" value="Add to Cart" data-counter="{{ counter }}">
+
+
+    </div>
+
+
+</form>
+
+      </div>
+
+
+    </div>
+   <hr>
+</div>
+
+<style>
+
+ button#top-25-mob.continue-shopping {
+    float: left;
+    width: 100%;
+    display: inline-block;
+    padding: 12px!important;
+    margin-bottom: 5px;
+}
+
+  button#top-25-mob.continue-shopping a {
+    color: #fff!important;
+}
+    .topmob {
+    padding-bottom: 10px;
+    display: inline-block;
+    width: 100%;
+      margin-top:10px;
+}
+
+.topmob button.continue-shopping {
+    float: left;
+    width: 35%;
+    display: inline-block;
+    padding: 15px!important;
+}
+
+button.continue-shopping {
+    background: #B9B9B9!important;
+    padding: 5px 20px;
+    font-size: 14px;
+}
+
+button.continue-shopping a {
+    color: #fff!important;
+    padding-bottom: 0px;
+}
+
+.cart_button2 {
+    padding: 15px!important;
+    width: 60%;
+}
+
+
+  #best-selling .four.columns {
+    float: right;
+  }
+      p.info-brand {
+        text-decoration: underline;
+        font-weight: 700;
+        color: #cc3366;
+      }
+
+  #best-selling .three.columns {
+    float: left;
+  }
+
+  p.info-title {
+    font-size: 2em;
+    padding-top: 5px;
+}
+
+
+  @media only screen and (max-width:550px) {
+
+
+
+     #best-selling .four.columns {
+    float: right;
+       width:100%!important;
+  }
+
+
+  #best-selling .three.columns {
+    float: left;
+    width:100%!important;
+  }
+
+  }
+  @media only screen and (max-width:790px) {
+
+
+                     div#best-selling .container .column.thumbnail, .container .columns.thumbnail {
+    width: 100%!important;
+}
+
+     #best-selling .four.columns {
+    float: right;
+       width:50%;
+  }
+
+
+  #best-selling .three.columns {
+    float: left;
+    width:45%;
+  }
+     .container .eight.columns {
+    width: 49%!important;
+        float: right;
+}
+  }
+
+   @media only screen and (min-width:790px) {
+
+      .container .eight.columns {
+    width: 49%!important;
+        float: right;
+}
+
+  #best-selling .three.columns {
+    float: left;
+    width:45%;
+  }
+
+  }
+
+body.collection div.info {
+    height: inherit;
+}
+
+  @media only screen and (max-width: 479px){
+
+    p.info-title {
+    font-size: 1em;
+    padding-top: 5px;
+}
+  }
+  .sale_banner {
+    top: 30px!important;
+}
+  .container div.thumbnail.odd {
+    margin-left: 0px;
+}
+
+  p {
+    font-family: Helvetica;
+  }
+
+
+
+
+  span.spr-badge-caption {
+    display: none;
+}
+
+  .info li span {
+    font-size: 12px!important;
+    font-family: Helvetica;
+    line-height: normal!important;
+        text-align: left;
+
+}
+    .info ul li {
+    font-size: 12px!important;
+    font-family: Helvetica;
+    line-height: normal!important;
+      text-align:left;
+}
+  .twelve.columns ul {
+    list-style: inherit!important;
+  }
+  .info p {
+    text-align: left;
+}
+
+  .thumbnail .price {
+    display: block;
+    font-size: 24px;
+    color: #cc3366;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+   .spr-badge[data-rating="0.0"] {
+ visibility: hidden;
+      }
+
+  .new_banner {
+    background:#d8000a
+  }
+
+    input#add-to-cart {
+    width: 100%!important;
+}
+</style>

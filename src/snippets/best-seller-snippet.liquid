@@ -1,0 +1,52 @@
+<!-- src/snippets/best-seller-snippet.liquid -->
+<div id="best-seller-snippets">
+  <div class="recommendations-group" style="margin-bottom:15px;">
+    {% assign counter = 60 %}
+    {% for product in collections.best-selling-sex-toys.products limit:48 %}
+      {% assign counter = counter | plus:1 %}
+      <div class="four columns {% cycle 'alpha', '', '', 'omega' %} thumbnail {% cycle 'even', 'odd', %}">
+        <div class="recommendations-product"  id="product-{{ product.id }}">
+          <div class="recommendations-product-image">
+            <a href="{{ product.url }}"><img src="{{ product.featured_image |  product_img_url: 'large', format: 'pjpg' }}">
+              {% if product.compare_at_price_max > product.price %}
+                <div class="banner-container">
+                  <div class="sale_banner">Sale</div>
+                </div>
+              {% endif %}
+            </a>
+          </div>
+          <div class="info">
+            <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}" itemprop="url">
+              <span class="title" itemprop="name">{{ product.title }}</span>
+            </a>
+          </div>
+          <div class="starprice">
+            <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+              <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ product.id }}" >{{ product.metafields.stamped.badge }}</span>
+              <span class="price {% if product.compare_at_price_max > product.price %}sale{% endif %}" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                {% if product.compare_at_price_max > product.price and product.available %}
+                  <span class="was_price">{{ product.compare_at_price_max | money }}</span>
+                {% endif %}
+                <meta itemprop="price" content="{{ product.price_min | money_without_currency }}" />
+                <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+                <meta itemprop="seller" content="{{ shop.name | escape }}" />
+                <meta itemprop="availability" content="{% if product.available %}in_stock{% else %}out_of_stock{% endif %}" />
+                <meta itemprop="itemCondition" content="New" />
+                {% if product.available %}
+                  {% if product.price_varies %}
+                    <small><em>from</em></small>
+                  {% endif %}
+                  {% include 'shappify-qb-min-price' with product %}
+                {% else %}
+                  <span class="sold_out">Sorry, Out Of Stock</span>
+                {% endif %}
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+  </div>
+  <hr class="home">
+</div>

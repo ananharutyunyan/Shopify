@@ -1,0 +1,195 @@
+<!-- templates/blog.buyer-guides.liquid -->
+{% if blog.handle != "sex-toy-guides" %}
+  {% paginate blog.articles by 100 %}
+    {% assign tag_count = blog.all_tags | size %}
+    {% assign tag_threshold = 8 %}
+
+    <div class="sixteen columns clearfix collection_nav">
+      {% include 'breadcrumbs-buying-guides' %}
+    </div>
+
+    {% include 'sidebar-general', mobile: false, hide_sections: 'vibrators' %}
+
+    <div class="twelve columns ">
+      <h1 class="newhome"><a href="{{ blog.url }}" title="{{ blog.title | escape }}">{{ blog.title }}</a></h1>
+      <hr>
+    </div>
+
+
+
+    <div class="twelve columns">
+      {% case blog.handle %}
+      {% when "vibrator-buying-guides" %}
+        {% include 'buyer-guides__articles-list' with 'Vibrator Buying Guides' %}
+      {% when "dildo-buying-guides" %}
+        {% include 'buyer-guides__articles-list' with 'Dildo Buying Guides' %}
+      {% when "couples-sex-toy-buying-guides" %}
+        {% include 'buyer-guides__articles-list' with "Couple's Sex Toy Buying Guides" %}
+      {% when "cock-ring-buying-guides" %}
+        {% include 'buyer-guides__articles-list' with 'Cock Ring Buying Guides' %}
+      {% when "male-sex-toy-buying-guides" %}
+        {% include 'buyer-guides__articles-list' with 'Male Sex Toy Buying Guides' %}
+      {% when "butt-plug-buying-guides" %}
+        {% include 'buyer-guides__articles-list' with 'Butt Plug Buying Guides' %}
+      {% when "bondage-toy-buying-guides" %}
+        {% include 'buyer-guides__articles-list' with 'Bondage Toy Buying Guides' %}
+      {% when "anal-sex-toy-buying-guides" %}
+        {% include 'buyer-guides__articles-list' with 'Anal Sex Toy Buying Guides' %}
+      {% endcase %}
+
+    </div>
+  {% endpaginate %}
+{% else %}
+  <div id="buyer-guide">
+    <div class="sixteen columns clearfix collection_nav">
+      {% include 'breadcrumbs-buying-guides' %}
+    </div>
+    {% include 'sidebar-general', mobile: false, hide_sections: 'vibrators' %}
+    <div class="twelve columns columns__large-right-gutter">
+      <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/700x260bannersamp1.jpg?14399049155801734000" alt="How To Buy Sex Toys" width="100%">
+      <h2 class="newhome">How To Find &amp; Buy The Right Sex Toys</h2>
+      <hr>
+      <p><span style="font-weight: 400;">Whether you’re a beginner or an experienced pleasure seeker, sex toys provide the tools you need to improve your overall sex life, no matter if you’re in a relationship or want to enhance your solo fun and experiment with different pleasure pursuits. To help you choose the best toys for your sexploration, we have a collection of sex toy guides for you to read through. Each of our guides has detailed information on how to use certain types of toys; the diverse toy options in each collection and how you can get the most out of them; sex toy tips; and much more.</span></p>
+      <hr>
+      <ul class="mobile-fblock-grid-1 tablet-fblock-grid-2">
+        <li>
+          <a href="https://www.simplipleasure.com/blogs/vibrator-buying-guides">
+            <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/520x260vibratorguide.jpg?575743975536668577">
+          </a>
+        </li>
+        <li>
+          <a href="/blogs/male-sex-toy-buying-guides">
+            <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/520x260-malesextoybuyingguide.jpg?14081776000254159382">
+          </a>
+        </li>
+        <li>
+          <a href="https://www.simplipleasure.com/blogs/cock-ring-buying-guides">
+            <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/520x260-cockringbuyingguide.jpg?7485761305208365034">
+          </a>
+        </li>
+        <li>
+          <a href="/blogs/dildo-buying-guides">
+            <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/520x260dildoguide.jpg?1170393530735559536">
+          </a>
+        </li>
+        <li>
+          <a href="/blogs/anal-sex-toy-buying-guides">
+            <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/520x260-analsextoybuyingguide.jpg?11251184437851830133">
+          </a>
+        </li>
+        <li>
+          <a href="/blogs/couples-sex-toy-buying-guides">
+            <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/520x260-couplesextoybuyingguide.jpg?1425138599639026922">
+          </a>
+        </li>
+        <li>
+          <a href="/blogs/bondage-toy-buying-guides">
+            <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/520x260-bondagegearbuyingguide.jpg?7270171765485866188">
+          </a>
+        </li>
+        <li>
+          <a href="/blogs/butt-plug-buying-guides">
+            <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/520x260-buttplugbuyingguide.jpg?7270171765485866188">
+          </a>
+        </li>
+      </ul>
+
+      <hr>
+      <h2 class="newhome"><span style="font-weight: 400;">Our guides to ensuring you pick the perfect sex toy!</span></h2>
+      <p><span style="font-weight: 400;">For guides on the most popular sex toys on the market, read through our </span><a href="https://www.simplipleasure.com/blogs/vibrator-buying-guides"><span style="font-weight: 400;">Vibrator Buying Guides</span></a><span style="font-weight: 400;"> and </span><a href="https://www.simplipleasure.com/blogs/dildo-buying-guides"><span style="font-weight: 400;">Dildo Buying Guides</span></a><span style="font-weight: 400;">. Designed for both men and women, these guides explain the variety of vibrators or dildos that you can indulge to take your personal pleasure to new heights. For instance, in our Vibrator Buying Guides, you can learn more about the best-selling rabbit vibrators that are a must-have for every woman’s toy drawer; you can also discover different types of lesser known vibrators, such as the G-spot vibrator and the anal vibrator. As for our dildos guide, although most dildos have similar shapes and designs, you can still find a wide array of different dildos to use, such as vibrating dildos, suction cup dildos, and more.</span></p>
+      <p><span style="font-weight: 400;">We also have helpful buying guides for sex toys geared toward specific people. For instance, our cock ring and male sex toy guides are great for men who want to find sex toys to enjoy. Male masturbators such as realistic vaginas and Fleshlights are highlighted in our guides so that you can learn more about how to use them to enhance your masturbation fun. For women specifically, we have plenty of guides for you to review so that you can expand your sex toy collection.</span></p>
+      <p><span style="font-weight: 400;">If you want to explore the toy options we have to make your love life better, you can read our </span><a href="https://www.simplipleasure.com/blogs/couples-sex-toy-buying-guides"><span style="font-weight: 400;">Couple’s Sex Toys Buying Guide</span></a><span style="font-weight: 400;"> and </span><a href="https://www.simplipleasure.com/blogs/bondage-toy-buying-guides"><span style="font-weight: 400;">Bondage Toy Buying Guide</span></a><span style="font-weight: 400;">. From sex games to make foreplay more fun and playful to exciting strap ons, our couples sex toy guide is full of information that you can use to spice up your love life in many ways to get you out of a sex rut or simply just to add to your already amazing bedroom play. If you’re looking to add an erotic touch to your sex routine, our bondage toy guide explains the different types of light BDSM toys that you can experiment with to take your sex life to the kinky level.</span></p>
+      <p><span style="font-weight: 400;">While you shop here at Simpli Pleasure for luxurious and high-quality sex toys, use our guides to help you navigate through our collections and let the guides assist you in choosing and buying the perfect toys to take home with you. </span></p>
+      <hr>
+
+      <ul class="show-for-tablet tablet-fblock-grid-3">
+        <li>
+          <a href="/pages/top-10-sex-toys-for-men">
+            <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/toptentoysformen1.jpg?12937296247882687627" alt="Top 10 Sex Toys For Men">
+          </a>
+        </li>
+        <li>
+          <a href="/pages/top-10-sex-toys-for-women">
+            <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/toptentoysforwomen1.jpg?12937296247882687627" alt="Top 10 Sex Toys For Women">
+          </a>
+        </li>
+        <li>
+          <a href="/pages/top-10-sex-toys-for-couples">
+            <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/toptentoysforcouples1.jpg?12937296247882687627" alt="Top 10 Sex Toys For Couples">
+          </a>
+        </li>
+      </ul>
+
+     </div>
+  </div>
+{% endif %}
+
+{% include 'sidebar-general', mobile: true, hide_sections: 'vibrators' %}
+
+<div class="ls-container">
+  {% include 'limespot-you-may-like' %}
+  {% include 'limespot-most-popular' %}
+  {% include 'limespot-recently-viewed' %}
+  {% include 'limespot-trending' %}
+</div>
+
+<style>
+  .collection_menu li a, .sidebar a {
+    color: #000;
+  }
+
+  .twelve.columns p {
+    color: #000;
+  }
+  div#buyer-guide.twelve.columns a {
+    color: #cc3366;
+  }
+  .article a {
+    text-transform: underline;
+  }
+
+  .sixteen.columns.article {
+    border-bottom: 1px solid #c6c5c3;
+  }
+
+  .container .blog_content {
+    padding-left: 5px;
+    padding-right: 5px;
+    border-left: solid 0px #dbe3e5;
+    padding-top: 5px;
+  }
+
+  @media only screen and (min-width: 780px) {
+    .paginate {
+      width: 100%;
+    }
+
+  }
+
+  .sidebar.four.columns {
+    margin-left: 0px;
+  }
+
+  h2 a {
+    text-decoration: underline!important;
+    font-weight: 800;
+    color: #a0346e!important;
+  }
+
+  .show-for-tablet a:nth-child(odd) {
+    margin-right: 5px;
+  }
+
+
+  a#art-title {
+    color: #cc3366;
+  }
+
+  .h1 {
+    font-size: 20px;
+    margin-bottom: 0px;
+    text-transform: none;
+    color: #cc3366;
+  }
+
+</style>

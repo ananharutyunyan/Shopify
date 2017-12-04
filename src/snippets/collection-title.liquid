@@ -1,0 +1,234 @@
+<!--snippets/collection-title.liquid -->
+{% if viz %} {% assign _viz = viz %} {% else %} {% assign _viz = 'hide-for-desktop' %}{% endif %}
+{% if toggle_viz %} {% assign _toggle_viz = toggle_viz %} {% else %} {% assign _toggle_viz = viz %}{% endif %}
+
+<div class="clearfix {{_viz}}">
+  <h1 class="coltitle">
+    {% case collection.handle %}
+    {% when 'male-toys-fleshlights' %} Fleshlights
+    {% when 'anal-sex-toys-beads' %} Anal Beads
+    {% when 'anal-sex-toys-dildos' %} Anal Dildos
+    {% when 'anal-sex-toys-probes' %} Anal Probes
+    {% when 'anal-sex-toys-hygiene' %} Anal Hygiene
+    {% when 'anal-sex-toys-animal-tail' %} Animal Tail Toys
+    {% when 'anal-sex-toys-beginner' %} Beginner Anal Toys
+    {% when 'anal-sex-toys-kit' %} Anal Toy Kits
+    {% when 'anal-sex-toys-butt-plugs' %} Butt Plug Toys
+    {% when 'anal-sex-toys-glass' %} Glass Anal Toys
+    {% when 'anal-sex-toys-inflatable' %} Inflatable Anal Toys
+    {% when 'anal-sex-toys-large' %} Large Anal Toys
+    {% when 'anal-sex-toys-prostate' %} Male Prostate Massagers
+    {% when 'anal-sex-toys-metal' %} Metal Anal Toys
+    {% when 'anal-sex-toys-small' %} Small Anal Toys
+
+    {% when 'butt-plugs-animal-tail' %} Animal Tail Butt Plugs
+    {% when 'butt-plugs-beginner' %} Beginner Butt Plugs
+    {% when 'butt-plugs-kit' %} Butt Plug Sets
+    {% when 'butt-plugs-glass' %} Glass Butt Plugs
+    {% when 'butt-plugs-inflatable' %} Inflatable Butt Plugs
+    {% when 'butt-plugs-jeweled' %} Jeweled Butt Plugs
+    {% when 'butt-plugs-large' %} Large Butt Plugs
+    {% when 'butt-plugs-metal' %} Metal Butt Plugs
+    {% when 'butt-plugs-non-vibe' %} Non-Vibrating Butt Plugs
+    {% when 'butt-plugs-vibrates' %} Vibrating Butt Plugs
+
+    {% when 'male-toys-cock-rings' %} Cock Rings
+    {% when 'male-toys-masturbators' %} Male Masturbators
+    {% when 'male-toys-vibrators' %} Male Vibrators
+    {% when 'male-toys-pumps' %} Penis Pumps & Enlargers
+    {% when 'male-toys-sleeves' %} Penis Sleeves & Extensions
+    {% when 'male-toys-prostate' %} Prostate Massagers
+    {% when 'male-toys-real-butts' %} Realistic Butts
+    {% when 'male-toys-real-vaginas' %} Realistic Vaginas
+    {% when 'male-toys-dolls' %} Sex Dolls
+    {% when 'male-toys-tenga' %} TENGA & Flip Hole
+    {% when 'male-toys-hollow' %} Hollow Strap On
+
+    {% when 'female-vibrators' %} Vibrators
+    {% when 'female-dildos' %} Dildos
+    {% when 'female-rabbits' %} Rabbit Vibrators
+    {% when 'female-clitoral' %} Clitoral Vibrators
+    {% when 'female-recharge' %} Rechargeable Vibrators
+    {% when 'female-luxury' %} Luxury Vibrators
+    {% when 'female-g-spot' %} G-Spot Vibrators
+    {% when 'female-anal-toys' %} Anal Toys
+    {% when 'female-ben-wa-balls' %} Ben Wa Balls
+    {% when 'female-nipple-toys' %} Nipple Toys
+    {% when 'female-essentials' %} Essentials For Her
+
+    {% when 'couples-cock-rings' %} Couples Cock Rings
+    {% when 'couples-bondage' %} Bondage Toys
+    {% when 'couples-swings' %} Sex Swings
+    {% when 'couples-furniture' %} Sex Furniture
+    {% when 'couples-sex-toys' %} Couples Sex Toys
+    {% when 'couples-games' %} Sex Games
+    {% when 'couples-enhancers' %} Sex Enhancers
+
+    {% when 'vibrators' %} Vibrators
+    {% when 'vibrators-anal' %} Anal Vibrators
+    {% when 'vibrators-bullet' %} Bullet Vibrators
+    {% when 'vibrators-butterfly' %} Butterfly Vibrators
+    {% when 'vibrators-classic' %} Classic Vibrators
+    {% when 'vibrators-clitoral' %} Clitoral Vibrators
+    {% when 'vibrators-couples' %} Couples Vibrators
+    {% when 'vibrators-discreet' %} Discreet Vibrators
+    {% when 'vibrators-dual' %} Dual Action Vibrators
+    {% when 'vibrators-quiet' %} Extra Quiet Vibrators
+    {% when 'vibrators-g-spot' %} G-Spot Vibrators
+    {% when 'vibrators-large' %} Large Sized Vibrators
+    {% when 'vibrators-luxury' %} Luxury Vibrators
+    {% when 'vibrators-wand' %} Magic Wand Vibrators
+    {% when 'vibrators-massager' %} Massager Vibrators
+    {% when 'vibrators-rabbit' %} Rabbit Vibrators
+    {% when 'vibrators-realistic' %} Realistic Dildo Vibrators
+    {% when 'vibrators-kit' %} Vibrator Sets
+    {% when 'vibrators-remote' %} Remote Control Vibrators
+    {% when 'vibrators-finger' %} Finger & Tongue Vibrators
+    {% when 'vibrators-egg' %} Egg Vibrators
+    {% when 'vibrators-recharge' %} Rechargeable Vibrators
+    {% when 'vibrators-attachments' %} Vibrator Attachments
+
+    {% when 'strap-ons-harnesses-beginner' %} Beginner Strap Ons
+    {% when 'strap-ons-harnesses-hollow' %} Hollow Strap Ons
+    {% when 'strap-ons-harnesses-lesbian' %} Lesbian Strap Ons
+    {% when 'strap-ons-harnesses-kit' %} Strap On Harnesses & Kits
+    {% when 'strap-ons-harnesses-strapless' %} Strapless Strap Ons
+    {% when 'strap-ons-harnesses-dildos' %} Strap On Dildos
+    {% when 'strap-ons-harnesses-vac-u-loc' %} Vac U Lock Strap Ons
+    {% when 'strap-ons-harnesses-vibrates' %} Vibrating Strap Ons
+
+    {% when 'bondage-gear-beginner' %} Beginner Bondage
+    {% when 'bondage-gear-kit' %} Bondage Kits
+    {% when 'bondage-gear-blindfolds-masks-gags' %} Blindfolds, Masks & Gags
+    {% when 'bondage-gear-chastity' %} Chastity Devices
+    {% when 'bondage-gear-electro' %} Electro Sex Toys
+    {% when 'bondage-gear-handcuffs-restraints' %} Handcuffs & Restraints
+    {% when 'bondage-gear-nipple-clitoral' %} Nipple & Clitoral Toys
+    {% when 'bondage-gear-furniture' %} Sex Furniture
+    {% when 'bondage-gear-sex-swings-machines' %} Sex Swings & Machines
+    {% when 'bondage-gear-spankers-ticklers' %} Spankers,Ticklers & Whips
+
+    {% when 'kegel-health-toys-kegel' %} Kegel Exercisers & Sets
+    {% when 'kegel-health-toys-ben-wa' %} Ben Wa Balls
+    {% when 'kegel-health-toys-vibrating-eggs' %} Vibrating Love Eggs
+    {% when 'kegel-health-toys-remote-eggs' %} Remote Control Love Eggs
+
+    {% when 'sex-essentials-lube-anal' %} Anal Lubricants
+    {% when 'sex-essentials-lube-cooling' %} Cooling Lubricants
+    {% when 'sex-essentials-lube-flavored' %} Flavored Lubricants
+    {% when 'sex-essentials-lube-masturbation' %} Masturbation Creams
+    {% when 'sex-essentials-lube-organic' %} Organic Lube
+    {% when 'sex-essentials-lube' %} Lubricants
+    {% when 'sex-essentials-oils-creams-massage' %} Erotic Massage Oils & Creams
+    {% when 'sex-essentials-lube-silicone' %} Silicone Lubricants
+    {% when 'sex-essentials-lube-stim' %} Stimulating Lubricants
+    {% when 'sex-essentials-lube-vegan' %} Vegan Lubricants
+    {% when 'sex-essentials-lube-warming' %} Warming Lubricants
+    {% when 'sex-essentials-lube-water' %} Water Based Lubricants
+    {% when 'sex-essentials-lube-women' %} Female Lubricants
+    {% when 'sex-essentials-better-anal' %} Better Anal Sex
+    {% when 'sex-essentials-better-her' %} Better Sex for Her
+    {% when 'sex-essentials-better-him' %} Better Sex for Him
+    {% when 'sex-essentials-condoms' %} Safe Sex & Condoms
+    {% when 'sex-essentials-battery' %} Batteries
+    {% when 'sex-essentials-cleaners' %} Cleaners
+    {% when 'sex-essentials-storage' %} Toy Storage
+    {% when 'sex-essentials-toy-accessories' %} Toy Accessories
+
+    {% when 'cock-rings-adjustable' %} Adjustable Cock Rings
+    {% when 'cock-rings-set' %} Cock Ring Sets
+    {% when 'cock-rings-double' %} Double Cock Rings
+    {% when 'cock-rings-metal' %} Metal Cock Rings
+    {% when 'cock-rings-non-vibe' %} Non Vibrating Cock Rings
+    {% when 'cock-rings-rabbit' %} Rabbit Cock Rings
+    {% when 'cock-rings-stretchy' %} Stretchy Cock Rings
+    {% when 'cock-rings-vibrates' %} Vibrating Cock Rings
+    {% when 'cock-rings-couples' %} Couples Cock Rings
+
+    {% when 'lingerie-babydolls-chemise' %} Babydolls & Chemises
+    {% when 'lingerie-bikini-set' %} Bikini Sets
+    {% when 'lingerie-bodystockings' %} Bodystockings
+    {% when 'lingerie-boxer-briefs' %} Boxers & Briefs
+    {% when 'lingerie-bras' %} Bras & Bra Sets
+    {% when 'lingerie-corsets' %} Corsets
+    {% when 'lingerie-costumes' %} Costumes
+    {% when 'lingerie-crotchless' %} Crotchless Lingerie
+    {% when 'lingerie-set' %} Lingerie Sets
+    {% when 'lingerie-male' %} Male Lingerie
+    {% when 'lingerie-fetish-men' %} Men's Fetishwear
+    {% when 'lingerie-peek-a-boo' %} Peek-A-Boo Lingerie
+    {% when 'lingerie-plus-babydoll' %} Plus Size Babydoll
+    {% when 'lingerie-plus-corsets' %} Plus Size Corsets
+    {% when 'lingerie-plus-size' %} Plus Size Lingerie
+    {% when 'lingerie-underwear' %} Sexy Underwear
+    {% when 'lingerie-strocking-set' %} Stocking Sets
+    {% when 'lingerie-stockings' %} Stockings
+    {% when 'lingerie-thongs-g-strings' %} Thongs & G-Strings
+    {% when 'lingerie-fetish-women' %} Women's Fetishwear
+
+    {% when 'games-gifts-drinking' %} Drinking Games
+    {% when 'games-gifts-massage' %} Erotic Massage
+    {% when 'games-gifts-hen' %} Hen Party Goodies
+    {% when 'games-gifts-candles' %} Massage Candles
+    {% when 'games-gifts-edibles' %} Naughty Edibles
+    {% when 'games-gifts-novelty' %} Novelty Gifts
+    {% when 'games-gifts-moulding' %} Penis Moulding Kits
+    {% when 'games-gifts-dice' %} Sex Dice
+    {% when 'games-gifts-sex' %} Sex Games
+
+    {% when 'dildos-black' %} Black Dildos
+    {% when 'dildos-double' %} Double Dildos
+    {% when 'dildos-ejaculating' %} Ejaculating Dildos
+    {% when 'dildos-glass' %} Glass Dildos
+    {% when 'dildos-harness' %} Harness Dildos
+    {% when 'dildos-homemade' %} Dildo Molding Kits
+    {% when 'dildos-large' %} Large Dildos
+    {% when 'dildos-metal' %} Metal Dildos
+    {% when 'dildos-realistic' %} Realistic Dildos
+    {% when 'dildos-silicone' %} Silicone Dildos
+    {% when 'dildos-small' %} Small Dildos
+    {% when 'dildos-strapless' %} Strapless Dildos
+    {% when 'dildos-vibrates' %} Vibrating Dildos
+    {% when 'dildos-suction-cup' %} Suction Cup Dildos
+    {% when 'dildos-porn-star' %} Porn Star Dildos
+    {% when 'dildos-g-spot' %} G-Spot Dildos
+
+    {% when 'sexy-lingerie-costumes' %} Sexy Costumes
+    {% when 'sexy-lingerie-stockings' %} Stockings & Hosiery
+    {% when 'sexy-lingerie-plus' %} Sexy Plus Size Lingerie
+    {% when 'sexy-lingerie-sets' %} Lingerie & Sets
+    {% when 'sexy-lingerie-bras' %} Bras & Bra Sets
+    {% when 'sexy-lingerie-panties' %} Sexy Panties
+
+    {% when 'couples-strap-ons' %} Strap Ons
+    {% when 'couples-vibrators' %} Vibrators For Couples
+    {% when 'couples-dildos' %} Dildos For Couples
+
+    {% when 'anal-sex-toys-jeweled' %} Jeweled Anal Toys
+
+    {% when 'all' %} Sex Toys
+    {% when 'new' %} New Sex Toys
+
+
+    {% when 'sale' %} Sex Toy Sale
+
+    {% else %}
+      {% if collection %}
+        {{ collection.title }}
+      {% else %}
+        {% if blog.url == "/blogs/help-center" %} Help Center
+        {% elsif blog.url == "/blogs/buyer-guides" %} Buyer Guides
+        {% elsif page.url == "/pages/deals-specials" %} Sex Toy Specials
+        {% elsif page.url == "/pages/brands" %} Brands
+        {% elsif page.url == "/pages/best-sellers" %} Best Selling Sex Toys
+        {% endif %}
+      {% endif %}
+    {% endcase %}
+
+  </h1>
+
+  {% unless toggle == false %}
+    <div class="filter-toggle {{_toggle_viz}}"><img src="{{ '../assets/images/mobile-filter-btn.png' | asset_url }}"></div>
+  {% endunless %}
+
+</div>

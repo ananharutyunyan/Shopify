@@ -1,0 +1,73 @@
+<h4 style="margin-bottom:10px;">Explore More From Our Collections...</h4>
+
+{% if product.metafields.cat.main == "vibrator" %}
+ {% for collection in product.collections  %}
+ {% if collection.handle contains "vibrators-" %}
+<ul style="margin-bottom: 0px;list-style: none;
+    margin-left: 0px;
+">
+   <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}>
+<div class="breadcrumbs">
+<a class="homepage-link" title="Back to the home">Sex Toys</a> <span class="separator">&rsaquo;</span>
+  <span class="page-title"><a href="/collections/vibrators" class="homepage-link">Vibrators</a></span>
+  <span class="separator">&rsaquo;</span>
+  <span class="page-title"><a href="/collections/{{ collection.handle }}" class="homepage-link">{{ collection.title }}</a></span>
+</div>
+  </li></ul>
+ {% endif %}
+ {% endfor %}
+{% endif %}
+{% if product.metafields.cat.main == "dildo" %}
+ {% for collection in product.collections  %}
+ {% if collection.handle contains "dildos-" %}
+<ul style="margin-bottom: 0px;list-style: none;
+    margin-left: 0px;
+">
+   <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}>
+<div class="breadcrumbs">
+<a class="homepage-link" title="Back to the home">Sex Toys</a> <span class="separator">&rsaquo;</span>
+  <span class="page-title"><a href="/collections/dildos" class="homepage-link">Dildos</a></span>
+  <span class="separator">&rsaquo;</span>
+  <span class="page-title"><a href="/collections/{{ collection.handle }}" class="homepage-link">{{ collection.title }}</a></span>
+</div>
+  </li></ul>
+ {% endif %}
+ {% endfor %}
+{% endif %}
+{% if product.metafields.cat.main == "anal-sex-toys" %}
+ {% for collection in product.collections  %}
+ {% if collection.handle contains "anal-sex-toys-" %}
+<ul style="margin-bottom: 0px;list-style: none;
+    margin-left: 0px;
+">
+   <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}>
+<div class="breadcrumbs">
+<a class="homepage-link" title="Back to the home">Sex Toys</a> <span class="separator">&rsaquo;</span>
+  <span class="page-title"><a href="/collections/anal-sex-toys" class="homepage-link">Anal Sex Toys</a></span>
+  <span class="separator">&rsaquo;</span>
+  <span class="page-title"><a href="/collections/{{ collection.handle }}" class="homepage-link">{{ collection.title }}</a></span>
+</div>
+  </li></ul>
+ {% endif %}
+ {% endfor %}
+{% endif %}
+{% if product.metafields.cat.main == "male-toy" %}
+ {% for collection in product.collections  %}
+ {% if collection.handle contains "male-toys-" %}
+<ul style="margin-bottom: 0px;list-style: none;
+    margin-left: 0px;
+">
+   <li{% cycle ' style="clear:both;"', '', '', ' class="last"' %}>
+<div class="breadcrumbs">
+<a class="homepage-link" title="Back to the home">Sex Toys</a> <span class="separator">&rsaquo;</span>
+  <span class="page-title"><a href="/collections/male-toys" class="homepage-link">Male Sex Toys</a></span>
+  <span class="separator">&rsaquo;</span>
+  <span class="page-title"><a href="/collections/{{ collection.handle }}" class="homepage-link">{{ collection.title }}</a></span>
+</div>
+  </li></ul>
+ {% endif %}
+ {% endfor %}
+{% endif %}
+<a href="/collections/{{product.vendor | handleize }}"> <p> All {{ product.vendor }} products</p></a>
+<br>
+

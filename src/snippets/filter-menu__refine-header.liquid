@@ -1,0 +1,6 @@
+<div class="filter-group refine-header">
+  <h4>Refine</h4>
+  {% unless collection.handle == 'all' or collection.handle == nil and current_tags == nil %}
+    <a class="filter-clear" href="/collections/all">view all</a>
+  {% endunless %}
+</div>

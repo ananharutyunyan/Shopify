@@ -1,0 +1,28 @@
+<!-- snippets/head__meta.liquid -->
+
+<meta charset="utf-8">
+<meta http-equiv="cleartype" content="on">
+<meta name="robots" content="index,follow">
+<!-- Mobile Specific Metas -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+{% include 'head__collection-meta-descriptions' %}
+{% include "head__social-meta-info" %}
+
+{% if template contains 'collection' and current_tags %}
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="{{ shop.url }}{{ collection.url }}" />
+{% elsif template contains "page" %}
+  <meta name="robots" content="follow" />
+  <link rel="canonical" href="{{ shop.url }}{{ page.url }}" />
+{% else %}
+  <link rel="canonical" href="{{ canonical_url }}" />
+{% endif %}
+
+{% if product.metafields.inventory.ShappifyHidden == "true" %}
+<meta name="robots" content="noindex">
+{% endif %}
+
+<!-- END: snippets/head__meta.liquid -->

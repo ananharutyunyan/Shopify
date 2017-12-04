@@ -1,0 +1,5 @@
+driver: :webkit
+
+urls:
+  store:
+    https://www.simplipleasure.com

@@ -1,0 +1,14 @@
+<script>
+  if (!window.SP) window.SP = {}
+  const SP = window.SP
+  Object.assign(SP, {
+    t: {
+      products: {
+        product: {
+          soldOut: "{{ 'products.product.sold_out' | t }}",
+          unavailable: "{{ 'products.product.unavailable' | t  }}"
+        }
+      }
+    }
+  })
+</script>

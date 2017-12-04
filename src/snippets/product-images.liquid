@@ -1,0 +1,47 @@
+<!--snippets/product-images.liquid -->
+
+{% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+
+<div class="product__slider-container">
+
+  {% unless product.title contains "Mystery" %}
+    <div id="badges__product_banner" class="badges__guarantee_banner"><a href="javascript:void(0)" class="badges__guarantee_link"></a></div>
+  {% endunless %}
+
+  <div class="product__slider-large product__slider">
+    {% for image in product.images %}
+      {% if featured_image.id == image.id %}
+        {% assign _imgClass = "featured_image" %}
+      {% else %}
+        {% assign _imgClass = "" %}
+      {% endif %}
+      {% assign _zoomId = "xzoom" | append: image.id %}
+      <div data-src="{{ image | product_img_url: 'master', format: 'pjpg' }}" data-title="{{ product.title }}" data-fancybox="product-images">
+        <img data-lazy="{{ image | product_img_url: '600x', format: 'pjpg' }}" class="product__image-slide {{_imgClass}}" alt="{{ product.title }}"  itemprop="image" data-zoom-image="{{ image | product_img_url: 'master', format: 'pjpg' }}"/>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="product__slider-nav product__slider">
+    {% for image in product.images %}
+      <div data-title="{{ product.title }}" class="product__slider-title">
+        <img data-lazy="{{ image | product_img_url: '86x', format: 'pjpg' }}" alt="{{ product.title }}" {% if featured_image.id == image.id %}class="featured_image"{% endif %} itemprop="image" data-image-id="{{image.id}}" />
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- capture _product_video -->
+{% capture _product_video %}
+  {% include 'product-videos' %}
+{% endcapture %}
+{% if _product_video contains "product__video-frame" %}
+  <!-- _product_video -->
+  {{ _product_video }}
+{% endif %}
+
+{% unless product.title contains "Mystery" %}
+  <div id="badges__product_banner_mobile" class="badges__guarantee_banner"><a href="javascript:void(0)" class="badges__guarantee_link"></a></div>
+{% endunless %}
+
+<!-- END: snippets/product-images.liquid -->

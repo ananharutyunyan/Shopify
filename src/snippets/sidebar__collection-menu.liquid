@@ -1,0 +1,28 @@
+<!-- snippets/sidebar__collection-menu.liquid category_toggle_viz: {{category_toggle_viz}}-->
+{% case  category_toggle_viz %}
+  {% when 'hidden' %}
+    {% assign _category_toggle_viz = 'hidden' %}
+    {% assign _view_all_viz = '' %}
+    {% assign _toggle_class = '' %}
+  {% when 'hide-for-desktop' %}
+    {% assign _category_toggle_viz = 'hide-for-desktop' %}
+    {% assign _view_all_viz = 'show-for-desktop' %}
+    {% assign _toggle_class = 'toggle_list' %}
+  {% else %}
+    {% assign _category_toggle_viz = '' %}
+    {% assign _view_all_viz = 'hidden' %}
+    {% assign _toggle_class = 'toggle_list' %}
+{% endcase %}
+
+{% unless endblock %}
+<div class="filter-group filter-group-{{sidebar_parent}}">
+  {% include 'sidebar__collection-title' with sidebar__collection-menu, dbg: 'from snippets/sidebar__collection-menu.liquid', viz: _view_all_viz %}
+
+  <h4 class="toggle {{_category_toggle_viz}}"><span>+</span>Choose Category</h4>
+
+  <ul class="nav-toys {{_toggle_class}}">
+    <li class="{{_view_all_viz}}"><div class="collection-name"><a href="/collections/{{sidebar_parent}}">< View All Categories</a></div></li>
+{% else %}
+  </ul>
+</div>
+{% endunless %}

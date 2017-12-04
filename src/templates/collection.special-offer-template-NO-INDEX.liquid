@@ -1,0 +1,164 @@
+
+<meta name="robots" content="noindex">
+
+{% paginate collection.products by 48 %}
+  {% assign tag_count = collection.all_tags | size %}
+  {% assign tag_threshold = 5 | minus: 0 %}
+
+  <div class="sixteen columns clearfix collection_nav">
+    {% include 'breadcrumbs' %}
+    <div class="ten columns alpha">
+    </div>
+  </div>
+
+  {% if collection.description != blank %}
+    <div class="sixteen columns">
+      <div class="section clearfix">
+        {{ collection.description }}
+      </div>
+    </div>
+  {% endif %}
+
+
+
+
+
+  {% if collection.handle == 'buy-2-save-20' %}
+<div class="twelve columns hide-for-desktop">
+    <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/2_13.png?17247280946281691152" width="98%">
+</div>{% endif %}
+{% include 'sidebar-general', mobile: false, hide_sections: 'vibrators' %}
+    <div class="twelve columns">
+
+  <div class="twelve columns">
+       {% if collection.handle == 'glass-dildo-special-bundle-offer' %}
+
+<img src="https://cdn.shopify.com/s/files/1/0386/0093/files/CHOOSE_2_FOR_80.png?15903489936210204260" width="98%">
+      <p>Buy any 2 Glass Dildos in this offer, and each will only cost $40! You can save up to 40%!<br>Your discount will be applied when both are added to your cart.</p>
+
+
+      {% endif %}
+
+      {% if collection.handle == 'buy-2-save-20' %}
+    <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/2_13.png?3604061244453913425" width="98%">
+    <p>Choose any 2 luxury vibrators below and save $20 on your entire order -- PLUS you'll get it shipped for FREE!</p>
+    {% endif %}
+      {% if collection.handle == 'sale-50' %}
+    <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/second_one.jpg?1506069274947147375" width="98%">
+    <p>Sex toys at crazy prices - hurry, stock is strictly limited...</p>
+
+      {% elsif collection.handle == 'luxury-sex-toy-specials-1' %}
+
+<img src="https://cdn.shopify.com/s/files/1/0386/0093/files/sex_tosdczys_for_30_less_12.png?14411792217848907112" width="98%">
+
+    <br>
+    {% endif %}
+
+
+
+
+      {% if collection.handle == 'rabbit-g-spot-special' %}
+    <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/asdasdasdasda.png?2002100132862404084" width="98%">
+    {% endif %}
+
+    <!-- OFFERS FOR ADDIE -- INSTALL IMAGE CODE HRE IF NEEDED !-->
+
+       {% if collection.handle == 'new-sex-toys' %}
+
+   <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/banner1REVISED_db367995-8c70-4a3a-ba0d-508d05279062.jpg?16117660547076594520" width="98%">
+    {% endif %}
+
+       {% if collection.handle == 'offer-210' %}
+    <h4> 20% Off Rabbits & Clitoral Vibrator Sale  </h4>
+
+    {% endif %}
+    {% if collection.handle == 'offer-211' %}
+
+ <h4> 20% Off Anal Toys & Lube Sale </h4>
+    {% endif %}
+    {% if collection.handle == 'offer-212' %}
+    <h4> 20% Off Cal Exotics Dildos  </h4>
+
+    {% endif %}
+    {% if collection.handle == 'offer-213' %}
+    <h4>  20% Off Clitoral Vibrators & Kegel Health Toys </h4>
+
+    {% endif %}
+    {% if collection.handle == 'offer-214' %}
+    <h4>  20% Off Male Sex Toys </h4>
+
+    {% endif %}
+    {% if collection.handle == 'offer-215' %}
+
+ <h4>  20% Off Womens Sex Toys </h4>
+    {% endif %}
+    {% if collection.handle == 'offer-216' %}
+    <h4>  20% Off Couples Sex Toys </h4>
+
+    {% endif %}
+     {% if collection.handle == 'offer-217' %}
+    <h4>  20% Off Best Selling Dildos & Lube Sale </h4>
+
+    {% endif %}
+     {% if collection.handle == 'offer-218' %}
+
+ <h4> 20% Off 300+ Best Selling Vibrators Sale  </h4>
+    {% endif %}
+
+     {% if collection.handle == 'test-collection' %}
+
+    <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/BUY_3_SAVE_25.png?15852361036324088880" width="98%">
+
+    <p>THis is a test blurb for the test headline -- make sure you capture this deal before END DATE</p>
+    {% endif %}
+
+      <h6>Products in this offer</h6>
+      </div>
+
+{% if current_tags %}
+<div class="filter-group">
+<strong>Current Tags:</strong>
+
+<span class="clear2">
+{% for tag in collection.all_tags %}
+    {% if current_tags contains tag %}
+
+  		{% if tag == 'sale' %}
+  		<span class="filter-clear2">{{ tag | link_to_remove_tag: tag }}</span>
+  		{% else %}
+    	{% assign tag_collection = collections[tag] %}
+ 		<span class="filter-clear2">{{ tag_collection.title | link_to_remove_tag: tag }}</span>
+    	{% endif %}
+    {% endif %}
+{% endfor %}
+  <span class="filter-clear3"><a href="{{ collection.url }}">Clear All</a></span></span>
+  </div>
+
+
+{% endif %}
+
+
+  {% include 'sort-and-paginate' %}
+
+  {% if collection.products.size == 0 %}
+    <div class="center">
+      <div class="section clearfix">
+        <p class="quote">{{ 'collections.general.no_matches' | t }}</p>
+      </div>
+    </div>
+  {% else %}
+    <div class="main_product_list_sec">
+    {% assign products = collection.products %}
+
+    {% assign products_per_row = 4 %}
+
+    {% include 'product-loop'  %}
+    </div>
+  {% endif %}
+  </div>
+
+  {% include 'pagination' with 'below' %}
+{% endpaginate %}
+
+
+{% include 'sidebar-general', mobile: true, hide_sections: 'vibrators' %}

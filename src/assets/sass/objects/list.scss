@@ -1,0 +1,15 @@
+.o-list {
+  box-sizing: border-box;
+  list-style: none;
+  margin: 0;
+}
+
+  .o-list--bullet {
+    margin-left: 20px;
+
+    li:before {
+      content: '\2014';
+      position: absolute;
+      margin-left: -20px;
+    }
+  }

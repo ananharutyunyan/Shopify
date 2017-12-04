@@ -1,0 +1,21 @@
+{% if page.handle  == 'search-results' %}
+  {% layout "search" %}
+{% endif %}
+    <meta name="robots" content="noindex,nofollow">
+
+<script type="text/javascript">
+console.log(window.location.href);
+console.log("page.handle: {{ page.handle }}");
+console.log(window.location);
+</script>
+<link rel="stylesheet" type="text/css" href='{{ "pre-cart-2.css" | asset_url }}'>
+
+<div class="sixteen columns clearfix collection_nav">
+  <h1 class="collection_title">
+    {{ page.title }}
+  </h1>
+</div>
+
+<div class="sixteen columns page">
+    {{ page.content }}
+</div>

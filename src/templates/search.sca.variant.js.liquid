@@ -1,0 +1,5 @@
+{% layout none %}{% capture results %}{% paginate search.results by search.results_count %}{% for item in search.results %}{% assign product = item %}{"id":{{ product.id | json }},"variants":{{ product.variants | json }}}{% unless forloop.last %},{% endunless %}{% endfor %}{% endpaginate %}{% endcapture %}{% capture script %}{"results_count":{{ search.results_count }},"terms":{{search.terms|json}},"results":[{{ results }}]}{% endcapture %}{{script}}
+{% comment %}
+Do not remove or edit this file, this file need for Freegifts Application searching products
+http://www.secomapp.com
+{%endcomment %}

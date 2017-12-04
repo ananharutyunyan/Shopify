@@ -1,0 +1,53 @@
+<!-- snippets/filter-menu.liquid -->
+
+<style type="text/css">
+  {{ shop.metafields.pt_filter_css['system'] }}
+  {{ shop.metafields.pt_filter_css['user'] }}
+</style>
+
+{% include 'filter-menu__refine-header' %}
+
+{% unless collection.handle != nil and template contains 'collection' %}
+  {% include 'filter-menu__pt-menu' %}
+{% else%}
+  {% assign tag_list = collection.tags %}
+  {% assign current_collection_handle = collection.handle %}
+    {% assign displayed_collection_handles = '|' %}
+
+  {% if collection.metafields.sort_primary.collection_handle %}
+    {% assign current_collection_handle = collections[collection.metafields.sort_primary.collection_handle].handle %}
+  {% endif %}
+
+  {% for menu_header in shop.metafields.pt_filter_menu %}
+    <!-- handling menu_header: {{menu_header}}-->
+    {% assign has_items = false %}
+    {% assign has_selected = false %}
+    {% assign current_selected = '|' %}
+    {% assign menu_key = menu_header.first %}
+    {% assign menu_items = menu_header.last | split: ',' %}
+
+    {% for menu_item in menu_items %}
+      {% assign filter_collection = collections[menu_item] %}
+      {% if tag_list contains menu_item or current_tags contains menu_item or current_collection_handle == menu_item %}
+        {% assign has_items = true %}
+        {% if current_tags contains menu_item or current_collection_handle == menu_item %}
+          {% assign has_selected = true %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    <!-- has_items: {{has_items}} -->
+    {% if has_items %}
+      <div class="filter-group filter-group-{{ menu_key | split: '-' | last }}  {% if has_selected %}has_group_selected{% endif %}">
+        <h4 class="toggle"><span>+</span>{{ shop.metafields.pt_filter_header[menu_key] }}</h4>
+
+        {% if shop.metafields.pt_filter_type[menu_key] == 'select' %}
+          {% include 'filter-menu__select' %}
+        {% else %}
+          {% include 'filter-menu__checkbox-group' %}
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endfor %}
+
+
+{% endunless %}

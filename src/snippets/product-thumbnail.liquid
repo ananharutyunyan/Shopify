@@ -1,0 +1,64 @@
+<!-- snippets/product-thumbnail.liquid -->
+{% assign progressive = true %}
+{% if progressive %}
+  {% assign thumbnail_css = "thumbnail progressive" %}
+  {% assign _product_image_url = product.featured_image | img_url: '200x200', format: 'pjpg' %}
+{% else %}
+  {% assign thumbnail_css = "thumbnail" %}
+  {% assign _product_image_url = product.featured_image | product_img_url: '200x' %}
+{% endif %}
+
+<div class="product_listing {{thumbnail_css}}">
+  {% if product.featured_image.alt contains 'youtube' or image.alt contains 'vimeo' %}
+    {% assign alt_text = product.title %}
+  {% else %}
+    {% assign alt_text = product.title %}
+  {% endif %}
+
+  <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+    <img class="product_listing__img lazy" data-src="{{_product_image_url}}" alt="{{ product.title }}" />
+    {% for variant in product.variants %}
+      {% if product.compare_at_price_max > product.price and product.available %}
+        <div class="banner-container">
+          <div class="sale_banner">Sale</div>
+        </div>
+      {% endif %}
+    {% endfor %} </a>
+    <div class="info">
+      <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}" itemprop="url">
+        <span class="title" itemprop="name">{{ product.title }}</span>
+      </a>
+    </div>
+    <div class="starprice">
+      <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+        <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ product.id }}">{{ product.metafields.stamped.badge }}</span>
+        <span class="price {% if product.compare_at_price_max > product.price %}sale{% endif %}" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+        <meta itemprop="price" content="{{ product.price_min | money_without_currency }}" />
+        <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+        <meta itemprop="seller" content="{{ shop.name | escape }}" />
+        <meta itemprop="availability" content="{% if product.available %}in_stock{% else %}out_of_stock{% endif %}" />
+        <meta itemprop="itemCondition" content="New" />
+        {% if product.available %}
+          {% if product.price_varies %}
+            <small><em>from</em></small>
+          {% endif %}
+          {% include 'shappify-qb-min-price' with product %}
+        {% else %}
+          <span class="sold_out">Sorry, Out Of Stock</span>
+        {% endif %}
+        {% if product.compare_at_price_max > product.price and product.available %}
+          <span class="was_price">{{ product.compare_at_price_max | money }}</span>
+        {% endif %}
+      </span>
+    </a>
+  </div>
+
+  {% for col in product.collections %}
+    {% if col.handle == 'new' %}
+      <div class="banner-container">
+        <div class="new_banner">New</div>
+      </div>
+    {% endif %}
+  {% endfor %}
+
+</div>

@@ -1,0 +1,20 @@
+div#breadcrumb {
+  margin-left: 10px;
+}
+
+div#breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+
+div#breadcrumb a:visited {
+  color: #cc3366;
+}
+
+
+@media only screen and (max-width: 479px) {
+  input.search_box {
+    width: 90% !important;
+  }
+}
+

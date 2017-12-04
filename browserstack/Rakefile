@@ -1,0 +1,78 @@
+require 'rake'
+require 'parallel'
+require 'yaml'
+require 'active_support/core_ext/hash'
+require 'active_support/core_ext/string'
+require 'cucumber/rake/task'
+
+
+module ThemeConfig
+  extend self
+  def config
+    @config ||= YAML.load(File.read(File.join(File.dirname(__FILE__), "../config.yml"))).with_indifferent_access
+  end
+  def current_theme_id
+    config[:development][:theme_id]
+  end
+end
+
+namespace :features do
+  namespace :dev do
+
+    # set site url to a theme preview
+    desc "set $STORE_URL to a link to the current theme preview"
+    task :set_url do
+      tid = Integer(ENV.fetch('SP_THEME_ID'){ ThemeConfig.current_theme_id } )
+      ENV['STORE_URL'] = "https://www.simplipleasure.com/?preview_theme_id=#{tid.to_s}"
+      puts "set url to:"
+      puts ENV['STORE_URL']
+    end
+
+    task :local { ENV['CONFIG_NAME'] = "local" }
+    Cucumber::Rake::Task.new(:local, "run @dev features in Chrome on theme SP_THEME_ID, locally") do |task|
+      task.cucumber_opts = ['--format=pretty', '--tags @dev']
+    end
+
+    namespace :local do
+      task :all { ENV['CONFIG_NAME'] = "local" }
+      Cucumber::Rake::Task.new(:all, "run all features in Chrome on theme SP_THEME_ID, locally") do |task|
+        task.cucumber_opts = ['--format=pretty']
+      end
+    end
+
+    Rake::Task['features:dev:local'].enhance ['features:dev:set_url']
+    Rake::Task['features:dev:local:all'].enhance ['features:dev:set_url']
+  end
+
+
+
+  task :live { ENV['CONFIG_NAME'] = "live" }
+  Cucumber::Rake::Task.new(:live, "run all non-dev features in Chrome on the live site") do |task|
+    task.cucumber_opts = ['--format=pretty', '--tags ~@dev']
+  end
+
+  namespace :live do
+    desc "run all features on multiple browsers on the live site"
+    task :parallel do |t, args|
+      @num_parallel = 5
+
+      Parallel.map([*1..@num_parallel], :in_processes => @num_parallel) do |task_id|
+        ENV["TASK_ID"] = (task_id - 1).to_s
+        ENV['name'] = "parallel_test"
+        ENV['CONFIG_NAME'] = "live-parallel"
+
+        Rake::Task["features:live"].invoke
+        Rake::Task["features:live"].reenable
+      end
+    end
+
+    task :local { ENV['CONFIG_NAME'] = "local" } # warning these only work when they come BEFORE the corresponding Cucumber::Rake::Task.new
+    Cucumber::Rake::Task.new(:local, "run all features in Chrome on the live site, locally") do |task|
+      task.cucumber_opts = ['--format=pretty', '--tags ~@dev']
+    end
+  end
+end
+
+
+
+task :default => 'features:live'

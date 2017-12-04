@@ -1,0 +1,9 @@
+<!--snippet: search-sort-paginate -->
+<div class="paginate" style="width:100%;">
+  {% include 'pagination' %}
+  <script>
+    if($('.paginate .pagenav').length == 0){
+      $('#sort-by-coll').addClass('pages-not-found');
+    }
+  </script>
+</div>

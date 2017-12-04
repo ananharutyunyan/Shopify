@@ -1,0 +1,117 @@
+<!--snippets/footer-theme.liquid -->
+
+{% unless favourite_toys_linklist %}
+  {% assign favourite_toys_linklist = "new-footer-links" %}
+{% endunless %}
+
+<div class="footer">
+  <div class="container">
+    <div class="four columns">
+
+     <h6>Get In Touch With Us</h6>
+      <ul class="footer_menu">
+        <li><a href="tel:+18009186308"><b>1-800-918-6308</b></a></li>
+        <li><a href="mailto:care@simplipleasure.com">care@simplipleasure.com</a></li>
+        <li>Get Live Help Now</li>
+      </ul>
+
+
+
+      <h6>100% Secure Shopping</h6>
+      <ul class="footer_menu">
+        {% if  include_authorize_net_seal %}
+          <li><!-- (c) 2005, 2015. Authorize.Net is a registered trademark of CyberSource Corporation -->
+            <div class="AuthorizeNetSeal"> <script type="text/javascript" language="javascript">var ANS_customer_id="864b9796-2643-426c-ae0d-33b20f2660a6";</script>
+              <script type="text/javascript" language="javascript" src="//verify.authorize.net/anetseal/seal.js" ></script>
+              <a href="http://www.authorize.net/" id="AuthorizeNetText" target="_blank"></a>
+            </div>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <div class="three columns">
+      <h6>{{ linklists['top'].title }}</h6>
+      <ul class="footer_menu">
+        {% if shop.customer_accounts_enabled %}
+          {% if customer %}
+            <li>
+              <a href="/account">{{ customer.name }}</a>
+            </li>
+            <li>
+              {{ 'layout.customer.log_out' | t | customer_logout_link }}
+            </li>
+          {% else %}
+            <li>
+              {{ 'layout.customer.my_account' | t | customer_login_link }}
+            </li>
+          {% endif %}
+        {% endif %}
+
+        {% for link in linklists['top'].links %}
+          <li><a href="{{ link.url }}" >{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="three columns">
+      <h6>{{ linklists['about-us'].title }}</h6>
+      <ul class="footer_menu">
+        {% for link in linklists['about-us'].links %}
+          <li><a href="{{ link.url }}" >{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="three columns">
+      <h6>Our Favorite Toys</h6>
+      <ul class="footer_menu">
+        {% for link in linklists[favourite_toys_linklist].links %}
+          <li><a href="{{ link.url }}" >{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="three columns">
+
+        <h6 class="social">{{ 'layout.general.social' | t }}</h6>
+
+        <ul class="social_icons">
+            <li class="facebook"><a href="http://facebook.com/justsimpli" title="{{ shop.name }} on Facebook" rel="me" target="_blank"><span class="icon-facebook"></span></a></li>
+            <li class="youtube"><a href="http://www.youtube.com/channel/UCKmbLmpXrWxtuUpnrrbcn5w" title="{{ shop.name }} on YouTube" rel="me" target="_blank"><span class="icon-youtube"></span></a></li>
+            <li class="vimeo"><a href="https://vimeo.com/simplipleasure/" title="{{ shop.name }} on Vimeo" rel="me" target="_blank"><span class="icon-vimeo"></span></a></li>
+        </ul>
+    </div>
+
+    <div class="sixteen columns hide-for-desktop">
+      <div class="section clearfix">
+      </div>
+    </div>
+
+    <div class="sixteen columns">
+      <hr />
+    </div>
+
+    <div class="six columns">
+      <p class="credits">
+        This Site Is For Adults Only   <br>
+        <a href="http://www.simplipleasure.com/pages/compliance"> 18 U.S.C. 2257 Disclaimer & Title Information </a>
+      </p>
+    </div>
+      <div class="ten columns credits_right">
+      <p class="credits">
+        &copy; {{ "now" | date: "%Y" }} {{ shop.name }}
+      </p>
+
+      <div class="payment_methods ">
+        <img src="{{ '../assets/images/cc-paypal.png' | asset_url }}" alt="PayPal" />
+        <img src="{{ '../assets/images/cc-visa.png' | asset_url }}" alt="Visa" />
+        <img src="{{ '../assets/images/cc-mastercard.png' | asset_url }}" alt="Mastercard" />
+        <img src="{{ '../assets/images/cc-amex.png' | asset_url }}" alt="American Express" />
+        <img src="{{ '../assets/images/cc-discover.png' | asset_url }}" alt="Discover" />
+      </div>
+    </div>
+  </div>
+
+</div> <!-- end footer -->
+<!-- END: snippets/footer-theme.liquid -->

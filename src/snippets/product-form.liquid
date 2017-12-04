@@ -1,0 +1,117 @@
+<!-- snippets/product-form.liquid   {{ product_form_identifier }} -->
+{% if product_form_classes %}
+  {% assign _product_form_classes = product_form_classes %}
+{% else %}
+  {% assign _product_form_classes = "clearfix product_form" %}
+{% endif %}
+
+{% assign _product_form_classes = _product_form_classes | append: " product-form__" | append: product_form_identifier %}
+
+{% if is_main_product_form %}
+  {% assign _product_form_classes = _product_form_classes | append: " " | append: "main_prod_form_1" %}
+{% endif %}
+
+{% if show_badges %}
+  {% assign _product_form_classes = _product_form_classes | append: " " | append: "badges__product_form" %}
+{% endif %}
+
+
+
+{% unless counter %}
+  {% assign counter = 1 %}
+{% endunless %}
+
+{% unless  triggers_interstitial == false %}
+  {% assign triggers_interstitial = true %}
+{% endunless %}
+
+{% unless show_guarantee == false %}
+  {% assign show_guarantee = true %}
+{% endunless %}
+
+{% if product.available %}
+  <form id="product-form-{{ product_form_identifier }}-{{ product.id }}" action="/cart/add" method="post" data-id="{{ product.id }}" data-handle="{{ product.handle }}" class="{{_product_form_classes}}" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}" {% if triggers_interstitial %}data-triggers-cart-interstitial{% endif %}>
+
+    {% if include_upsells_before %}
+      {% include 'product-page-upsells' %}
+    {% endif %}
+
+
+    {% if mobile_hide_select %}<div class="show-for-desktop">{% endif %}
+
+      <div class="select">
+        {% if product.options.size > 1 %}
+          <select id="product-select-{{ product_form_identifier }}-{{ product.id }}" name="id" class="product-select-{{ product.id }}">
+            {% for variant in product.variants %}
+              <option {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %} value="{{ variant.id }}" data-sku="{{ variant.sku }}">{{ variant.title }}</option>
+            {% endfor %}
+          </select>
+        {% elsif product.options.size == 1 and (product.variants.size > 1 or product.options[0] != "Title") %}
+          <label>{{ product.options[0] }}</label>
+          <select id="product-select-{{ product_form_identifier }}-{{ product.id }}" name="id" class="product-select-{{ product.id }}" >
+            {% for variant in product.variants %}
+
+              {% if variant.metafields.shappify_qb.qb_hide == "1" %}{% else %}
+                <option {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %} value="{{ variant.id }}">{{ variant.title }}</option>
+              {% endif %}
+
+            {% endfor %}
+          </select>
+        {% else %}
+          <input type="hidden" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}" />
+        {% endif %}
+      </div>
+
+    {% if  mobile_hide_select %}</div>{% endif %}
+
+    {% if include_upsells_after %}
+      {% include 'product-page-upsells' %}
+    {% endif %}
+
+    {% if display_quantity %}
+      <div class="left">
+        <label for="quantity">Quantity:</label>
+        <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" />
+      </div>
+      <div class="product-addition-info2">
+        In Stock
+        <div>SHIPS WITHIN 24 HOURS</div>
+      </div>
+    {% else %}
+      <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" style="display:none;"/>
+    {% endif %}
+
+    {% case atc_style %}
+    {% when 'add_bundle' %}
+      <input class="add_to_cart add_to_cart_bundle" type="submit" name="add" value="Add Bundle"/>
+    {% else %}
+      <div class="purchase clearfix inline_purchase">
+        <button type="submit" value="{{ 'products.product.add_to_cart' | t }}" name="add" class="atc action_button add_to_cart" data-counter="{{counter}}" data-abgoal-add-to-cart-click >
+          <span class="top-deck">Add to Cart</span>
+
+          {% if product.price > 5999 %}
+            <span style="display:block;" class="bottom-deck">with Free Shipping</span>
+          {% else %}
+            <span style="display:none;" class="bottom-deck"> with Free Shipping </span>
+          {% endif %}
+        </button>
+      </div>
+    {% endcase %}
+
+  </form>
+
+  {% if (product.options.size > 1) or (product.options.size == 1 and ((product.variants.size > 1) or (product.options[0] != "Title")))%}
+    <script type="text/javascript">
+      $(function() {
+        console.log("setup Shopify.OptionSelectors for ", "product-select-{{ product_form_identifier }}-{{ product.id }}");
+        new Shopify.OptionSelectors("product-select-{{ product_form_identifier }}-{{ product.id }}", {
+          product: {{ product | json }},
+          onVariantSelected: SP.selectCallback{% if product-form == 'product' %},
+          enableHistoryState: true{% endif %}
+        });
+      });
+    </script>
+  {% endif %}
+{% endif %}
+
+<!-- END: snippets/product-form.liquid  {{ product_form_identifier }} -->

@@ -1,0 +1,7 @@
+<!-- snippets/snippet_if_exists.liquid -->
+{% capture _snippet %}
+  {% include snippet_if_exists %}
+{% endcapture %}
+{% unless _snippet contains 'Liquid error:' %}
+  {{ _snippet }}
+{% endunless %}

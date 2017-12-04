@@ -1,0 +1,114 @@
+.c-cart__form {
+  padding-left: 10px;
+}
+
+.sidebar.columns {
+  margin: 0;
+  border-right: 1px dotted color('border-gray');
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+
+.c-cart__top-payment-section,
+.c-cart__bottom-payment-section {
+  float: right;
+  margin-right: -10px;
+  margin-bottom: 10px;
+  width: 292px;
+}
+
+.c-cart__checkout-btn,
+.c-cart__contains-header {
+  font-family: $text-font;
+  text-transform: none;
+  font-weight: bold;
+}
+
+.c-cart__contains-header {
+  margin: 0;
+  line-height: 48px;
+}
+
+.c-cart__checkout-btn {
+  padding: 0 30px;
+  font-size: 18px;
+  line-height: 48px;
+}
+
+.c-cart__faq {
+  box-sizing: border-box;
+  float: left;
+  width: 50%;
+
+  + .c-cart__faq {
+    padding-left: 30px;
+  }
+}
+
+@media #{$mobile-or-tablet-small-only} {
+
+  .c-cart__top-payment-section {
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .c-cart__bottom-payment-section {
+    float: none;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .c-cart__checkout-btn {
+    margin-top: 10px;
+    margin-right: 0;
+  }
+
+  .c-cart__faq {
+    font-size: 90%;
+  }
+}
+
+
+// @TODO create a button sass file
+// @TODO remove legacy selectors
+.c-cart-item__minimal-btn,
+.c-cart-item__minimal-btn[type="submit"] {
+  display: inline-block;
+  background: color('white');
+  color: color('text-black');
+  font-family: $text-font;
+  font-size: 12px !important;
+  font-weight: normal !important;
+  text-shadow: 0 1px rgba(0, 0, 0, .1);
+  border: 1px solid color('border-gray');
+  line-height: 30px;
+  margin: 0;
+  padding: 0 10px;
+  vertical-align: top;
+  box-sizing: border-box;
+  border-radius: 1px;
+
+  &:hover {
+    background: color('white');
+  }
+}
+
+a.c-cart__continue-shopping-btn {
+  float: left;
+  background: color('pink');
+  color: #ffffff;
+  border: 0;
+  padding: 8px 20px;
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: $text-font;
+  font-weight: bold;
+  font-size: 15px;
+  text-transform: none;
+  display: inline-block;
+  transition: all 500ms ease 0s;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}

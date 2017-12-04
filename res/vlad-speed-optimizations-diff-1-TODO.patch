@@ -1,0 +1,32 @@
+diff --git a/snippets/head__3rd-party-apps.liquid b/snippets/head__3rd-party-apps.liquid
+index b49e01df..ccca0252 100644
+--- a/snippets/head__3rd-party-apps.liquid
++++ b/snippets/head__3rd-party-apps.liquid
+@@ -1,13 +1,5 @@
+-<!-- snippets/head__3rd-party-apps.liquid -->
+-    {% include 'limespot' %}
+-    <!-- IS+ Instant Search Widget -->
+-	  <script async src="https://acp-magento.appspot.com/js/acp-magento.js?v=3&mode=shopify&UUID=b94835bf-f961-46f3-a6f2-523d5345d5d3&store=3860093"></script>
+-    <!-- IS+ Instant Search Widget -->
++    {% comment %} IS+ Instant Search Widget {% endcomment %}
++	<script async src="https://acp-magento.appspot.com/js/acp-magento.js?v=3&mode=shopify&UUID=b94835bf-f961-46f3-a6f2-523d5345d5d3&store=3860093"></script>
+
+     <script src="//load.sumome.com/" data-sumo-site-id="74c5ab3116cb3b3f81ba1d687f8b9d6247ee6a17862430511c511d11218f0389" async="async"></script>
+
+-    <!-- TrustBox script -->
+-    <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.sync.bootstrap.min.js" async></script>
+-
+-    <!-- END TrustBox-->
+-    <link rel="stylesheet" type="text/css" href="//cdn-stamped-io.azureedge.net/files/widget.min.css">
+diff --git a/snippets/head__collections-templates.liquid b/snippets/head__collections-templates.liquid
+index 0a696b41..e69de29b 100644
+--- a/snippets/head__collections-templates.liquid
++++ b/snippets/head__collections-templates.liquid
+@@ -1,7 +0,0 @@
+-<!-- snippets/head__collections-templates.liquid -->
+-
+-{{ "api.jquery.js" | shopify_asset_url | script_tag }}
+-{{ "option_selection.js" | shopify_asset_url | script_tag }}
+-
+-<!--jquery.cookie -->
+-<script src='{{ "jquery.cookie.min.js" | asset_url }}'></script>

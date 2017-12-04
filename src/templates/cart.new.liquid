@@ -1,0 +1,429 @@
+<!--templates/cart.liquid -->
+
+<link rel="stylesheet" type="text/css" href='{{ "cart.css" | asset_url }}'>
+
+{% assign scripttotal = 0 %}
+{% for item in cart.items %}
+  {% if item.variant.compare_at_price > item.variant.price %}
+    {% capture scriptsave %}{{ item.variant.compare_at_price | minus: item.variant.price }} {% endcapture %}
+    {% assign scripttotal = scripttotal | plus: scriptsave %}
+  {% endif %}
+
+{% endfor %}
+{% assign cartsubtotal = 0 %}
+{% for item in cart.items %}
+  {% if item.variant.compare_at_price > item.variant.price %}
+    {% capture savings %}
+      {{ item.variant.compare_at_price | minus: item.variant.price | times: item.quantity }}
+    {% endcapture %}
+    {% assign cartsubtotal = cartsubtotal | plus: savings %}
+  {% endif %}
+{% endfor %}
+
+
+{% if cart.item_count == 0 %}
+  <div class="sixteen columns">
+    <div class="section clearfix">
+      <p class="quote">{{ 'cart.general.continue_browsing_html' | t }}</p>
+      <br class="clear" />
+      <br class="clear" />
+    </div>
+  </div>
+{% else %}
+
+  <div class="sixteen columns cont__top-space">
+    <div id="cart__top_mobi" class="hide-for-desktop">
+      <div id="cart__order_summary">
+        <div class="cart__title"><h2>ORDER SUMMARY</h2></div>
+
+        <div class="cart__num_p cart__bottom_line">
+          <span>{{ cart.item_count }} {{ cart.item_count | pluralize: 'product', 'products' }} </span>
+        </div>
+
+        <div class="cart__pro_total cart__bottom_line">
+          <span>Product Total</span>
+          <span class="cart__pro_right" >
+            {{ cart.total_price | money_with_currency }}
+          </span>
+        </div>
+        {% if cart.total_price >= 6000 %}
+          <div class="cart__top_shipping cart__bottom_line"><span>Shipping</span><span class="cart__pro_right cart__pink_free" >FREE</span></div>
+        {% endif %}
+        {% if cart.total_discount > 0 or cartsubtotal > 0 %}
+          <div class="cart__top_savings cart__bottom_line">
+            <span>Total Savings</span>
+            <span class="cart__pro_right cart__pink_free">{{ cart.total_discount | plus: cartsubtotal | money }} savings!</span>
+          </div>
+        {% endif %}
+        <div class="cart__top_shipping cart__final-total">
+          <span>
+            {% if cart.total_price >= 6000 %}
+              Total
+            {% else %}
+              Sub Total
+            {% endif %}
+          </span>
+          <span class="cart__pro_right" >
+            {{ cart.total_price | money_with_currency }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="hide-for-desktop">
+      {% include 'cart-payment-form', includeBadges: false %}
+    </div>
+
+    <form action="/cart" method="post" class="cart_form">
+
+      <h2>Your Cart Contains {{ cart.item_count }} {{ cart.item_count | pluralize: 'Item', 'Items' }} </h2>
+      <hr>
+
+      <ul class="none">
+        {% for item in cart.items %}
+          {% if item.properties.master_builder == blank %} <!-- Bold Apps: Premium Options (Step 9) -->
+            {% if item.properties.builder_id == blank %}
+              <li class="bold-row">
+            {% else %}
+              <li style="display:none" class="bold-row-{{ item.properties.builder_id }} item {{ item.product.handle }}">
+            {% endif %}
+
+              <div class="eight columns title_column alpha">
+                <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_image">
+                  <img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}" />
+                </a>
+
+                <p class="cart_price">
+                  {{ item.line_price | money }}
+                  <span class="price_total_text">
+                    {% if item.properties.builder_id == blank %}
+                      <a href="/cart/change?line={{ forloop.index }}&quantity=0" onclick="" title="{{ 'cart.general.remove' | t }}">
+                        {{ 'cart.general.remove' | t }}
+                      </a>
+                    {% else %}
+                      <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="{{ item.properties.builder_id }}_remove" onclick="" title="{{ 'cart.general.remove' | t }}">
+                        {{ 'cart.general.remove' | t }}
+                      </a>
+
+                    {% endif %}
+                  </span>
+                </p>
+                <p>
+                  <a href="{{ item.url }}" title="{{ item.title | escape }}">
+                    {{ item.title | escape | remove: 'Default' | replace: '2+', '( Special Offer )' | replace: '3+', '( Special Offer )'  }}
+                  </a>
+                </p>
+              </div>
+
+              <div class="three columns">
+                <p class="price_total">
+                  {{ item.line_price | money }}
+                  {% if item.variant.compare_at_price > item.variant.price and item.total_discount == 0  %}
+                    <s>{{ item.variant.compare_at_price | times: item.quantity | money }}</s>
+                  {% elsif item.total_discount > 0 and item.variant.compare_at_price > item.variant.price %}
+                    <s>{{ item.variant.compare_at_price | times: item.quantity | money }}</s>
+                  {% elsif item.total_discount > 0 %}
+                    <s>{{ item.original_line_price | money }}</s>
+                  {% endif %}
+                </p>
+
+                {% if item.total_discount > 0 or item.variant.compare_at_price > item.variant.price %}
+                  <div class="cartsave hide-for-desktop" style="color:#000;">
+                    Retail Price:
+                    <span>
+                      {% if item.variant.compare_at_price > item.variant.price %}
+                        {{ item.variant.compare_at_price | money }}
+                      {% else %}
+                        {{ item.original_line_price | money }}
+                      {% endif %}
+                    </span>
+                  </div>
+
+                  {% if item.variant.compare_at_price > item.variant.price %}
+                    <div class="cartsave hide-for-desktop" style="color:#000;">
+                      Sale Price: <span>{{ item.original_price | money }} </span>
+                    </div>
+                  {% endif %}
+
+                  <div class="cartsave hide-for-desktop" style="font-size:11.5px;">
+                    You Save: <span>
+                      {% if item.variant.compare_at_price > item.variant.price %}
+                        {{ item.variant.compare_at_price | minus: item.variant.price | money }}
+                      {% else %}
+                        {{ item.total_discount | money }}
+                      {% endif %}
+                    </span>
+                    <div style="display:block;">
+                      {{ item.message }}
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+
+              <div class="two columns mobile_right" id="quantity_{{ forloop.index }}">
+                <span class="quantity_label">{{ 'cart.general.quantity' | t }}:</span>
+                {% if item.properties.builder_id == blank %}
+                  <input type="number" min="0" size="2" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" {% if item.product.metafields.inventory.ShappifyHidden == "true" %} readonly="readonly" {% endif %}/>
+                {% else %}
+                  <input type="number" min="0" size="2" class="quantity {{ item.properties.builder_id }}_qty" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" {% if item.product.metafields.inventory.ShappifyHidden == "true" %} readonly="readonly" {% endif %}/>
+                {% endif %}
+              </div>
+
+              <div class="three columns mobile_right omega">
+                {% if item.properties.builder_id == blank %}
+                  <a href="/cart/change?line={{ forloop.index }}&quantity=0" onclick="" title="{{ 'cart.general.remove' | t }}" class="right show-for-desktop remove"><span class="icon-cancel"></span></a>
+                {% else %}
+                  <a href="/cart/change?line={{ forloop.index }}&quantity=0" onclick="" title="{{ 'cart.general.remove' | t }}" class="right show-for-desktop remove {{ item.properties.builder_id }}_remove"><span class="icon-cancel"></span></a>
+                {% endif %}
+                <span class="price_total">{{ item.line_price | money }}
+                  {% if item.variant.compare_at_price > item.variant.price and item.total_discount == 0  %}
+                    <s>{{ item.variant.compare_at_price | times: item.quantity | money }}</s>
+                  {% elsif item.total_discount > 0 and item.variant.compare_at_price > item.variant.price %}
+                    <s>{{ item.variant.compare_at_price | times: item.quantity | money }}</s>
+                  {% elsif item.total_discount > 0 %}
+                    <s>{{ item.original_line_price | money }}</s>
+                  {% endif %}
+                </span>
+                {% if item.total_discount > 0 or item.variant.compare_at_price > item.variant.price %}
+                  <div class="cartsave show-for-desktop" style="color:#000;">
+     Retail Price: <span>{% if item.variant.compare_at_price > item.variant.price %} {{ item.variant.compare_at_price | money }} {% else %}{{ item.original_line_price | money }}{% endif %}</span>
+                  </div>
+
+                  {% if item.variant.compare_at_price > item.variant.price %}
+                    <div class="cartsave show-for-desktop" style="color:#000;">
+                      Sale Price: <span>{{ item.original_price | money }} </span>
+                    </div>
+                  {% endif %}
+
+                  <div class="cartsave show-for-desktop" style="font-size:11.5px;">
+                    You Save: <span> {% if item.variant.compare_at_price > item.variant.price %}
+                      {{ item.variant.compare_at_price | minus: item.variant.price | times: item.quantity | money }} {% else %}{{ item.total_discount | money }}{% endif %} </span>
+                    <div>  {{ item.message }} </div>
+                  </div>
+
+                {% endif %}
+              </div>
+
+              <div class="sixteen columns clearfix alpha omega">
+                <hr />
+              </div>
+
+            </li>
+          {% else %} <!-- Bold Apps: Premium Options (Step 10) -->
+            {% if item.properties.builder_info %}
+              {% assign builder = item.properties.builder_info | split: '~~' %}
+            {% endif %}
+            {% assign item_price = 0 %}
+            {% assign item_line_price = 0 %}
+            {% for price_item in cart.items %}
+              {% unless price_item.properties.builder_id == blank %}
+                {% if price_item.properties.builder_id == item.properties.builder_id %}
+                  {% capture temp %}{{ item_price | plus: price_item.price }}{% endcapture %}
+                  {% assign item_price = temp %}
+                  {% capture temp %}{{ item_line_price | plus: price_item.line_price }}{% endcapture %}
+                  {% assign item_line_price = temp %}
+                {% endif %}
+              {% endunless %}
+            {% endfor %}
+            <li class="line item bold-row-{{ item.properties.builder_id }} {{ builder[2] }}">
+              <div class="eight columns title_column alpha">
+                <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_image">
+                  {% if builder[0] %}
+                    <img src="{{ builder[1] }}" alt="{{ builder[0] }}" />
+                  {% else %}
+                    <img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}" />
+                  {% endif %}
+                </a>
+
+                <p class="cart_price">
+                  {{ item.line_price | money }}
+
+                  <span class="price_total_text">
+                    <a href="#" class="{{ item.properties.builder_id }}_remove" onclick="remove_product_builder('{{item.properties.builder_id}}');" title="{{ 'cart.general.remove' | t }}">{{ 'cart.general.remove' | t }}</a>
+                  </span>
+                </p>
+                <p>
+                  <a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a>
+                </p>
+
+                <div id="bold-item-{{ item.properties.builder_id }}" data-is-builder="{{ is_builder }}" data-handle="{{ item.product.handle }}" data-variant-id="{{ item.variant.id }}" class="bold-edit-item"></div>
+              </div>
+
+              <div class="three columns">
+                <p class="price_total">
+
+                  {{  item.variant.compare_at_price | minus: item.price  | times: item.quantity | money }}
+                </p>
+              </div>
+
+              <div class="two columns mobile_right" id="quantity_{{ forloop.index }}">
+                <span class="quantity_label">{{ 'cart.general.quantity' | t }}:</span>
+                <input type="number" min="0" size="2" class="quantity {{ item.properties.builder_id }}_qty" onchange="update_qty_builder('{{item.properties.builder_id}}', this);" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
+              </div>
+
+              <div class="three columns mobile_right omega">
+                <a href="#" onclick="remove_product_builder('{{item.properties.builder_id}}');" title="{{ 'cart.general.remove' | t }}" class="right show-for-desktop remove {{ item.properties.builder_id }}_remove"><span class="icon-cancel"></span></a>
+                <span class="price_total"> {{  item.variant.compare_at_price | minus: item.price  | times: item.quantity | money }} </span>
+              </div>
+
+              <div class="sixteen columns clearfix alpha omega">
+                <hr />
+              </div>
+            </li>
+          {% endif %} <!-- Bold Apps: Premium Options (code ends) -->
+        {% endfor %}
+      </ul>
+    </form>
+  </div>
+
+  <div class="hide-for-desktop">
+    <div class="sixteen columns">
+      <h4 class="carth6" >
+        Subtotal: <span class="cartright">
+          {{ cartsubtotal | plus: cart.total_price | plus: cart.total_discount | money }}
+        </span>
+      </h4>
+
+    </div>
+
+    <div class="sixteen columns">
+      <h4 class="carth6"  >
+        Sales Tax: <span class="cartright">$0</span>
+      </h4>
+    </div>
+
+    {% if cart.total_price >= 6000 %}
+      <div class="sixteen columns">
+        <h4 class="carth6" style=" color:#02b004;" >
+          Standard Shipping: <span class="cartright">FREE</span>
+        </h4>
+      </div>
+    {% endif %}
+
+
+    {% if cart.total_discount > 0 or cartsubtotal > 0 %}
+      <div class="sixteen columns ">
+        <h4 class="carth6" style="color:#cc3366;">Total savings:
+          <span class="cartright">{{ cart.total_discount | plus: cartsubtotal | money }} savings!</span>
+        </h4>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="show-for-desktop">
+    <div class="eleven columns align_right alpha">
+      <h6 class="carth6" >
+        Subtotal
+      </h6>
+    </div>
+    <div class="five columns omega" style="padding-bottom:5px;">
+      <h6 class="carth6" style="text-align:center; ">
+        {{ cartsubtotal | plus: cart.total_price | plus: cart.total_discount | money }}
+      </h6>
+    </div>
+    <div class="eleven columns align_right alpha">
+      <h6 class="carth6">
+        Sales Tax
+      </h6>
+    </div>
+    <div class="five columns omega" style="padding-bottom:5px;">
+      <h6 class="carth6" style="text-align:center" >
+        $0
+      </h6>
+    </div>
+
+    {% if cart.total_price >= 6000 %}
+      <div class="eleven columns align_right alpha">
+        <h6 class="carth6" style=" color:#02b004;" >
+          Standard Shipping:
+        </h6>
+      </div>
+      <div class="five columns omega" style="padding-bottom:5px;">
+        <h6 class="carth6" style="text-align:center; color:#02b004;">
+          FREE
+        </h6>
+      </div>
+    {% endif %}
+
+    {% if cart.total_discount > 0  or cartsubtotal > 0 %}
+      <div class="eleven columns align_right alpha ">
+        <h6 class="carth6" style="color:#cc3366;">Total Savings:</h6>
+      </div>
+      <div class="five columns omega" style="padding-bottom: 5px;">
+        <center>
+          <h6 class="carth6" style="padding-bottom:4px;text-decoration:none; color:#cc3366;">
+            {{ cart.total_discount | plus: cartsubtotal | money }} off your order!
+          </h6>
+        </center>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="eleven columns align_center alpha hide-for-desktop">
+    <h4 class="subtotal" style="text-align:center;font-size: 20px;">
+      Order total including taxes
+    </h4>
+
+  </div>
+
+  <div class="eleven columns align_right alpha show-for-desktop">
+    <h4 class="subtotal">
+      Order total including taxes
+    </h4>
+
+    <div class="payment-methods cart__pay_methods">
+      <span style="float:right;">
+        <ul>
+          <li class="pm-amex" title="Amex"></li>
+  				<li class="pm-maestro" title="Maestro"></li>
+          <li class="pm-paypal" title="Paypal"></li>
+  				<li class="pm-visa-debit" title="Visa Debit"></li>
+  				<li class="pm-visa" title="Visa"></li>
+          <li class="pm-mastercard" title="Mastercard"></li>
+  			</ul>
+      </span>
+    </div>
+  </div>
+
+  <div class="five columns omega hide-for-desktop">
+    <h4 style="text-align:center;font-size:30px;" class="subtotal_amount"  >
+      <strong>{{ cart.total_price | money_with_currency }}</strong>
+      <small id="estimated-shipping" style="display:none">+ <em>{{ 0 | money }}</em> {{ 'cart.shipping_calculator.estimated_shipping' | t }}</small>
+    </h4>
+
+  </div>
+
+  <div class="five columns omega show-for-desktop">
+    <h4 style="text-align:center" class="subtotal_amount"  >
+      <strong>{{ cart.total_price | money_with_currency }}</strong>
+      <small id="estimated-shipping" style="display:none">+ <em>{{ 0 | money }}</em> {{ 'cart.shipping_calculator.estimated_shipping' | t }}</small>
+    </h4>
+  </div>
+
+  <div class="sixteen columns">
+    <div class="five columns omega align_left show-for-desktop" style="float: left;">
+      <a href="/">  <button class="test">Continue Shopping </button></a>
+    </div>
+    <div class="five columns omega align_right" style="float: right;">
+      {% include 'cart-payment-form' %}
+    </div>
+  </div>
+
+  {% include 'cart-v3-upsell' %}
+
+  <br>
+
+  <div class="show-for-desktop">
+    {% include 'cart-banner' %}
+  </div>
+
+  <div class="hide-for-desktop">
+    {% include 'cart-banner-mobile' %}
+  </div>
+
+{% endif %}
+
+
+
+<!-- END: templates/cart.liquid -->

@@ -1,0 +1,376 @@
+<div id="save">
+
+
+
+
+    <!-- STEP ONE OF THE BUNDLES !-->
+  <div id="recommendations">
+    <h4 style="margin-top:30px;">Step 1: Pick your first vibrator!</h4>
+
+    <ul class="bxslider_step2">
+    {% for product in collections.jopen.products limit:10 %}
+
+    <li>
+
+    <div class="recommendations-group">
+
+            <div class="three columns {% cycle 'group1': 'alpha', '', '', '', 'omega' %} thumbnail {% cycle 'even', 'odd' %}" id="product-{{ product.id }}">
+                <div class="recommendations-product">
+                	<div class="recommendations-product-image" style="border: 1px solid #e0e0e0;">
+                              <a class="titsone smooth-scroll" id="product-{{ product.variants.first.id }}" data-id="{{ product.variants.first.id }}" data-price="{{  product.price_max }}" data-prod="{{ product.id }}" data-name="{{ product.title }}" href="#step2" data-role="button">
+                                <img class="imgons" src="{{ product.featured_image |  product_img_url: 'compact', format: 'pjpg' }}" > </a></div>
+                	<div class="info">{{ product.title }}</div>
+                	<div class="info2"> <span class="pprice">{{   product.price_max | money }}</span> </div>
+                      	<a href="#product-{{ product.id }}-popup" id="inline1"  class="">View Info</a>
+  						<div style="display:none">
+                            <div id="product-{{ product.id }}-popup">
+                                <h4>{{ product.title }}</h4>
+                                <div align="center">
+                                	<img src="{{ product.featured_image | product_img_url: 'medium', format: 'pjpg' }}" alt="{{ alt_text | escape }}" />
+                                </div>
+                                {{ product.description | remove: '<h4>Product Description</h4>' }}
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+
+
+      </div>
+    </li>
+
+    {% endfor %}
+    </ul>
+
+    </div>
+
+
+
+  <!-- STEP 1 OF THE BUNDLES !-->
+
+     <div id="recommendations">
+       <div id="step2">
+       <h4 style="margin-top:50px;">Step 2: Choose your second favorite vibrator!</h4>
+        <ul class="bxslider_step2">
+  {% for product in collections.jopen.products offset:10 %}
+<li>
+  <div class="recommendations-group">
+  <div class="three columns {% cycle 'group2': 'alpha', '', '', '', 'omega' %} thumbnail {% cycle 'even', 'odd' %}" id="product-{{ product.id }}">
+  <div class="recommendations-product">
+    <div class="recommendations-product-image" style="border: 1px solid #e0e0e0;">
+           <a class="tits2 smooth-scroll" id="product-{{ product.variants.first.id }}" data-id="{{ product.variants.first.id }}" data-price="{{  product.price_max }}" data-prod="{{ product.id }}" data-name="{{ product.title }}" href="#step3" data-role="button">
+             <img class="imgs" src="{{ product.featured_image |  product_img_url: 'compact', format: 'pjpg' }}" ></a>
+           </div>
+            <div class="info">{{ product.title }}</div>
+            <div class="info2"><span class="pprice">{{ product.price_max | money }}</span></div>
+            <a href="#product-{{ product.id }}-popup" id="inline1"  class="">View Info</a>
+            <div style="display:none">
+                <div id="product-{{ product.id }}-popup">
+                    <h4 readonly>{{ product.title }}</h4>
+                    <div align="center">
+                        <img src="{{ product.featured_image | product_img_url: 'medium', format: 'pjpg' }}" alt="{{ alt_text | escape }}" />
+                    </div>
+                    {{ product.description | remove: '<h4>Product Description</h4>' }}
+                </div>
+            </div>
+    </div></div>
+</div>
+          </li>
+{% endfor %}
+       </ul>
+       </div>
+</div>
+
+<hr>
+
+  <!-- STEP 2 OF THE BUNDLES !-->
+  <div id="recommendations">
+    <div id="step3">
+    <h4 style="margin-top:30px;">Step 3: Choose your FREE storage case!</h4>
+    <ul class="bxslider_step2">
+    {% for product in collections.sex-toy-storage.products %}
+    <li>
+    <div class="recommendations-group">
+            <div class="three columns {% cycle 'group1': 'alpha', '', '', '', 'omega' %} thumbnail {% cycle 'even', 'odd' %}" id="product-{{ product.id }}">
+                <div class="recommendations-product">
+                	<div class="recommendations-product-image" style="border: 1px solid #e0e0e0;">
+                              <a class="tits smooth-scroll" id="product-{{ product.variants.first.id }}" data-id="{{ product.variants.first.id }}" data-price="{{  product.price_max }}" data-prod="{{ product.id }}" data-name="{{ product.title }}" href="#box-holder" data-role="button">
+                                <img class="imgs2" src="{{ product.featured_image |  product_img_url: 'compact', format: 'pjpg' }}" > </a></div>
+                	<div class="info">{{ product.title }}</div>
+                	<div class="info2"> <span class="pprice">{{  product.price_max| money }}</span> </div>
+                    <a href="#product-{{ product.id }}-popup" id="inline1"  class="">View Info</a>
+                    <div style="display:none">
+                        <div id="product-{{ product.id }}-popup">
+                            <h4>{{ product.title }}</h4>
+                            <div align="center">
+                                <img src="{{ product.featured_image | product_img_url: 'medium', format: 'pjpg' }}" alt="{{ alt_text | escape }}" />
+                            </div>
+                            {{ product.description | remove: '<h4>Product Description</h4>' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+      </div>
+    </li>
+    {% endfor %}
+    </ul>
+    </div>
+    </div>
+
+
+
+  <br><br>
+<hr>
+
+  <div style="clear:both"></div>
+    <div id="box-holder">
+         <h4 style="margin-top:10px;">Your Bundle Contains:</h4>
+
+
+
+ <div id="prod-1" class="current-prod" style="display:inline-block;">
+
+<div id="step-box"><div class="three columns" style="margin-bottom: 0px;margin-top: 0px;"><img src="" class="imgone" title="{{ product.title }}" >
+ <div class="title-one" data-name="" style="visibility:hidden">{{ product.title }}</div>
+     <div id="totalprice" class="price-one" data-price="" style="visibility:hidden">{{ product.price | money }}</div></div>
+
+   <input id="titsone-{{ product.variants.first.id }}" onfocus="this.select()" class="quantity field" data-id="{{ product.variants.first.id }}" min="0" type="hidden" value="1" tabindex="1" data-overlay-theme="a">
+     </div>
+      </div>
+
+
+
+   <!-- STEP 1 BOX !-->
+
+   <div id="prod-2" class="current-prod-2" style="display:inline-block;">
+
+<div class="step-1-box"><div class="three columns" style="margin-bottom: 0px;margin-top: 0px;"><img src="" class="img2" title="{{ product.title }}" >
+   <div class="title-1" data-name="" style="visibility:hidden">{{ product.title }}</div>
+     <div id="totalprice" class="price-1" data-price="" style="visibility:hidden">{{ product.price | money }}</div></div>
+
+   <input id="tits2-{{ product.variants.first.id }}" onfocus="this.select()" class="quantity field" data-id="{{ product.variants.first.id }}" min="0" type="hidden" value="1" tabindex="1" data-overlay-theme="a">
+     </div>
+    </div>
+
+
+
+
+     <!-- STEP 2 BOX !-->
+
+   <div id="prod-22" class="current-prod-22" style="display:inline-block;" >
+
+<div class="step-2-box" ><div class="three columns" style="margin-bottom: 0px;margin-top: 0px;"><img src="" class="img3" title="{{ product.title }}">
+       <div class="title-2" data-name="" style="visibility:hidden">{{ product.title }}</div>
+          <div id="totalprice"  class="price-2" data-price="" style="visibility:hidden">{{ product.price | money}}</div></div>
+
+   <input id="tits-{{ product.variants.first.id }}" onfocus="this.select()" class="quantity field" data-id="{{ product.variants.first.id }}" min="0" type="hidden" value="1" tabindex="1" data-overlay-theme="b">
+     </div></div>
+  </div>
+ <div class="combo-price-box">
+      <div class="combo-price">
+
+        <div class="kit-price"><span>Total Price: </span>$<span class="u-tot-price"></span></div>
+                <div class="kit-price"><span>Bundle Price: </span>$<span class="u-total-price"></span></div>
+
+        <div class="save-price"><span>You save: </span>$<span class="u-save-price"></span></div>
+      </div>
+      <input class="add-to-cart-order-form disabled" disabled="disabled" type="submit" value="Buy Bundle!">
+  </div>
+
+  <div style="clear:both"></div>
+    <p align="center"><a style="text-decoration:underline" href="#top"><span>Back To Top</span></a></p>
+
+<script>
+
+ $(document).ready(function() {
+  $('.titsone').click(function() {
+	var data_id = $(this).data('id');
+    var data_name = $(this).data('name');
+     var data_price = $(this).data('price');
+        var formatted_price = Shopify.formatMoney(data_price, "{{ shop.money_without_currency_format }}");
+
+     $('#titsone-{{ product.variants.first.id }}').attr('data-id', data_id );
+                   $('#titsone-{{ product.variants.first.id }}').attr('data-name', data_name );
+            $('.title-one').html('<strong>'+data_name+'</strong>').val();
+    $('#titsone-{{ product.variants.first.id }}').html('Data ID - <strong>'+data_id+'</strong>');
+         $('#titsone-{{ product.variants.first.id }}').attr('data-price', data_price );
+            $('.price-one').html('<strong>'+formatted_price+'</strong>').val();
+  });
+});
+
+  $(document).ready(function() {
+  $('.tits').click(function() {
+	var data_id = $(this).data('id');
+
+    var data_name = $(this).data('name');
+     var data_price = $(this).data('price');
+        var formatted_price = Shopify.formatMoney(data_price, "{{ shop.money_without_currency_format }}");
+
+     $('#tits-{{ product.variants.first.id }}').attr('data-id', data_id );
+                   $('#tits-{{ product.variants.first.id }}').attr('data-name', data_name );
+            $('.title-2').html('<strong>'+data_name+'</strong>').val();
+    $('#tits-{{ product.variants.first.id }}').html('Data ID - <strong>'+data_id+'</strong>');
+         $('#tits-{{ product.variants.first.id }}').attr('data-price', data_price );
+            $('.price-2').html('<strong>'+formatted_price+'</strong>').val();
+  });
+});
+     $(document).ready(function() {
+  $('.tits2').click(function() {
+	var data_id = $(this).data('id');
+     var data_name = $(this).data('name');
+     var data_price = $(this).data('price');
+    var formatted_price = Shopify.formatMoney(data_price, "{{ shop.money_without_currency_format }}");
+     $('#tits2-{{ product.variants.first.id }}').attr('data-id', data_id );
+        $('#tits2-{{ product.variants.first.id }}').attr('data-name', data_name );
+            $('.title-1').html('<strong>'+data_name+'</strong>').val();
+     $('#tits2-{{ product.variants.first.id }}').attr('data-price', data_price );
+            $('.price-1').html('<strong>'+formatted_price+'</strong>').val();
+  });
+});
+
+    $(document).ready(function() {
+  $('.imgons').click(function(){
+    var idimg = $(this).attr('id');
+    var srcimg = $(this).attr('src');
+
+    $(".imgone").attr('src',srcimg);
+  });
+});
+
+   $(document).ready(function() {
+  $('.imgs').click(function(){
+    var idimg = $(this).attr('id');
+    var srcimg = $(this).attr('src');
+
+    $(".img2").attr('src',srcimg);
+  });
+});
+   $(document).ready(function() {
+  $('.imgs2').click(function(){
+    var idimg = $(this).attr('id');
+    var srcimg = $(this).attr('src');
+
+    $(".img3").attr('src',srcimg);
+  });
+});
+
+  Shopify.itemsToAdd = [];
+Shopify.addItemstoTheCart = function() {
+  if (Shopify.itemsToAdd.length) {
+    var item = Shopify.itemsToAdd.pop();
+    $.ajax({
+      url: '/cart/add',
+      dataType: 'json',
+      type: 'post',
+      data: item,
+      success: Shopify.addItemstoTheCart,
+      error: Shopify.addItemstoTheCart
+    });
+  }
+  else {
+    window.location.href = '/cart';
+  }
+};
+jQuery(function($) {
+  $('table .quantity:first').focus();
+  $('[max]').change(function() {
+    var max = parseInt($(this).attr('max'), 10);
+    var value = parseInt($(this).val(), 10) || 0;
+    if (value > max) {
+      alert('We only have ' + max + ' of this item in stock');
+      $(this).val(max);
+    }
+  });
+  $('.add-to-cart-order-form').click(function() {
+    $('.add-to-cart-order-form').addClass('disabled').attr('disabled','disabled');
+    // Resetting.
+    Shopify.itemsToAdd = [];
+    $('.quantity').each(function() {
+      var quantity = parseInt($(this).val(), 10);
+      if (quantity) {
+        Shopify.itemsToAdd.push( { id: $(this).attr('data-id'), quantity: quantity } );
+      }
+    });
+    if (Shopify.itemsToAdd.length) {
+      Shopify.addItemstoTheCart();
+    }
+    else {
+      alert('All quantities are set to zero.');
+      $('.add-to-cart-order-form').removeAttr('disabled').removeClass('disabled');
+    }
+  });
+})
+</script>
+ <script>
+$('a.smooth-scroll[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+        || location.hostname == this.hostname) {
+
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+           if (target.length) {
+             $('html,body').animate({
+                 scrollTop: target.offset().top
+            }, 1000);
+            return false;
+        }
+    }
+});
+</script>
+<script>
+
+$('#recommendations .recommendations-group .columns .smooth-scroll').each(function(index, element) {
+        $(this).click(function(e) {
+            $(this).parent().parent().parent().addClass('combo-selected');
+			$(this).parent().parent().parent().parent().siblings().find('.recommendations-group').removeClass('combo-selected');
+
+			var combo_count = 0;
+			var combo1_is = $('#prod-1 img').attr('src');
+			var combo2_is = $('#prod-2 img').attr('src');
+			var combo3_is = $('#prod-22 img').attr('src');
+			if(combo1_is){
+				combo_count++;
+			}
+			if(combo2_is){
+				combo_count++;
+			}
+			if(combo3_is){
+				combo_count++;
+			}
+			if(combo_count == 3){
+				setTimeout(function(){
+					var combo1_price = $('#prod-1 .price-one').text().split('$')[1];
+					var combo2_price = $('#prod-2 .price-1').text().split('$')[1];
+					var combo3_price = $('#prod-22 .price-2').text().split('$')[1];
+                  					var total_save_price = parseFloat(combo1_price) + parseFloat(combo2_price) + parseFloat(combo3_price);
+                                    					var total_tot_price = parseFloat(combo1_price) + parseFloat(combo2_price) + parseFloat(combo3_price);
+
+					var total_combo_price = parseFloat(combo1_price) + parseFloat(combo2_price) - parseFloat(combo3_price);
+					total_combo_price = Number((total_combo_price).toFixed(2));
+                  					total_save_price = Number(((total_save_price)*.25).toFixed(2));
+                  					total_tot_price = Number(((total_combo_price)-(total_save_price)).toFixed(2));
+
+					$('.save-price .u-save-price').text(total_save_price);
+                  					$('.kit-price .u-tot-price').text(total_combo_price);
+                                    					$('.kit-price .u-total-price').text(total_tot_price);
+
+
+					$('#save .combo-price-box .add-to-cart-order-form').removeClass('disabled');
+					$('#save .combo-price-box .add-to-cart-order-form').prop("disabled", false);
+				},1000);
+			}
+        });
+    });
+
+</script>
+
+
+
+
+<style>
+ span.pprice {
+   display:block;
+ }
+</style>
+</div>

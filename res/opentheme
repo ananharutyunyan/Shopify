@@ -1,0 +1,148 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+require 'optparse'
+require 'awesome_print'
+
+class OpenTheme
+
+  attr_accessor :test_name, :browser, :debug, :variation, :page, :environment
+
+  def initialize
+    @browser = "Safari"
+    @environment = 'development'
+  end
+
+  def config
+    @config ||= YAML.load(File.read(File.join(File.dirname(__FILE__), "../config/shopify.yml")))
+  end
+
+  def environments
+    {
+      d: 'development',
+      dev: 'development',
+      e: 'preview',
+      v: 'preview',
+      pre: 'preview',
+      preview: 'preview',
+      p: 'production',
+      prod: 'production',
+      production: 'production',
+      l: 'production'
+    }
+  end
+
+  def base_url
+    'https://www.simplipleasure.com'
+  end
+
+  def browsers
+    {
+      s: 'Safari',
+      c: 'Google Chrome'
+    }
+  end
+
+  def tests
+    {
+      ab4: {
+        id: 10023631,
+        variations: [
+          1002550206,
+          1002550207
+        ]
+      }
+    }
+  end
+
+  def pages
+    {
+      home: '/',
+      prod: '/products/the-original-magic-wand-vt',
+      coll: '/collections/vibrators',
+      collprod: '/collections/vibrators/products/the-original-magic-wand-vt',
+      cart: '/cart'
+    }
+  end
+
+  def default_params(theme_id)
+    {
+      preview_theme_id: theme_id,
+      utm_medium: 'sptest'
+    }
+  end
+
+  def to_query(p)
+    p.map{|pair| pair.join('=')}.join('&')
+  end
+
+  def run
+    theme_id = config[@environment]['theme_id']
+
+    params = default_params(theme_id)
+
+    if @test_name
+      puts "looking in #{tests.inspect} for #{@test_name}" if @debug
+      t = tests[@test_name]
+      test_id = t[:id]
+      force = [test_id]
+      if @variation
+        variation_id = t[:variations][@variation]
+        force << variation_id unless variation_id.nil?
+      end
+      params[:_conv_eforce] = force.join('.')
+    end
+
+    url = "#{base_url}#{@page}?#{to_query(params)}"
+    puts
+    puts url
+    puts
+    `open -a '#{@browser}' '#{url}'` unless @debug
+  end
+
+  def parseOpts(args)
+
+    optparse = OptionParser.new do |opts|
+      opts.on( '-t', '--test TEST', 'Test Name' ) do |name|
+        @test_name = name.to_sym
+      end
+
+      opts.on( '-v', '--var VARIATION', 'Variation' ) do |v|
+        @variation = v.to_i
+      end
+
+      opts.on( '-e', '--env ENVIRONMENT', 'environment' ) do |v|
+        @environment = environments[v.to_sym] || 'development'
+      end
+
+      @debug = false
+      opts.on( '-d', '--debug', 'Just show the url without opening' ) do
+        @debug = true
+      end
+
+      opts.on('-b', '--browser BROWSER', 'Which browser: (c)hrome or (s)afari. Default is Safari') do |browser_code|
+        @browser = browsers[browser_code.to_sym] || 'Safari'
+      end
+
+      opts.on('-p', '--page PAGE', "Which page to open: #{pages.keys.join(', ')}") do |page_code|
+        @page = pages[page_code.to_sym] || '/'
+      end
+
+      opts.on( '-h', '--help', 'Display this screen' ) do
+        puts opts
+        exit
+      end
+
+    end
+
+    puts "ARGV: #{ARGV.inspect}" if @debug
+
+    optparse.parse!
+    self
+  end
+end
+
+
+c = OpenTheme.new.parseOpts(ARGV)
+ap c
+c.run

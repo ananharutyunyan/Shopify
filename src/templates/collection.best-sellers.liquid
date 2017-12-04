@@ -1,0 +1,8 @@
+<!-- templates/collection.best-sellers.liquid -->
+{% if collection.title contains "Top 10" %}
+  {% assign page_size = 10 %}
+{% else %}
+  {% assign page_size = 50 %}
+{% endif %}
+
+{% include 'best-sellers__template' %}

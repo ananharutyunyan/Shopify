@@ -1,0 +1,193 @@
+
+
+
+
+
+<meta name="robots" content="noindex">
+
+<link rel="stylesheet" type="text/css" href='{{ "pre-cart-2.css" | asset_url }}'>
+
+  <div align="center"><img src="https://cdn.shopify.com/s/files/1/0386/0093/files/BUY_3_SAVE_25.png?5984214065159446387"></div>
+<div id="noshow1">
+<div class="eleven columns hide-for-desktop">
+ <a class="button2" style="width: 90%; margin-bottom: .5em;" href="/cart">Proceed to Cart</a>
+</div>
+
+<hr>
+
+
+<div class="sixteen columns page">
+  {% if cart.item_count > 0 %}
+  	<div id="basketinfo" class="five columns pro_basketinfo">
+      <div>
+        {% assign cart_total = cart.item_count | pluralize: 'item', 'items'  %}
+        <strong>Your goods total: {{ cart.total_price | money }}</strong>
+        <span class="basket-item">
+          {{ cart.item_count }} {{ cart.item_count | pluralize: 'Item', 'Items' }} in your cart
+          <br>
+
+              <a class="button2" href="/cart">Proceed to Cart</a>
+        </span>
+      </div>
+
+  	</div>
+
+  {% else %}
+    <div class="section clearfix">
+      <p class="quote">{{ 'cart.general.continue_browsing_html' | t }}</p>
+    </div>
+  {% endif %}
+
+</div>
+</div>
+   <div class="recommendations-group">
+
+  <h5 style="font-size:18px;">
+Don't forget to add some LELO essentials to make your experience even better...
+  </h5>
+
+       {% assign counter = 1 %}
+  {% for product in collections.bnd01.products limit: 28 %}
+      	{% assign counter = counter | plus:1 %}
+        <div class="four columns {% cycle  'alpha', 'omega', 'alpha', 'omega', %} thumbnail {% cycle 'even', 'odd' %}" id="product-{{ product.id }}">
+  <div class="recommendations-product">
+            <div class="recommendations-product-image">
+              <a href="{{ product.url }}"><img src="{{ product.featured_image |  product_img_url: 'large', format: 'pjpg' }}">
+               {% if product.compare_at_price_max > product.price %}
+               <div class="banner-container">
+
+                 <div class="sale_banner">Sale</div>
+                </div>
+    {% endif %}</a>
+            </div>
+            <div class="info"><a href="{{ product.url }}">{{ product.title }}</a></div>
+               <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+
+            <div class="info2"> <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+
+            <span class="current_price price">{% include 'shappify-qb-min-price' with product %}</span><span class="was_price">
+ {% if product.compare_at_price_max > product.price %}  {{ product.compare_at_price | money }} {% endif %}</span></a></div>
+    <center>
+
+      <span class="savings">{% if product.compare_at_price_max > product.price %} <strong>You Save:</strong> {{ product.compare_at_price_min  | minus: product.price | money }}
+       ( {{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}% )
+       {% else %} <span class="nosave">No Savings</span> {% endif %} </span>
+                    <div>
+
+
+    <form action="" data-id="{{ product.id }}" data-handle="{{ product.handle }}" method="post" class="variants product_form main_prod_form_{{ counter }}"  id="product-actions" enctype="multipart/form-data" style="padding:0px;">
+    {% if product.options.size > 1 %}
+      <div class="select">
+
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }} product_variant_drop">
+          {% for variant in product.variants %}
+          {%if variant.metafields.shappify_qb.qb_hide == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% elsif product.options.size == 1 and (shappify_qb_options_count > 1 or product.options[0] != "Title" or product.variants.title contains '3+' ) %}
+     <div class="select" style="display:none;">
+        <label>{{ product.options[0] }}:</label>
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }} product_variant_drop">
+          {% for variant in product.variants %}
+          {%if variant.metafields.shappify_qb.qb_hide == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% else %}
+        <div class="select" style="display:none;">
+        <label>{{ product.options[0] }}:</label>
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }} product_variant_drop">
+          {% for variant in product.variants %}
+          {%if variant.metafields.shappify_qb.qb_hide == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      {% endif %}
+    <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" style="display:none;"/>
+
+    <input class="btn add_to_cart" type="submit" name="add" id="add-to-cart" value="Add to Cart" data-counter="{{ counter }}"/>
+    </form>
+
+  </div>
+    </center>
+
+  </div>
+
+          </div>
+        {% endfor %}
+
+
+
+</div>
+<script>
+  var cart_count = '{{ cart.item_count }}';
+  window.prod_title = '';
+  if(cart_count > 0)
+  {
+      var get_quantity = $.cookie('recent_quantity');
+      var get_var_title = $.cookie('recent_variant');
+
+  	  var get_var_id = $.cookie('recent_variant_id');
+      //alert(get_quantity);
+  	  var get_recent_product = $.cookie('recent_added_product');
+  	  var quantity_line = get_quantity > 1 ? '<h2>'+get_quantity+' items were added to your cart</h2>' : '<h2>'+get_quantity+' item was added to your cart</h2>';
+  	  var set_html = '<div class="precart-sec">' + quantity_line;
+  	  set_html = set_html + '<div class="border-bottom">';
+  	  if(get_quantity != null && get_var_id != null && get_recent_product != null)
+      {
+      var cart_json = {{ cart.items | json }};
+	  //console.log(cart_json);
+	  for(var t_item in cart_json)
+	  {
+		  var temp_item = cart_json[t_item];
+		  if(temp_item.id == get_var_id)
+		  {
+			  window.prod_title = temp_item.product_title;
+			  var p_title = temp_item.title;
+			  var formatted_price = Shopify.formatMoney(temp_item.price, "{{ shop.money_without_currency_format }}");
+			  var prod_image = temp_item.image;
+			  var prod_url = temp_item.url;
+			  set_html = set_html + '<div id="prodinfo" class="ten columns"><div class="precart_prod_image"><img src="'+ prod_image +'"></div><div class="product_info"><a href="'+ prod_url +'" id="ibprodname">'+ p_title +'</a><div class="price">'+ formatted_price +'</div></div></div>';
+		  }
+	  }
+
+
+
+  	  /*jQuery.getJSON('/cart.js', function(cart) {
+        var cart_total = Shopify.formatMoney({{ cart.total_price }}, "{{ shop.money_without_currency_format }}");
+        var item_count = cart.item_count > 1 ? '<strong>'+ cart.item_count +'</strong> items' : cart.item_count +'</strong> item';
+		set_html = set_html + '<div id="basketinfo" class="five columns"><div> <strong>Your goods total: '+ cart_total +'</strong><span class="basket-item">'+ item_count +' in your cart<br><a class="button2" href="/cart/">Proceed to Cart</a></span></div></div>';
+        set_html = set_html + '</div></div>';
+        //alert(set_html);
+      });
+      */
+
+          var cart_total = Shopify.formatMoney('{{ cart.total_price }}', "{{ shop.money_without_currency_format }}");
+          var item_count = '{{ cart.item_count }}' > 1 ? '<strong>{{ cart.item_count }}</strong> items' : {{ cart.item_count }} +'</strong> item';
+          set_html = set_html + '<div id="basketinfo" class="five columns"><div> <strong>Your goods total: '+ cart_total +'</strong><span class="basket-item">'+ item_count +' in your cart<br><a class="button2" href="/cart">Proceed to Cart</a></span></div></div>';
+          set_html = set_html + '</div></div>';
+
+
+      //alert(set_html);
+  	  $('.sixteen.columns.page').html(set_html);
+      }
+  }
+  else
+  {
+  	$.removeCookie("recent_quantity");
+    $.removeCookie("recent_variant");
+    $.removeCookie("recent_variant_id");
+    $.removeCookie("recent_added_product");
+  }
+  </script>
+<hr>
+
+
+  {% include 'handle_product_form_2' %}

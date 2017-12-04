@@ -1,0 +1,47 @@
+<!-- templates/snippets/sidebar__item.liquid -->
+
+{% unless  title %}
+  {% assign title = sidebar__item.title %}
+{% endunless %}
+
+{% if collection and collection.handle == sidebar__item.handle %}
+  {% assign _selected = true %}
+{% else %}
+  {% assign _selected = false %}
+{% endif %}
+
+
+{% if tooltip %}
+  {% assign _tooltip = tooltip %}
+{% else %}
+  {% assign _tooltip = title | remove_first: "View " | remove_first: "Browse " | remove_first: '<' %}
+  {% if sidebar_checkboxes %}
+    {% if _selected %}
+      {% assign _tooltip = "Unselect " | append: _tooltip %}
+    {% else %}
+      {% assign _tooltip = "Select " | append: _tooltip %}
+    {% endif %}
+  {% else %}
+    {% assign _tooltip = "Browse " | append: _tooltip %}
+  {% endif %}
+{% endif %}
+
+
+{% if _selected %}
+  {% if sidebar_parent == true%}
+    {% assign _url = sidebar__item.url | split: '-' | first %}
+  {% elsif sidebar_parent == false %}
+    {% assign _url = sidebar__item.url %}
+  {% else %}
+    {% assign _url = sidebar_parent %}
+  {% endif %}
+{% else %}
+  {% assign _url = sidebar__item.url %}
+{% endif %}
+
+<li class="collection-container active {% if _selected %}selected{% endif %}">
+  <div class="collection-name">
+    <a title="{{ _tooltip }}" href="{{ _url }}"><i class="check-icon"></i> {{ title }}</a>
+  </div>
+</li>
+<!-- END templates/snippets/sidebar__item.liquid -->

@@ -1,0 +1,44 @@
+<!-- snippets/breadcrumbs__item.liquid -->
+{% unless breadcrumb_index %}
+  {% assign breadcrumb_index = 0 %}
+{% endunless %}
+
+{% assign breadcrumb_index = breadcrumb_index | plus: 1 %}
+
+{% if title %}
+  {% assign _title = 'title="' | append: title | append: '"' %}
+{% else %}
+  {% assign _title = '' %}
+{% endif %}
+
+{% if breadcrumb_index > 1 %}
+  <li class="separator">&rsaquo;</li>
+{% endif %}
+<li itemprop="itemListElement" itemscope
+    itemtype="http://schema.org/ListItem">
+  {% if url %}
+    <a itemprop="item" href="{{url}}" {{_title}}>
+      <span itemprop="name">{{name}}</span>
+    </a>
+  {% else %}
+    <p itemprop="item">
+      <span itemprop="name">
+        {% if name %}
+          {{ name }}
+        {% elsif product.title %}
+          {{ product.title }}
+        {% elsif collection.title %}
+          {{ collection.title }}
+        {% elsif page.title %}
+          {{ page.title }}
+        {% elsif article.title %}
+          {{ article.title }}
+        {% elsif blog.title %}
+          {{ blog.title }}
+        {% endif %}
+      </span>
+    </p>
+  {% endif %}
+
+  <meta itemprop="position" content="{{breadcrumb_index}}" />
+</li>

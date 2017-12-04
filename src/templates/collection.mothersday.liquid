@@ -1,0 +1,244 @@
+
+<meta name="robots" content="noindex">
+{% paginate collection.products by 48 %}
+  {% assign tag_count = collection.all_tags | size %}
+  {% assign tag_threshold = 5 | minus: 0 %}
+
+  <div class="sixteen columns clearfix collection_nav">
+    {% include 'breadcrumbs' %}
+    <div class="ten columns alpha">
+    </div>
+  </div>
+
+  {% if collection.description != blank %}
+    <div class="sixteen columns">
+      <div class="section clearfix">
+        {{ collection.description }}
+      </div>
+    </div>
+  {% endif %}
+
+{% if collection.handle == 'special-offer-may-long-blowout' %}
+            <div class="sixteen columns hide-for-desktop">
+              <div align="center"> <img src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/may-long-lander.png?11261846350419131355" width="98%"></div></div>
+{% endif %}
+
+    {% include 'collection-sidebar' %}
+    <div class="twelve columns">
+
+      {% if collection.handle == 'special-offer-luxury-vibrators-15' %}
+
+<img src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/luxury-vibe-lander.png?6740843312645028687" width="98%">
+
+      <p>{% include 'shappify-sales-clock-2' %}</p>
+
+      <h2>Products in this offer</h2>
+
+      <hr>
+        {% elsif collection.handle == 'special-offer-male-toys-15' %}
+
+<img src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/male-toy-lander.png?14477840889074382583" width="98%">
+      <h2>Products in this offer</h2>
+        <p>{% include 'shappify-sales-clock-2' %}</p>
+      <hr>
+
+       {% elsif collection.handle == 'special-offer-may-long-blowout' %}
+
+<img src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/may-long-lander.png?11261846350419131355" width="98%">
+      <p>Make sure you take these amazing savings while you can! May Long specials end May 18th at Midnight!</p>
+      <h2>Products in this offer</h2>
+
+      <hr>
+
+        {% elsif collection.handle == 'luxury-sex-toy-specials-1' %}
+
+<img src="https://cdn.shopify.com/s/files/1/0386/0093/files/sex_tosdczys_for_30_less_12.png?14411792217848907112" width="98%">
+
+               <div id="bundleimages"> <a href="/collections/buy-2-save-20"> <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/BUY220.png?17247280946281691152" width="98%"></a></div>
+
+
+        {% elsif collection.handle == 'couples-toys-specials' %}
+
+<img src="https://cdn.shopify.com/s/files/1/0386/0093/files/sex_tosdczys_for_30_less_7.png?11194728995949141199" width="98%">
+      <p>The best selling toys for couples are now on sale! Check back here weekly as we change them all of the time! We guarantee you'll find a toy to pleasure both you and your lover...</p>
+      <h2>Products in this offer</h2>
+
+      <hr>
+
+        {% elsif collection.handle == 'special-offer-friday-frenzy' %}
+
+ <img src="https://cdn.shopify.com/s/files/1/0386/0093/files/g-spot-rabbits-18-off-lander.png?2429503233565803727" width="98%">
+
+
+      <p>Make sure you take these amazing savings on <a href="/collections/vibrators">Rabbit and G-Spot vibrators</a> while you can! They end at MIDNIGHT tonight!</p>
+      <h2>Products in this offer</h2>
+
+      <hr>
+
+        {% elsif collection.handle == 'couples-bondage-sale' %}
+
+ <img src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/TYPE_DESIGN.png?2460266864327934724" width="98%">
+
+
+
+      <hr>
+       {% elsif collection.handle == 'special-offer-lelo' %}
+
+<img src="https://cdn.shopify.com/s/files/1/0386/0093/t/21/assets/LELO-PROMOTION.png?531885139933217050" width="98%">
+      <p>Get a FREE Personal Lubricant made by LELO when you purchase any of the selected products in this collection! </p><p>The Lubricant will be added once you reach the cart and confirm.</p>
+      <h2>Products in this offer</h2>
+
+      <hr>
+      {% else %}
+
+
+      <hr>
+      {% endif %}
+
+
+{% if current_tags %}
+<div class="filter-group">
+<strong>Current Tags:</strong>
+
+<span class="clear2">
+{% for tag in collection.all_tags %}
+    {% if current_tags contains tag %}
+
+  		{% if tag == 'sale' %}
+  		<span class="filter-clear2">{{ tag | link_to_remove_tag: tag }}</span>
+  		{% else %}
+    	{% assign tag_collection = collections[tag] %}
+ 		<span class="filter-clear2">{{ tag_collection.title | link_to_remove_tag: tag }}</span>
+    	{% endif %}
+    {% endif %}
+{% endfor %}
+  <span class="filter-clear3"><a href="{{ collection.url }}">Clear All</a></span></span>
+  </div>
+
+
+{% endif %}
+<h4 style="margin-bottom:10px;"> </h4>
+
+  {% include 'sort-and-paginate' %}
+
+  {% if collection.products.size == 0 %}
+    <div class="center">
+      <div class="section clearfix">
+        <p class="quote">{{ 'collections.general.no_matches' | t }}</p>
+      </div>
+    </div>
+  {% else %}
+    <div class="main_product_list_sec">
+    {% assign products = collection.products %}
+
+    {% assign products_per_row = 4 %}
+
+    {% include 'product-loop'  %}
+    </div>
+  {% endif %}
+  </div>
+
+  {% include 'pagination' with 'below' %}
+{% endpaginate %}
+
+            <style>
+   .filter-group.filter-group-toys {
+display: none;
+}
+
+   .filter-group.filter-group-essentials {
+display: none;
+}
+
+   .filter-group.filter-group-dildos {
+display: none;
+}
+          .filter-group.filter-group-rings {
+display: none;
+}
+
+
+
+   .filter-group.filter-group-gear {
+display: none;
+}
+              .filter-group.filter-group-vibrators {
+display: none;
+}
+
+.filter-group.filter-group-harnes {
+display: none;
+}
+
+        .filter-group.filter-group-men {
+display: none;
+}
+
+            .filter-group.filter-group-love {
+display: none;
+}
+              .filter-group.filter-group-type.has_group_selected {display: none;}
+              .filter-group.filter-group-vendor.has_group_selected {display: none;}
+                .filter-group.filter-group-toys2 { display: none; }
+.filter-group.filter-group-rings2 { display: none; }
+                .filter-group.filter-group-lingerie2 { display: none; }
+    .filter-group.filter-group-games-gifts2 { display: none; }
+.filter-group.filter-group-plugs2 { display: none; }
+.filter-group.filter-group-men2 { display: none; }
+.filter-group.filter-group-women2 { display: none; }
+.filter-group.filter-group-couplestoy2 { display: none; }
+.filter-group.filter-group-dildos2 { display: none; }
+.filter-group.filter-vibrators2 { display: none; }
+.filter-group.filter-harnes2 { display: none; }
+.filter-group.filter-gear2 { display: none; }
+.filter-group.filter-toy2 { display: none; }
+.filter-group.filter-essentials2 { display: none; }
+
+   .filter-group.filter-group-plugs {
+display: none;
+}
+           .filter-group.filter-group-toy {
+display: none;
+}
+
+                 .filter-group.filter-group-types {
+display: none;
+}
+
+          .filter-group.filter-group-women {
+display: none;
+}
+
+              .filter-group.filter-group-femaledildos {
+  display: none;
+}
+
+.filter-group.filter-group-lingerie {
+  display: none;
+}
+
+.filter-group.filter-group-gamesgifts {
+  display: none;
+}
+
+.filter-group.filter-group-not-shown.has_group_selected {
+  display: none;
+}
+
+        .filter-group.filter-group-couplestoy {
+display: none;
+}
+
+                .filter-group.filter-group-opening {
+display: none;
+}
+                .filter-group.filter-group-femalevibrators {display: none;}
+
+     h2 {
+  text-transform: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  margin-top: 15px;
+}
+
+      </style>

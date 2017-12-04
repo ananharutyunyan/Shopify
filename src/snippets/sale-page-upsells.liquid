@@ -1,0 +1,33 @@
+<!-- snippets/sale-page-upsells.liquid -->
+<ul class="mobile-fblock-grid-2 tablet-small-fblock-grid-3 tablet-fblock-grid-4 recommendations-group">
+  {% for product in collections.essentials-on-sale.products limit:9 %}
+    {% if forloop.last %}
+      {% assign _viz = "show-for-tablet-small-only" %}
+    {% endif %}
+
+    {% assign viz = value %}
+    <li id="product-{{ product.id }}" class="thumbnail {{_viz}}">
+      <div class="recommendations-product">
+        <div class="recommendations-product-image">
+          <a href="{{ product.url }}">
+            <img src="{{ product.featured_image |  product_img_url: 'large' }}">
+            {% if product.compare_at_price_max > product.price %}
+              <div class="banner-container">
+                <div class="sale_banner">Sale</div>
+              </div>
+            {% endif %}
+          </a>
+        </div>
+        <div class="info"><a href="{{ product.url }}">{{ product.title }}</a></div>
+        <div class="info2">
+          <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+            <span class="current_price price">{% include 'shappify-qb-min-price' with product %}</span>
+            <span class="was_price">
+              {% if product.compare_at_price_max > product.price %}  {{ product.compare_at_price | money }} {% endif %}
+            </span>
+          </a>
+        </div>
+      </div>
+    </li>
+  {% endfor %}
+</ul>

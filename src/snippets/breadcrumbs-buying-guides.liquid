@@ -1,0 +1,68 @@
+<div id="breadcrumb">
+    <ol class="breadcrumbsol" itemscope itemtype="http://schema.org/BreadcrumbList">
+   {% if template contains 'article' %}
+ <li itemprop="itemListElement" itemscope
+      itemtype="http://schema.org/ListItem">
+   <a itemprop="item" href="/" class="homepage-link" title="Back to the home"><span itemprop="name">Home</span></a>
+    <meta itemprop="position" content="1" />
+  </li>
+ 
+      <span class="separator">&rsaquo;</span> 
+      
+           <li itemprop="itemListElement" itemscope
+      itemtype="http://schema.org/ListItem">
+             <a itemprop="item" href="/blogs/sex-toy-guides">
+               <span itemprop="name">Sex Toy Guides</span></a>
+        <meta itemprop="position" content="2" />
+  </li>
+      <span class="separator">&rsaquo;</span> 
+      
+           <li itemprop="itemListElement" itemscope
+      itemtype="http://schema.org/ListItem">
+             <a itemprop="item" href="/blogs/{{ blog.handle }}">
+               <span itemprop="name">{{ blog.title }}</span></a>
+        <meta itemprop="position" content="3" />
+  </li>
+      <span class="separator">&rsaquo;</span>
+   
+              <li itemprop="itemListElement" itemscope
+      itemtype="http://schema.org/ListItem">
+        <span itemprop="name">{{ article.title }}</span>
+        <meta itemprop="position" content="4" />
+  </li>
+      
+   {% elsif template contains 'blog' %}
+      {% if blog.handle == "sex-toy-guides" %}
+ <li itemprop="itemListElement" itemscope
+      itemtype="http://schema.org/ListItem">
+   <a itemprop="item" href="/" class="homepage-link" title="Back to the home"><span itemprop="name">Home</span></a>
+    <meta itemprop="position" content="1" />
+  </li>      <span class="separator">&rsaquo;</span> 
+   <li itemprop="itemListElement" itemscope
+      itemtype="http://schema.org/ListItem">
+        <a itemprop="item" href="/blogs/{{ blog.handle }}">
+               <span itemprop="name">{{ blog.title }}</span></a>
+        <meta itemprop="position" content="2" />
+  </li>
+      {% else %}
+       <li itemprop="itemListElement" itemscope
+      itemtype="http://schema.org/ListItem">
+   <a itemprop="item" href="/" class="homepage-link" title="Back to the home"><span itemprop="name">Home</span></a>
+    <meta itemprop="position" content="1" />
+  </li>      <span class="separator">&rsaquo;</span> 
+   <li itemprop="itemListElement" itemscope
+      itemtype="http://schema.org/ListItem">
+        <a itemprop="item" href="/blogs/sex-toy-guides">
+               <span itemprop="name">Sex Toy Guides</span></a>
+        <meta itemprop="position" content="2" />
+  </li>
+       <span class="separator">&rsaquo;</span> 
+       <li itemprop="itemListElement" itemscope
+      itemtype="http://schema.org/ListItem">
+        <a itemprop="item" href="/blogs/{{ blog.handle }}">
+               <span itemprop="name">{{ blog.title }}</span></a>
+        <meta itemprop="position" content="3" />
+  </li>
+      {% endif %}
+      {% endif %}
+  </ol></div>

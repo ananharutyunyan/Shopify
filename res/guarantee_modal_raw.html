@@ -1,0 +1,75 @@
+<script>
+  var badges__modal_container = '...';
+
+  var badges__guarantee_modal = '...';
+
+
+  badges__testInterval = setInterval(function(){
+    if(document.querySelectorAll(".footer").length > 0 && document.querySelectorAll("#product_slider").length > 0 && typeof(jQuery) == "function"){
+      clearInterval(badges__testInterval);
+
+      jQuery("body").addClass("badges__var_1_money_bg");
+      try{
+        var badges__shop = jQuery(".safety_divider").parent().html().replace('<span class="safety_divider">|</span> Shop With Confidence', '');
+
+        jQuery(".product_form").after('<a href="javascript:void(0)" class="badges__btn_money">100% MONEY-BACK GUARANTEE</a>');
+
+        badges__shop = badges__shop.replace('<span class="safety_divider">|</span> Shop With Confidence', '');
+        jQuery(".safety_divider").parent().html(badges__shop);
+      }
+      catch(badges__error){
+        badges__log(badges__error);
+      }
+
+      jQuery(".badges__btn_money").on("click",function(){
+        badges__popup();
+        jQuery("#badges__popup").append(badges__guarantee_modal);
+      });
+
+      try{
+        document.body.classList.add("badges__variation1");
+        var badges__product_price = document.querySelector("p.modal_price > span[itemprop='price']").textContent.trim().replace("$","");
+        document.getElementById("product_slider").insertAdjacentHTML("afterbegin","<div id='badges__product_banner' class='badges__guarantee_banner'><a href='javascript:void(0)' class='badges__guarantee_link'></a></div>");
+
+
+
+
+
+        document.querySelector(".hide-for-desktop .main_prod_form_1").insertAdjacentHTML("afterend","<div><a href='javascript:void(0)'  class='badges__guarantee_box '><div class='badges__prod1'></div><p>FREE SHIPPING</p></a><a href='javascript:void(0)' class='badges__guarantee_box'><div class='badges__prod2'></div><p>FREE EXCHANGES</p></a><a href='javascript:void(0)' class='badges__guarantee_box'><div class='badges__prod3'></div><p>FREE RETURNS</p></a></div>");
+        document.querySelector(".product__show-for-desktop .main_prod_form_1").insertAdjacentHTML("afterend","<div><a href='javascript:void(0)' class='badges__guarantee_box '><div class='badges__prod1'></div><p>FREE SHIPPING</p></a><a href='javascript:void(0)' class=' badges__guarantee_box'><div class='badges__prod2'></div><p>FREE EXCHANGES</p></a><a href='javascript:void(0)'  class='badges__guarantee_box'><div class='badges__prod3'></div><p>FREE RETURNS</p></a></div>");
+
+
+
+
+
+
+
+
+        document.getElementById("product_slider").insertAdjacentHTML("afterend","<div id='badges__product_banner_mobile' class='badges__guarantee_banner'><a  href='javascript:void(0)' class='badges__guarantee_link'></a></div>");
+
+        if(badges__product_price > 59.99){
+          document.querySelector(".hide-for-desktop .badges__guarantee_box > p").innerHTML = "FREE SHIPPING";
+          document.querySelector(".product__show-for-desktop .badges__guarantee_box > p").innerHTML = "FREE SHIPPING";
+        }
+      }catch(badges__error){
+        console.log(badges__error);
+      }
+
+      jQuery(".badges__guarantee_box").on("click",function(){
+        badges__popup();
+        jQuery("#badges__popup").append(badges__modal_container);
+      });
+      jQuery(".badges__guarantee_banner").on("click",function(){
+        badges__popup();
+        jQuery("#badges__popup").append(badges__guarantee_modal);
+      });
+    }
+  },10);
+
+
+
+</script>
+
+<style>
+</style>
+

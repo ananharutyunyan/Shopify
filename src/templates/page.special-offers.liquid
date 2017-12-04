@@ -1,0 +1,198 @@
+<div class="sixteen columns clearfix collection_nav">
+  <h1 class="collection_title">
+    {{ page.title }}
+  </h1>
+</div>
+
+ {% include 'sidebar-general', hide_sections: 'vibrators' %}
+    <div class="twelve columns">
+       {% if page.handle == 'special-offers-01' %}
+        {% for product in collections.vibrators.products limit: 10 %}
+ <div class="section product_section clearfix" id="product-{{ product.id }}">
+    <h2>#{{ forloop.index }} {{ product.title }}</h2>
+    <div class="six columns alpha">
+    <div class="product__top-10-thumb">
+      <img src="{{ product.featured_image | product_img_url: 'large', format: 'pjpg' }}">
+    </div>
+    </div>
+
+
+  <div class="six columns omega">
+
+    <p class="modal_price">
+      <span style="font-size: 1.2em;">Only:</span> <span itemprop="price" class="current_price">
+            {% include 'shappify-bdl-min-price' with product %}
+      </span>
+      <span class="was_price">
+          {% if product.price < product.compare_at_price_max %}
+            {{ product.compare_at_price | money }}
+          {% endif %}
+      </span>
+    </p>
+    {% if product.available %}
+  <form action="" data-id="{{ product.id }}" data-handle="{{ product.handle }}" method="post" class="clearfix product_form main_prod_form_{{ forloop.index }}" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}"  id="product-form-{{ product.id }}">
+  	<label for="quantity">Quantity:</label>
+    <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" />
+    {% if product.options.size > 1 %}
+      <div class="select">
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% elsif product.options.size == 1 and (shappify_bdl_options_count > 1 or product.options[0] != "Title") %}
+      <div class="select">
+        <label>{{ product.options[0] }}:</label>
+        <select id="product-select-{{ product.id }}" name='id' class="product-select-{{ product.id }}">
+          {% for variant in product.variants %}
+          {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% else %}
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}" class="product-select-{{ product.id }}"/>
+    {% endif %}
+
+
+    {% if product.description contains '<!-- split -->' %}
+{{ product.description | split: '<!-- split -->' | first | remove: '<h4>Product Description</h4>'| remove: '<h4>product description</h4>' | add: '<h4>Brief Description</h4>' }}
+{% endif %}
+    <div class="purchase clearfix">
+
+      <input type="submit" name="add" value="Add To Cart" class="action_button add_to_cart" data-counter="{{ forloop.index }}"/>
+    </div>
+
+  </form>
+
+   </div>
+     <a class="buttoncontinue" href="{{ product.url }}">View Product</a>
+  {% if shappify_bdl_options_count > 1 or product.variants.size > 1 %}
+    <script type="text/javascript">
+      // <![CDATA[
+        $(function() {
+          $product = $('#product-' + {{ product.id }});
+          if($('.single-option-selector', $product).length == 0) {
+            new Shopify.OptionSelectors("product-select-{{ product.id }}", { product: {{ product | json }}, onVariantSelected: SP.selectCallback });
+
+            {% if product.available %}
+              {% assign found_one_in_stock = false %}
+              {% for variant in product.variants %}
+              {% if variant.metafields.shappify_bundle.is_bundle == "true" %}{% else %}
+                {% if variant.available and found_one_in_stock == false %}
+                  {% assign found_one_in_stock = true %}
+                  {% for option in product.options %}
+                    $('.single-option-selector:eq(' + {{ forloop.index0 }} + ')', $product).val({{ variant.options[forloop.index0] | json }}).trigger('change');
+                  {% endfor %}
+                {% endif %}
+            {% endif %}  {% endfor %}
+            {% endif %}
+          }
+        });
+      // ]]>
+    </script>
+  {% endif %}
+  {% endif %}
+
+
+  </div>
+{% endfor %}
+      {% endif %}
+</div>
+<style>
+.collection_menu li a, .sidebar a {
+color: #000;
+}
+    body > div.header {
+margin: 8px;
+}
+    h4, .h4, h4.title a {
+font-size: 18px;
+line-height: 32px;
+margin: 0 0 10px 0;
+padding: 0;
+border-bottom: 1px solid #d7d4d3;
+padding-bottom: 8px;
+color: #cc3366;
+}
+
+      background: #000
+  }
+
+
+   h1 a, h1 a:visited, .collection_title a, .collection_title a:visited {
+color: #cc3366;
+
+}
+
+  h2 a, h2 a:visited {
+color: #cc3366;
+    text-decoration: underline;
+
+}
+  h1, h2, h3, h4, h5, h6, .collection_title, .headline, p.subtitle {
+font-family: "Oswald";
+font-weight: normal;
+text-transform: uppercase;
+color: #cc3366;
+display: block;
+letter-spacing: 1px;
+text-rendering: optimizeLegibility;
+}
+  html, body, p, blockquote,  ul, li, {
+
+color: #000;
+}
+
+
+  div.section.clearfix {
+color: #000;
+width: 700px;
+margin: 0 auto;
+margin: margin:0 auto;
+}
+
+  body {
+    color: #000
+  }
+
+    body > div.container.main.content > div.sixteen.columns.clearfix.collection_nav > h1 > a {
+color: #000;
+}
+
+  h1.collection_title, div.collection_title {
+margin-bottom: 0;
+line-height: 32px;
+display: block;
+text-align: center;
+}
+
+
+
+  p.job {
+font-size: 14px;
+}
+
+  table a:link {
+color: #cc3366;
+    text-decoration: underline;
+  }
+
+  table {
+border-collapse: none;
+border-spacing: 0;
+}
+  table tr td {
+padding: 12px;
+border-bottom: 1px solid #e0e0e0;
+border-left: 0px solid #e0e0e0;
+  }
+
+  td {
+border-left: 0px;
+}
+</style>
